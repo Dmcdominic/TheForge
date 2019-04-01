@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
-  m_Name: wood
+  m_Script: {fileID: 11500000, guid: 1018698514d49904e8452d01c0950855, type: 3}
+  m_Name: grindstone
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  ingredients: []
-  station: {fileID: 11400000, guid: f3d4186c735c126458dcdb370936aa67, type: 2}
-  gold_value: 0
+  products:
+  - {fileID: 11400000, guid: a9b3896875ee0c847bd196d88f406a56, type: 2}

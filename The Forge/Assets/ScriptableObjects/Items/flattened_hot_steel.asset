@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
-  m_Name: wood
+  m_Name: flattened_hot_steel
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  ingredients: []
-  station: {fileID: 11400000, guid: f3d4186c735c126458dcdb370936aa67, type: 2}
+  ingredients:
+  - {fileID: 11400000, guid: db3b385f1970a5644bf669d4305e86ca, type: 2}
+  station: {fileID: 11400000, guid: 731ead471c212d941ba4dfecab050a45, type: 2}
   gold_value: 0

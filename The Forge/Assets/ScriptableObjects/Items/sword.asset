@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
-  m_Name: wood
+  m_Name: sword
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  ingredients: []
-  station: {fileID: 11400000, guid: f3d4186c735c126458dcdb370936aa67, type: 2}
-  gold_value: 0
+  ingredients:
+  - {fileID: 11400000, guid: a9b3896875ee0c847bd196d88f406a56, type: 2}
+  - {fileID: 11400000, guid: 331126d0dce59b242a73543e1a8d25df, type: 2}
+  station: {fileID: 11400000, guid: f864d68c219a0d24aa81dae79748384e, type: 2}
+  gold_value: 40

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f74c9d2326101d14fb93564adf0ad598, type: 3}
-  m_Name: ore
+  m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
+  m_Name: blade
   m_EditorClassIdentifier: 
-  Item:
-    ID: 0
-    icon: {fileID: 0}
-    ingredients: 
+  icon: {fileID: 0}
+  ingredients:
+  - {fileID: 11400000, guid: d482eb59191b1f1458333587876ac8f7, type: 2}
+  station: {fileID: 11400000, guid: 656021c0d8fa7df4aa4f15e546d7d45d, type: 2}
+  gold_value: 0

@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2331657473
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Stations
+    uniqueID: 1695448093
+    locked: 0
+  - name: Players
+    uniqueID: 2810810997
     locked: 0
