@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
   m_Name: flattened_cool_steel
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 649ee172a90a455458159e5195be2759, type: 3}
   ingredients:
   - {fileID: 11400000, guid: f5794b8b4f569bc4f9919a6313b8e537, type: 2}
   station: {fileID: 11400000, guid: 731ead471c212d941ba4dfecab050a45, type: 2}

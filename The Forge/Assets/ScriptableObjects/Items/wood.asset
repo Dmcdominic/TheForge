@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
   m_Name: wood
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d336d7f1c1b643f4386a2bdbeda0f3a3, type: 3}
   ingredients: []
   station: {fileID: 11400000, guid: f3d4186c735c126458dcdb370936aa67, type: 2}
   gold_value: 0

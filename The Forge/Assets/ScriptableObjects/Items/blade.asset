@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
   m_Name: blade
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2773613acb5f8164c85e760accf5e4ef, type: 3}
   ingredients:
   - {fileID: 11400000, guid: d482eb59191b1f1458333587876ac8f7, type: 2}
   station: {fileID: 11400000, guid: 656021c0d8fa7df4aa4f15e546d7d45d, type: 2}

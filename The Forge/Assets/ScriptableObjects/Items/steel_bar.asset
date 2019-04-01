@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
-  m_Name: steel_ingot
+  m_Name: steel_bar
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b051e8bb1738337488fab8a404b04f90, type: 3}
   ingredients: []
   station: {fileID: 11400000, guid: 85e996725d6ce26418134580cdb6145e, type: 2}
   gold_value: 0

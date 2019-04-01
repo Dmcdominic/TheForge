@@ -17,14 +17,16 @@ public abstract class MonoStation : MonoInteractable {
 		}
 
 		foreach (item Item in station_info.products) {
-			bool can_craft = false;
+			print("Checking if " + Item + "can be crafted");
+			bool can_craft = true;
 			foreach (item ingredient in Item.ingredients) {
 				if (!Player.items_carried.Contains(ingredient)) {
+					print("Doesn't contain ingredient " + ingredient);
 					can_craft = false;
 				}
 			}
 			if (can_craft) {
-				return null;
+				return Item;
 			}
 		}
 		return null;

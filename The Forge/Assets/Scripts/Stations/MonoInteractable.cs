@@ -32,7 +32,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 			return;
 		}
 		foreach (player p in players_touching) {
-			if (input.p[p.index].interact) {
+			if (input.p[p.index].interact && can_interact(p)) {
 				print("Got interact!");
 				on_interact(p);
 				break;
