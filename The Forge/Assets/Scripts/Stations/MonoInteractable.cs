@@ -33,7 +33,6 @@ public abstract class MonoInteractable : MonoBehaviour {
 		}
 		foreach (player p in players_touching) {
 			if (input.p[p.index].interact && can_interact(p)) {
-				print("Got interact!");
 				on_interact(p);
 				break;
 			}
@@ -46,7 +45,6 @@ public abstract class MonoInteractable : MonoBehaviour {
 		if (collision.CompareTag("Player")) {
 			player p = collision.gameObject.GetComponent<player>();
 			if (can_interact(p)) {
-				print("can_interact passed");
 				players_touching.Add(p);
 			}
 		}

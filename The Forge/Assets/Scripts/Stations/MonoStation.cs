@@ -17,11 +17,9 @@ public abstract class MonoStation : MonoInteractable {
 		}
 
 		foreach (item Item in station_info.products) {
-			print("Checking if " + Item + "can be crafted");
 			bool can_craft = true;
 			foreach (item ingredient in Item.ingredients) {
 				if (!Player.items_carried.Contains(ingredient)) {
-					print("Doesn't contain ingredient " + ingredient);
 					can_craft = false;
 				}
 			}
@@ -53,7 +51,7 @@ public abstract class MonoStation : MonoInteractable {
 	}
 
 	public override bool can_interact(player Player) {
-		return !occupied() && get_craftable_item(Player) != null;
+		return !occupied() && get_craftable_item(Player) != null && !(station_info.crate && Player.hands_full);
 	}
 
 	public override void on_interact(player Player) {

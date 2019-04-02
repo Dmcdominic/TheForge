@@ -64,7 +64,7 @@ public static class input {
 				if (keyboard_H == null) {
 					return xbox;
 				}
-				float keyboard = Input.GetAxis(keyboard_H);
+				float keyboard = Input.GetAxisRaw(keyboard_H);
 				return (xbox != 0) ? xbox : keyboard;
 			}
 		}
@@ -75,7 +75,7 @@ public static class input {
 				if (keyboard_V == null) {
 					return xbox;
 				}
-				float keyboard = Input.GetAxis(keyboard_V);
+				float keyboard = Input.GetAxisRaw(keyboard_V);
 				return (xbox != 0) ? xbox : keyboard;
 			}
 		}
