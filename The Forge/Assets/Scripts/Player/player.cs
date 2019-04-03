@@ -39,9 +39,9 @@ public class player : MonoBehaviour {
 		}
 
 		// TEMPORARY
-		float x_velo = input.p[index].h_axis;
-		float y_velo = input.p[index].v_axis;
-		Vector3 displacement = new Vector3(x_velo, y_velo, 0).normalized * 4f * Time.deltaTime;
-		transform.Translate(displacement);
+		//float x_velo = input.p[index].h_axis;
+		//float y_velo = input.p[index].v_axis;
+		//Vector3 displacement = new Vector3(x_velo, y_velo, 0).normalized * 4f * Time.deltaTime;
+		//transform.Translate(displacement);
 	}
 }

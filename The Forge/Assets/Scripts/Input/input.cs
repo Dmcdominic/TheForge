@@ -49,9 +49,10 @@ public static class input {
 		//bool tp_down {
 		//	get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller); }
 		//}
-		public bool switch_floors {
-			get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller) || XCI.GetButtonDown(XboxButton.RightBumper, controller); }
-		}
+
+		//public bool switch_floors {
+		//	get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller) || XCI.GetButtonDown(XboxButton.RightBumper, controller); }
+		//}
 
 		public bool start {
 			get { return XCI.GetButtonDown(XboxButton.Start, controller); }
