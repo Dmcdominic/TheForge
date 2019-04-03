@@ -26,8 +26,8 @@ public class scroll_visuals : MonoBehaviour {
 
 	// Hide all scroll visuals
 	public void clear_scroll() {
-		foreach(GameObject GO in steps_parent.transform) {
-			Destroy(GO);
+		foreach(Transform trans in steps_parent.transform) {
+			Destroy(trans.gameObject);
 		}
 		visuals_parent.SetActive(false);
 	}

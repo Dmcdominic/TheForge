@@ -34,8 +34,12 @@ public class scroll : MonoInteractable {
 	public void clear_scroll(bool fulfilled) {
 		if (fulfilled) {
 			// Todo - completed order animation
+			sound_manager.instance.play_one_shot(sound_manager.instance.coin);
+			// Todo - move this to the visual coin/score display,
+			// which also animates coins being gained
 		} else {
 			// Todo - order expired animation?
+			// Todo - order expired sfx?
 		}
 		requested_item = null;
 		visuals.clear_scroll();

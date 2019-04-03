@@ -12,7 +12,12 @@ public class movement : MonoBehaviour {
 	public GameObject carried_items;
 
 	[HideInInspector]
-	public bool movement_enabled;
+	private bool movement_enabled;
+	public static bool all_players_frozen = false;
+	public bool can_move {
+		get { return movement_enabled && !all_players_frozen; }
+		set { movement_enabled = value; }
+	}
 
 	// Private vars
 	private int index;
@@ -33,7 +38,7 @@ public class movement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		if (!movement_enabled) {
+		if (!can_move) {
 			animator.SetBool("running", false);
 			animator.SetBool("carrying", Player.carrying_items);
 			return;

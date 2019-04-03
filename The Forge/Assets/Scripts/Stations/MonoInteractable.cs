@@ -31,11 +31,17 @@ public abstract class MonoInteractable : MonoBehaviour {
 		if (occupied()) {
 			return;
 		}
+
+		player to_try_remove = null;
 		foreach (player p in players_touching) {
 			if (input.p[p.index].interact && can_interact(p)) {
 				on_interact(p);
+				to_try_remove = p;
 				break;
 			}
+		}
+		if (to_try_remove && (occupied() || !can_interact(to_try_remove))) {
+			players_touching.Remove(to_try_remove);
 		}
 	}
 
@@ -44,7 +50,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Player")) {
 			player p = collision.gameObject.GetComponent<player>();
-			if (can_interact(p)) {
+			if (p != null && can_interact(p)) {
 				players_touching.Add(p);
 			}
 		}
