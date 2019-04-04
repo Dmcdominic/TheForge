@@ -17,6 +17,9 @@ public class scroll : MonoInteractable {
 	// Init
 	private void Awake() {
 		visuals = GetComponent<scroll_visuals>();
+	}
+
+	private void Start() {
 		init_order(init_item);
 	}
 
@@ -52,7 +55,7 @@ public class scroll : MonoInteractable {
 	}
 
 	public override void on_interact(player Player) {
-		Player.score += requested_item.gold_value;
+		player.scores[Player.index] += requested_item.computed_gold_val;
 		Player.items_carried.Remove(requested_item);
 		clear_scroll(true);
 	}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class scroll_visuals : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class scroll_visuals : MonoBehaviour {
 	public float recipe_steps_spacing;
 
 	public GameObject visuals_parent;
+	public TextMeshPro gold_TMP;
 	public SpriteRenderer requested_item_sr;
 	public GameObject steps_parent;
 	public recipe_step step_prefab;
@@ -20,6 +22,7 @@ public class scroll_visuals : MonoBehaviour {
 	public void init_visuals(item _requested_item) {
 		requested_item = _requested_item;
 		requested_item_sr.sprite = requested_item.icon;
+		gold_TMP.text = requested_item.computed_gold_val.ToString() + " G";
 		generate_recipe_steps();
 		visuals_parent.SetActive(true);
 	}

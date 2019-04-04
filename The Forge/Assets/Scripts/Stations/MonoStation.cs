@@ -45,6 +45,7 @@ public abstract class MonoStation : MonoInteractable {
 			user.items_carried.Remove(ingredient);
 		}
 		user.items_carried.Add(working_on);
+		user.Movement.can_move = true;
 
 		user = null;
 		working_on = null;
@@ -58,5 +59,6 @@ public abstract class MonoStation : MonoInteractable {
 		user = Player;
 		working_on = get_craftable_item(Player);
 		Player.current_station = this;
+		Player.Movement.can_move = false;
 	}
 }

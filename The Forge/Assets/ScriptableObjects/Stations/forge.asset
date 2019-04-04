@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1018698514d49904e8452d01c0950855, type: 3}
-  m_Name: furnace
+  m_Name: forge
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 610adab5648cee448b4e3a424b6f2f45, type: 3}
+  icon: {fileID: 21300000, guid: 703bada53f35d4a44b7e9e2e2b09abef, type: 3}
   crate: 0
   products:
   - {fileID: 11400000, guid: db3b385f1970a5644bf669d4305e86ca, type: 2}

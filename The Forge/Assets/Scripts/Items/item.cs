@@ -11,12 +11,11 @@ public class item : ScriptableObject {
 	public Sprite icon;
 	public List<item> ingredients;
 	public station station;
-	public int gold_value;
 
 	public bool is_base_item { get { return ingredients.Count == 0; } }
 
-	public static int gold_val_per_item;
-	public static int gold_val_per_step;
+	public static int gold_val_per_item = 5;
+	public static int gold_val_per_step = 5;
 
 	private int _computed_gold_val = -1;
 	public int computed_gold_val {
@@ -33,4 +32,8 @@ public class item : ScriptableObject {
 		}
 	}
 
+	// Rest
+	private void OnEnable() {
+		_computed_gold_val = -1;
+	}
 }

@@ -9,6 +9,7 @@ public class player : MonoBehaviour {
 	public List<SpriteRenderer> carried_item_srs;
 
 	// Public vars
+	public string display_index { get { return (index + 1).ToString(); } }
 	[HideInInspector]
 	public List<item> items_carried;
 	public bool carrying_items { get { return items_carried.Count > 0; } }
@@ -18,11 +19,21 @@ public class player : MonoBehaviour {
 	public MonoStation current_station = null;
 
 	[HideInInspector]
-	public int score = 0;
+	public movement Movement { get; private set; }
 
 	// Static vars
 	public static int item_limit = 2;
 
+	public static int[] scores = new int[4] { 0, 0, 0, 0 };
+
+
+	// Init
+	private void Awake() {
+		Movement = GetComponent<movement>();
+	}
+	private void Start() {
+		scores[index] = 0;
+	}
 
 	// Called every frame
 	private void Update() {
@@ -37,11 +48,5 @@ public class player : MonoBehaviour {
 				}
 			}
 		}
-
-		// TEMPORARY
-		//float x_velo = input.p[index].h_axis;
-		//float y_velo = input.p[index].v_axis;
-		//Vector3 displacement = new Vector3(x_velo, y_velo, 0).normalized * 4f * Time.deltaTime;
-		//transform.Translate(displacement);
 	}
 }
