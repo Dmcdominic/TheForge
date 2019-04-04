@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
   m_Name: leather
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: f01b4fbba916540498ee496519db6094, type: 3}
+  icon: {fileID: 21300000, guid: 581beb5277f1ae3428f88fea6a3e2aa9, type: 3}
   ingredients: []
   station: {fileID: 11400000, guid: 1adc113ad2a10e642af4d8346d00edfe, type: 2}
-  gold_value: 0

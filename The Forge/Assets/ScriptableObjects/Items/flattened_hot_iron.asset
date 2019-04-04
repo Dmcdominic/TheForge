@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
-  m_Name: flattened_cool_steel
+  m_Name: flattened_hot_iron
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 649ee172a90a455458159e5195be2759, type: 3}
+  icon: {fileID: 21300000, guid: d0680826a2bf4634299038c4d1307504, type: 3}
   ingredients:
-  - {fileID: 11400000, guid: f5794b8b4f569bc4f9919a6313b8e537, type: 2}
+  - {fileID: 11400000, guid: db3b385f1970a5644bf669d4305e86ca, type: 2}
   station: {fileID: 11400000, guid: 731ead471c212d941ba4dfecab050a45, type: 2}
-  gold_value: 0

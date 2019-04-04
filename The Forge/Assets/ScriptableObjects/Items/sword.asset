@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
   m_Name: sword
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 4d7789e3e9e43634d88878a06d613727, type: 3}
+  icon: {fileID: 21300000, guid: f42b6d20a7d282047a71784a1838c6a7, type: 3}
   ingredients:
   - {fileID: 11400000, guid: a9b3896875ee0c847bd196d88f406a56, type: 2}
   - {fileID: 11400000, guid: 331126d0dce59b242a73543e1a8d25df, type: 2}
   station: {fileID: 11400000, guid: f864d68c219a0d24aa81dae79748384e, type: 2}
-  gold_value: 40

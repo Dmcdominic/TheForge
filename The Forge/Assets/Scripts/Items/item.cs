@@ -32,7 +32,7 @@ public class item : ScriptableObject {
 		}
 	}
 
-	// Rest
+	// Reset
 	private void OnEnable() {
 		_computed_gold_val = -1;
 	}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1018698514d49904e8452d01c0950855, type: 3}
   m_Name: wood_crate
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 54d2636265b526b4b9ea9d6e2047edf4, type: 3}
+  icon: {fileID: 21300000, guid: 7d7bd468100e71c4bb866c67b5a0e6d8, type: 3}
   crate: 1
   products:
   - {fileID: 11400000, guid: a3b04de46adb3de4cbc3c5bd926057e7, type: 2}

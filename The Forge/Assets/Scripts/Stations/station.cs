@@ -10,6 +10,19 @@ public class station : ScriptableObject {
 	
 	public Sprite icon;
 	public bool crate;
-	public List<item> products;
 
+	private List<item> _products;
+	public List<item> products {
+		get {
+			if (_products == null) {
+				_products = items_oracle.all.FindAll(x => x.station == this);
+			}
+			return _products;
+		}
+	}
+
+	// Reset
+	private void OnEnable() {
+		_products = null;
+	}
 }
