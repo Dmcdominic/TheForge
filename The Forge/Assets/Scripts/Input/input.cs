@@ -8,10 +8,10 @@ using XboxCtrlrInput;
 /// </summary>
 public static class input {
 	public static player[] p = {
-		new player(0, XboxController.First, "Horizontal_1", "Vertical_1", KeyCode.E, KeyCode.Q),
-		new player(1, XboxController.Second, "Horizontal_2", "Vertical_2", KeyCode.RightShift, KeyCode.Slash),
-		new player(2, XboxController.Third, null, null, KeyCode.None, KeyCode.None),
-		new player(3, XboxController.Fourth, null, null, KeyCode.None, KeyCode.None)
+		new player(0, XboxController.First, "Horizontal_1", "Vertical_1", KeyCode.E, KeyCode.Q, KeyCode.F),
+		new player(1, XboxController.Second, "Horizontal_2", "Vertical_2", KeyCode.RightShift, KeyCode.Slash, KeyCode.RightControl),
+		new player(2, XboxController.Third, null, null),
+		new player(3, XboxController.Fourth, null, null)
 	};
 
 	/// <summary>
@@ -24,14 +24,17 @@ public static class input {
 		private string keyboard_V;
 		private KeyCode interact_key;
 		private KeyCode hand_tool_key;
+		private KeyCode swap_items_key;
 
-		public player(int _index, XboxController _controller, string _keyboard_H, string _keyboard_V, KeyCode _interact_key, KeyCode _hand_tool_key) {
+		public player(int _index, XboxController _controller, string _keyboard_H = null, string _keyboard_V = null,
+			KeyCode _interact_key = KeyCode.None, KeyCode _hand_tool_key = KeyCode.None, KeyCode _swap_items_key = KeyCode.None) {
 			index = _index;
 			controller = _controller;
 			keyboard_H = _keyboard_H;
 			keyboard_V = _keyboard_V;
 			interact_key = _interact_key;
 			hand_tool_key = _hand_tool_key;
+			swap_items_key = _swap_items_key;
 		}
 
 		// Buttons
@@ -39,8 +42,12 @@ public static class input {
 			get { Input.GetKeyDown(KeyCode.E); return XCI.GetButtonDown(XboxButton.Y, controller) || Input.GetKeyDown(interact_key); }
 		}
 
-		bool hand_tool {
+		public bool hand_tool {
 			get { return XCI.GetButtonDown(XboxButton.A, controller) || Input.GetKeyDown(hand_tool_key); ; }
+		}
+
+		public bool swap_items {
+			get { return XCI.GetButtonDown(XboxButton.X, controller) || Input.GetKeyDown(swap_items_key); ; }
 		}
 
 		//bool tp_up {

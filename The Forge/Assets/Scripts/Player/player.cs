@@ -37,6 +37,19 @@ public class player : MonoBehaviour {
 
 	// Called every frame
 	private void Update() {
+		// Check if you wanna switch your items
+		if (input.p[index].swap_items) {
+			if (items_carried.Count > 1) {
+				item[] temp_items = items_carried.ToArray();
+				for (int i = 0; i < temp_items.Length; i++) {
+					items_carried[i] = temp_items[(i + 1) % temp_items.Length];
+				}
+			}
+			foreach(SpriteRenderer sr in carried_item_srs) {
+				sr.transform.Rotate(Vector3.up, 180f);
+			}
+		}
+
 		// Update the visual carried-item indicators
 		for (int i=0; i < carried_item_srs.Count; i++) {
 			if (carried_item_srs[i] != null) {

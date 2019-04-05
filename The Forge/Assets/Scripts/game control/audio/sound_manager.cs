@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class sound_manager : MonoBehaviour {
+	// Songs
+	public AudioSource Royal_Entrance;
+
 	// One-shots
 	public AudioSource anvil_hit;
 	public AudioSource bu_bu;
 	public AudioSource coin;
 	public AudioSource thunderclap;
 	public AudioSource walk_into_player;
+	public AudioSource footstep;
+	public AudioSource opening_box;
 
 	// Loops
 	public AudioSource furnace_loop;
@@ -42,7 +47,7 @@ public class sound_manager : MonoBehaviour {
 
 	// ===== Loops =====
 	// Starts or stops a (looping) AudioSource
-	private void update_loop(AudioSource AS, bool start) {
+	public void update_loop(AudioSource AS, bool start) {
 		if (start) {
 			AS.loop = true;
 			AS.Play();

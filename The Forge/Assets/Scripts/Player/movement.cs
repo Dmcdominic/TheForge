@@ -10,6 +10,7 @@ public class movement : MonoBehaviour {
 
 	public GameObject dwarf_visuals;
 	public GameObject carried_items;
+	public ParticleSystem teleport_PS;
 
 	[HideInInspector]
 	private bool movement_enabled;
@@ -61,6 +62,15 @@ public class movement : MonoBehaviour {
 			teledown = true;
 		}
 
+		// Trigger teleport particle effects
+		if (Mathf.Abs(move_ver) > 0) {
+			ParticleSystem new_teleport_ps = Instantiate(teleport_PS);
+			new_teleport_ps.gameObject.SetActive(true);
+			new_teleport_ps.transform.position = transform.position;
+			new_teleport_ps.Play();
+		}
+
+		// Move the player
 		Vector2 movement = new Vector2(move_hor, move_ver);
 		transform.Translate(movement);
 

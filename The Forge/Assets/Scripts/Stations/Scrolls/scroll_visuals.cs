@@ -45,24 +45,27 @@ public class scroll_visuals : MonoBehaviour {
 	// Instantiate a new recipe step
 	private int instantiate_step(item product, float x_pos) {
 		recipe_step new_step = Instantiate(step_prefab, steps_parent.transform);
-		Vector3 pos = new_step.transform.position;
-		new_step.transform.position = new Vector3(x_pos, pos.y, pos.z);
+		Vector3 pos = new_step.transform.localPosition;
+		new_step.transform.localPosition = new Vector3(x_pos, pos.y, pos.z);
 
 		item next_item = null;
 
 		new_step.station_sr.sprite = product.station.icon;
-		item item1 = product.ingredients[0];
-		if (product.ingredients.Count == 2) {
-			item item2 = product.ingredients[1];
-			item easier_item = get_easier_item(item1, item2);
-			new_step.ingredient_sr.sprite = easier_item.icon;
-			next_item = (easier_item == item1) ? item2 : item1;
-		} else if (item1.is_base_item) {
-			new_step.ingredient_sr.sprite = item1.icon;
-		} else {
-			next_item = item1;
+		if (!product.is_base_item) {
+			item item1 = product.ingredients[0];
+			if (product.ingredients.Count == 2) {
+				item item2 = product.ingredients[1];
+				item easier_item = get_easier_item(item1, item2);
+				new_step.ingredient_sr.sprite = easier_item.icon;
+				next_item = (easier_item == item1) ? item2 : item1;
+			} else if (item1.is_base_item) {
+				new_step.ingredient_sr.sprite = item1.icon;
+			} else {
+				next_item = item1;
+			}
 		}
 
+		new_step.gameObject.SetActive(true);
 		if (next_item) {
 			return 1 + instantiate_step(next_item, x_pos - recipe_steps_spacing);
 		}

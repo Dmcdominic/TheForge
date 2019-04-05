@@ -11,6 +11,7 @@ public class item : ScriptableObject {
 	public Sprite icon;
 	public List<item> ingredients;
 	public station station;
+	public int tier;
 
 	public bool is_base_item { get { return ingredients.Count == 0; } }
 
