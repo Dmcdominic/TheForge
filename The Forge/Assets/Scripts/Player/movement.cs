@@ -80,16 +80,11 @@ public class movement : MonoBehaviour {
 
 		// Update visual orientation
 		if (move_hor > 0) {
-			set_rot_y(dwarf_visuals.transform, 180f);
-			set_rot_y(carried_items.transform, 180f);
+			rotation_util.set_rot_y(dwarf_visuals.transform, 180f);
+			rotation_util.set_rot_y(carried_items.transform, 180f);
 		} else if (move_hor < 0) {
-			set_rot_y(dwarf_visuals.transform, 0);
-			set_rot_y(carried_items.transform, 0);
+			rotation_util.set_rot_y(dwarf_visuals.transform, 0);
+			rotation_util.set_rot_y(carried_items.transform, 0);
 		}
-	}
-
-	// Rotate an object to a certain y-rotation value
-	private void set_rot_y(Transform trans, float val) {
-		trans.rotation = Quaternion.Euler(new Vector3(trans.rotation.x, val, trans.rotation.z));
 	}
 }

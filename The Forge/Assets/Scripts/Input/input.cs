@@ -65,6 +65,10 @@ public static class input {
 			get { return XCI.GetButtonDown(XboxButton.Start, controller); }
 		}
 
+		public bool back {
+			get { return XCI.GetButtonDown(XboxButton.Back, controller); }
+		}
+
 		// Axes
 		public float h_axis {
 			get {

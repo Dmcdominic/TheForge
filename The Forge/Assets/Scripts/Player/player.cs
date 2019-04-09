@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class player : MonoBehaviour {
 
 	// Fields
 	public int index;
+	public TextMeshPro player_indicator;
 	public List<SpriteRenderer> carried_item_srs;
 
 	// Public vars
@@ -30,6 +32,7 @@ public class player : MonoBehaviour {
 	// Init
 	private void Awake() {
 		Movement = GetComponent<movement>();
+		player_indicator.text = "P" + display_index;
 	}
 	private void Start() {
 		scores[index] = 0;
@@ -61,5 +64,12 @@ public class player : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	// Kick this player out of whatever station they are at, and remove all their items
+	public void reset_item_state() {
+		current_station.abort_items_swap();
+		// Todo - stations need to override the abort_items_swap in order to close the quicktime event?
+		items_carried.Clear();
 	}
 }

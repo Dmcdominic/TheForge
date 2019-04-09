@@ -51,6 +51,18 @@ public abstract class MonoStation : MonoInteractable {
 		working_on = null;
 	}
 
+	// Kick the player out of this station, without exchanging the items
+	public void abort_items_swap() {
+		if (user == null || working_on == null) {
+			Debug.LogError("Tried to abort_items_swap at station " + this.gameObject + "but user or working_on was null");
+		}
+
+		user.Movement.can_move = true;
+
+		user = null;
+		working_on = null;
+	}
+
 	public override bool can_interact(player Player) {
 		return !occupied() && get_craftable_item(Player) != null && !(station_info.crate && Player.hands_full);
 	}

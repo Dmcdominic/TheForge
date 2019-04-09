@@ -9,6 +9,7 @@ using UnityEngine;
 public class item : ScriptableObject {
 	
 	public Sprite icon;
+	public float icon_angle = 45f;
 	public List<item> ingredients;
 	public station station;
 	public int tier;
