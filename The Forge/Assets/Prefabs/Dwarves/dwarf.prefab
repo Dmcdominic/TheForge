@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 930019905320192375}
   - component: {fileID: 930019905320192374}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dwarf Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 930019905702387833}
   - component: {fileID: 930019905702387832}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Item 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 930019906118566906}
   - component: {fileID: 930019906118566905}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Item 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930019906387068863}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Carried Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,10 +282,10 @@ GameObject:
   - component: {fileID: 930019906390442621}
   - component: {fileID: 930019906390442622}
   - component: {fileID: 930019906390442618}
-  - component: {fileID: 930019906390442620}
+  - component: {fileID: 2560987869739121806}
   - component: {fileID: 930019906390442619}
   - component: {fileID: 930019906390442617}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: dwarf
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -340,13 +340,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec08001cdd721477ebd55264d9af4792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.5
-  vertical_height: 3
-  dwarf_visuals: {fileID: 930019905320192264}
-  carried_items: {fileID: 930019906387068848}
-  teleport_PS: {fileID: 7193743169528887945}
---- !u!70 &930019906390442620
-CapsuleCollider2D:
+  x_mult: 3.5
+  jump_velo: 5
+  falling_grav_mult: 1.5
+  ghost_jump_delay: 0.2
+  raycast_dist: 0.13
+  ladder_velo: 2.2
+--- !u!61 &2560987869739121806
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -359,8 +360,18 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.19}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
   m_Size: {x: 0.4, y: 0.6}
-  m_Direction: 0
+  m_EdgeRadius: 0
 --- !u!50 &930019906390442619
 Rigidbody2D:
   serializedVersion: 4
@@ -369,19 +380,19 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930019906390442623}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!95 &930019906390442617
 Animator:
   serializedVersion: 3
@@ -412,7 +423,7 @@ GameObject:
   - component: {fileID: 8927513052200547071}
   - component: {fileID: 1337007108827743435}
   - component: {fileID: 7732449213299752523}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5179,7 +5190,7 @@ GameObject:
   - component: {fileID: 4034700316273349768}
   - component: {fileID: 7784574249457854925}
   - component: {fileID: 6105222250739355649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5385,7 +5396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3826366093244115212}
   - component: {fileID: 3267850721738910346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Down Caret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5470,7 +5481,7 @@ GameObject:
   - component: {fileID: 8692882001981119145}
   - component: {fileID: 7193743169528887945}
   - component: {fileID: 1403131977395834893}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particle System (Teleport)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

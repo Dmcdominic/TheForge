@@ -26,7 +26,7 @@ public class player : MonoBehaviour {
 	// Static vars
 	public static int item_limit = 2;
 
-	public static int[] scores = new int[4] { 0, 0, 0, 0 };
+	//public static int[] scores = new int[4] { 0, 0, 0, 0 };
 
 
 	// Init
@@ -35,7 +35,7 @@ public class player : MonoBehaviour {
 		player_indicator.text = "P" + display_index;
 	}
 	private void Start() {
-		scores[index] = 0;
+		game_controller.scores[index] = 0;
 	}
 
 	// Called every frame

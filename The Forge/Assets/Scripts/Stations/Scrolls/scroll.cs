@@ -59,7 +59,7 @@ public class scroll : MonoInteractable {
 	}
 
 	public override void on_interact(player Player) {
-		player.scores[Player.index] += requested_item.computed_gold_val;
+		game_controller.scores[Player.index] += requested_item.computed_gold_val;
 		Player.items_carried.Remove(requested_item);
 		clear_scroll(true);
 	}

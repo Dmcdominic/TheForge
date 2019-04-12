@@ -10,8 +10,8 @@ public class score_display : MonoBehaviour {
 
 	// Regularly update the text displays
 	private void Update() {
-		for (int p=0; p < player.scores.Length && p < score_TMPs.Length; p++) {
-			score_TMPs[p].text = "P" + (p+1).ToString() + ": " + player.scores[p].ToString();
+		for (int p=0; p < game_controller.scores.Length && p < score_TMPs.Length; p++) {
+			score_TMPs[p].text = "P" + (p+1).ToString() + ": " + game_controller.scores[p].ToString();
 		}
 	}
 }
