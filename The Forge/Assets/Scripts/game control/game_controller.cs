@@ -41,6 +41,11 @@ public class game_controller : MonoBehaviour {
 		game_timer = game_time_in_s;
 		game_playing = true;
 		movement.all_players_frozen = false;
+
+		// Reset scores
+		for (int p=0; p < scores.Length; p++) {
+			scores[p] = 0;
+		}
 	}
 
 	// End a game

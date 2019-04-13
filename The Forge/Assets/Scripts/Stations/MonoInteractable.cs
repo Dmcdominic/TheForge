@@ -26,23 +26,21 @@ public abstract class MonoInteractable : MonoBehaviour {
 	// Verifies that the indicator should be displayed.
 	// Calls on_interact() if any of the touching players are 
 	private void Update() {
-		indicator.SetActive(!occupied() && players_touching.Count > 0);
-
 		if (occupied()) {
 			return;
 		}
-
-		player to_try_remove = null;
+		
+		bool someone_can_interact = false;
 		foreach (player p in players_touching) {
-			if (input.p[p.index].interact && can_interact(p)) {
+			bool p_can_interact = can_interact(p);
+			someone_can_interact = someone_can_interact || p_can_interact;
+			if (input.p[p.index].interact && p_can_interact) {
 				on_interact(p);
-				to_try_remove = p;
 				break;
 			}
 		}
-		if (to_try_remove && (occupied() || !can_interact(to_try_remove))) {
-			players_touching.Remove(to_try_remove);
-		}
+		
+		indicator.SetActive(someone_can_interact);
 	}
 
 	// Handles the player interaction indicator.
@@ -50,9 +48,10 @@ public abstract class MonoInteractable : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Player")) {
 			player p = collision.gameObject.GetComponent<player>();
-			if (p != null && can_interact(p)) {
-				players_touching.Add(p);
-			}
+			players_touching.Add(p);
+			//if (p != null && can_interact(p)) {
+			//	players_touching.Add(p);
+			//}
 		}
 	}
 

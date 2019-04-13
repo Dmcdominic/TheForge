@@ -15,6 +15,8 @@ public class movement : MonoBehaviour {
 
 	public float ladder_velo;
 
+	public Transform no_rotation;
+
 	[HideInInspector]
 	private bool movement_enabled;
 	public static bool all_players_frozen = false;
@@ -147,9 +149,11 @@ public class movement : MonoBehaviour {
 
 		// Transform flip
 		if (x_input > 0) {
-			transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z));
+			transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.x, 180f, transform.localRotation.z));
+			no_rotation.localRotation = Quaternion.Euler(new Vector3 (no_rotation.localRotation.x, 180f, no_rotation.localRotation.z));
 		} else if (x_input < 0) {
-			transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 0, transform.rotation.z));
+			transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.x, 0, transform.localRotation.z));
+			no_rotation.localRotation = Quaternion.Euler(new Vector3(no_rotation.localRotation.x, 0, no_rotation.localRotation.z));
 		}
 
 		// Update animations

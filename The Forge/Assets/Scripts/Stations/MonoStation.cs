@@ -46,9 +46,27 @@ public abstract class MonoStation : MonoInteractable {
 		}
 		user.items_carried.Add(working_on);
 		user.Movement.can_move = true;
+		user.current_station = null;
 
 		user = null;
 		working_on = null;
+	}
+
+	// Take away the ingredients from the player, and let them move, but no product yet
+	public void take_ingredients_only() {
+		if (user == null || working_on == null) {
+			Debug.LogError("Tried to take_ingredients_only at station " + this.gameObject + "but user or working_on was null");
+		}
+
+		foreach (item ingredient in working_on.ingredients) {
+			user.items_carried.Remove(ingredient);
+		}
+		//user.items_carried.Add(working_on);
+		user.Movement.can_move = true;
+		user.current_station = null;
+
+		user = null;
+		//working_on = null;
 	}
 
 	// Kick the player out of this station, without exchanging the items

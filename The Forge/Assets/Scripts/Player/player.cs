@@ -26,16 +26,11 @@ public class player : MonoBehaviour {
 	// Static vars
 	public static int item_limit = 2;
 
-	//public static int[] scores = new int[4] { 0, 0, 0, 0 };
-
 
 	// Init
 	private void Awake() {
 		Movement = GetComponent<movement>();
-		player_indicator.text = "P" + display_index;
-	}
-	private void Start() {
-		game_controller.scores[index] = 0;
+		player_indicator.text = get_indicator_string(index);
 	}
 
 	// Called every frame
@@ -71,5 +66,15 @@ public class player : MonoBehaviour {
 		current_station.abort_items_swap();
 		// Todo - stations need to override the abort_items_swap in order to close the quicktime event?
 		items_carried.Clear();
+	}
+
+	// Play a footstep sound effect
+	public void play_footstep_sfx(int index) {
+		sound_manager.play_from_set(sound_manager.instance.footsteps, index, .1f);
+	}
+
+	// Get the player's indicator string
+	public static string get_indicator_string(int index) {
+		return "P" + (index + 1).ToString();
 	}
 }

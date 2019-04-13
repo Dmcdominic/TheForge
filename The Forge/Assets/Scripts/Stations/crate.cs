@@ -14,7 +14,7 @@ public class crate : MonoStation {
 
 	public override void on_interact(player Player) {
 		base.on_interact(Player);
-		sound_manager.instance.play_one_shot(sound_manager.instance.opening_box);
+		sound_manager.play_one_shot(sound_manager.instance.opening_box);
 		complete_items_swap();
 	}
 }
