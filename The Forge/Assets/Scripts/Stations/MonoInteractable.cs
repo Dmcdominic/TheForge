@@ -25,7 +25,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 
 	// Verifies that the indicator should be displayed.
 	// Calls on_interact() if any of the touching players are 
-	private void Update() {
+	protected virtual void Update() {
 		if (occupied()) {
 			return;
 		}

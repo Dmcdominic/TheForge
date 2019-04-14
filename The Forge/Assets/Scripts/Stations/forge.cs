@@ -80,4 +80,10 @@ public class forge : MonoStation {
 		}
 		on_done_cooking();
 	}
+
+	// Called every frame
+	protected override void Update() {
+		base.Update();
+		// Your stuff here
+	}
 }
