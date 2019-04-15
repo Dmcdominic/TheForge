@@ -27,6 +27,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 	// Calls on_interact() if any of the touching players are 
 	protected virtual void Update() {
 		if (occupied()) {
+			indicator.SetActive(false);
 			return;
 		}
 		

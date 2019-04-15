@@ -76,7 +76,12 @@ public class movement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate() {
 		if (!can_move) {
-			rb.velocity = new Vector2(0, rb.velocity.y);
+			//rb.velocity = new Vector2(0, rb.velocity.y);
+			if (stunned) {
+				rb.velocity = new Vector2(0, rb.velocity.y);
+			} else {
+				rb.velocity = new Vector2(0, 0);
+			}
 			col.isTrigger = false;
 			animator.SetBool("running", false);
 			animator.SetBool("carrying", Player.carrying_items);
@@ -213,8 +218,9 @@ public class movement : MonoBehaviour {
 	public void stun(item Item) {
 		stunned = true;
 		invuln = true;
-		rb.velocity = new Vector2(rb.velocity.x, jump_velo * 0.7f);
-		StartCoroutine(unstun_delayed(0.5f + Item.computed_gold_val * 0.01f, 1f));
+		rb.velocity = new Vector2(rb.velocity.x, jump_velo * .9f);
+		sound_manager.play_one_shot(sound_manager.instance.punch);
+		StartCoroutine(unstun_delayed(0.7f + Item.computed_gold_val * 0.01f, 1f));
 	}
 
 	private IEnumerator unstun_delayed(float unstun_delay, float extra_invuln_delay) {
@@ -270,6 +276,15 @@ public class movement : MonoBehaviour {
 	private void update_grav_scale() {
 		//float y_input = input.p[index].v_axis;
 		//bool jump_held = y_input > 0;
+
+		if (stunned) {
+			rb.gravityScale = base_grav_scale * falling_grav_mult;
+			return;
+		} else if (!can_move) {
+			rb.gravityScale = 0;
+			return;
+		}
+
 		bool jump_held = input.p[index].jump_held;
 		if (holding_onto_ladder) {
 			rb.gravityScale = 0;

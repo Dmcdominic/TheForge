@@ -43,7 +43,6 @@ public static class input {
 		public bool jump {
 			get { return XCI.GetButtonDown(XboxButton.A, controller) || Input.GetKeyDown(jump_key); }
 		}
-
 		public bool jump_held {
 			get { return XCI.GetButton(XboxButton.A, controller) || Input.GetKey(jump_key); }
 		}
@@ -54,6 +53,9 @@ public static class input {
 
 		public bool hand_tool {
 			get { return XCI.GetButtonDown(XboxButton.A, controller) || Input.GetKeyDown(hand_tool_key); }
+		}
+		public bool hand_tool_down {
+			get { return XCI.GetButton(XboxButton.A, controller) || Input.GetKey(hand_tool_key); }
 		}
 
 		public bool swap_items {
@@ -66,10 +68,6 @@ public static class input {
 		public bool throw_left {
 			get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller) || Input.GetKeyDown(KeyCode.R); }
 		}
-
-		//public bool switch_floors {
-		//	get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller) || XCI.GetButtonDown(XboxButton.RightBumper, controller); }
-		//}
 
 		public bool start {
 			get { return XCI.GetButtonDown(XboxButton.Start, controller); }

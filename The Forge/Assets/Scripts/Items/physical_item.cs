@@ -10,9 +10,13 @@ public class physical_item : MonoBehaviour {
 	public player thrower;
 	public bool just_thrown = false;
 
+	// Private vars
+	private bool flying = false;
+	private bool flying_delayed = false;
+
 	// Static settings
 	public static int expiration_time = 6;
-	public static float flying_velo_threshold = 1f;
+	public static float flying_velo_threshold = 1.5f;
 
 	// Component references
 	private SpriteRenderer sr;
@@ -32,13 +36,13 @@ public class physical_item : MonoBehaviour {
 	// Called every frame
 	private void Update() {
 		// TODO - disappears after a few seconds, and flashes.
+
+		// Update flying value
+		flying = rb.velocity.magnitude > flying_velo_threshold;
 	}
 
 	// Check for collisions with players
 	private void OnCollisionEnter2D(Collision2D collision) {
-		// Check if this is flying through the air
-		bool flying = rb.velocity.magnitude > flying_velo_threshold;
-
 		if (collision.gameObject.CompareTag("Player")) {
 			player Player = collision.gameObject.GetComponent<player>();
 			if (Player == thrower) {
@@ -47,7 +51,7 @@ public class physical_item : MonoBehaviour {
 				} else {
 					try_pickup(Player);
 				}
-			} else if (Player != thrower) {
+			} else if (Player != thrower && !Player.GetComponent<movement>().stunned) {
 				if (flying) {
 					// Stun them
 					Player.GetComponent<movement>().stun(Item);

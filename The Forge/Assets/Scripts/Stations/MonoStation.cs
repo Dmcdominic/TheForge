@@ -46,7 +46,7 @@ public abstract class MonoStation : MonoInteractable {
 		}
 		user.items_carried.Add(working_on);
 		user.Movement.can_move = true;
-		user.current_station = null;
+		user.set_to_station(null);
 
 		user = null;
 		working_on = null;
@@ -63,7 +63,7 @@ public abstract class MonoStation : MonoInteractable {
 		}
 		//user.items_carried.Add(working_on);
 		user.Movement.can_move = true;
-		user.current_station = null;
+		user.set_to_station(null);
 
 		user = null;
 		//working_on = null;
@@ -88,7 +88,7 @@ public abstract class MonoStation : MonoInteractable {
 	public override void on_interact(player Player) {
 		user = Player;
 		working_on = get_craftable_item(Player);
-		Player.current_station = this;
+		Player.set_to_station(this);
 		Player.Movement.can_move = false;
 	}
 }

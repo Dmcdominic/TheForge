@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[RequireComponent(typeof(Collider2D), typeof(movement))]
 public class player : MonoBehaviour {
 
 	// Fields
@@ -18,10 +19,12 @@ public class player : MonoBehaviour {
 	public bool hands_full { get { return items_carried.Count >= item_limit; } }
 
 	[HideInInspector]
-	public MonoStation current_station = null;
+	public MonoStation current_station { get; private set; }
 
+	// Component references
 	[HideInInspector]
 	public movement Movement { get; private set; }
+	private Collider2D col;
 
 	// Static vars
 	public static int item_limit = 2;
@@ -30,6 +33,7 @@ public class player : MonoBehaviour {
 	// Init
 	private void Awake() {
 		Movement = GetComponent<movement>();
+		col = GetComponent<Collider2D>();
 		player_indicator.text = get_indicator_string(index);
 	}
 
@@ -58,6 +62,18 @@ public class player : MonoBehaviour {
 					carried_item_srs[i].sprite = (Item != null && Item.icon != null) ? Item.icon : null;
 				}
 			}
+		}
+	}
+
+	// Set this player's current station
+	public void set_to_station(MonoStation station) {
+		current_station = station;
+		if (station == null) {
+			col.enabled = true;
+			Movement.can_move = true;
+		} else {
+			col.enabled = false;
+			Movement.can_move = false;
 		}
 	}
 

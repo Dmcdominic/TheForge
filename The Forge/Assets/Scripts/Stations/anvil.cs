@@ -12,12 +12,11 @@ public class anvil : MonoStation
 
     public SpriteRenderer bar_location;
     public spritesheet bar_sprites;
-    private int progress_num = 10;
+    private static int progress_num = 10;
 
     public override void on_interact(player Player)
     {
         base.on_interact(Player);
-        sound_manager.play_one_shot(sound_manager.instance.anvil_hit);
         player_num = Player.index;
         is_playing = true;
 
@@ -34,10 +33,11 @@ public class anvil : MonoStation
     {
         base.Update();
         // Your stuff here
-        if (input.p[player_num].interact && is_playing)
+        if (input.p[player_num].hand_tool && is_playing)
         {
             count++;
-            Debug.Log("count = " + count);
+			sound_manager.play_one_shot(sound_manager.instance.anvil_hit);
+			//Debug.Log("count = " + count);
         }
 
         if (count == button_mash_num && is_playing)

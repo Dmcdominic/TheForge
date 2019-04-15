@@ -371,7 +371,6 @@ MonoBehaviour:
   - {fileID: 930019906118566905}
   - {fileID: 930019905702387832}
   items_carried: []
-  current_station: {fileID: 0}
 --- !u!114 &930019906390442618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5302,7 +5301,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1695448093
   m_SortingLayer: 1
-  m_SortingOrder: 3
+  m_SortingOrder: 10
 --- !u!33 &4034700316273349768
 MeshFilter:
   m_ObjectHideFlags: 0
