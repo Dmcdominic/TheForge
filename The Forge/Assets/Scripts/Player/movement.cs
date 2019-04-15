@@ -5,6 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(Animator))]
 [RequireComponent(typeof(player))]
 public class movement : MonoBehaviour {
+	// Static settings
+	public static float throw_speed_fast = 7f;
+	public static float throw_speed_slow = 4f;
+	public static float throw_turn_duration = 0.15f;
+
 	// Public fields
 	public float x_mult;
 
@@ -17,11 +22,18 @@ public class movement : MonoBehaviour {
 
 	public Transform no_rotation;
 
+	public physical_item physical_item_prefab;
+
 	[HideInInspector]
+	public bool stunned;
+	[HideInInspector]
+	public bool invuln;
+	
+	// Movement management
 	private bool movement_enabled;
 	public static bool all_players_frozen = false;
 	public bool can_move {
-		get { return movement_enabled && !all_players_frozen; }
+		get { return movement_enabled && !stunned && !all_players_frozen; }
 		set { movement_enabled = value; }
 	}
 
@@ -37,6 +49,9 @@ public class movement : MonoBehaviour {
 	private int ladder_count = 0;
 	private bool touching_ladder { get { return ladder_count > 0; } }
 	private bool holding_onto_ladder = false;
+
+	private bool just_threw_left = false;
+	private bool just_threw_right = false;
 
 	// Component references
 	private Rigidbody2D rb;
@@ -65,10 +80,11 @@ public class movement : MonoBehaviour {
 			col.isTrigger = false;
 			animator.SetBool("running", false);
 			animator.SetBool("carrying", Player.carrying_items);
+			//animator.SetBool("stunned", stunned);
 			update_grav_scale();
 			return;
 		}
-		
+
 		// Get input
 		float x_input = input.p[index].h_axis;
 		bool jump_pressed = input.p[index].jump;
@@ -96,10 +112,10 @@ public class movement : MonoBehaviour {
 		// Jump controls
 		Vector3 left_foot_pos = new Vector3(col.bounds.min.x, col.bounds.min.y);
 		Vector3 right_foot_pos = new Vector3(col.bounds.max.x, col.bounds.min.y);
-		
+
 		bool has_footing = false;
 		RaycastHit2D[] hits = Physics2D.RaycastAll(left_foot_pos, Vector2.down, raycast_dist);
-		for (int i=0; i < hits.Length; i++) {
+		for (int i = 0; i < hits.Length; i++) {
 			if (!hits[i].collider.isTrigger && hits[i].transform.gameObject != gameObject) {
 				has_footing = true;
 				break;
@@ -115,7 +131,7 @@ public class movement : MonoBehaviour {
 				}
 			}
 		}
-		
+
 		//if ((has_footing && rb.velocity.y <= 0.1f) || touching_ladder) {
 		if (has_footing || touching_ladder) {
 			jump_grounded_check = true;
@@ -137,6 +153,28 @@ public class movement : MonoBehaviour {
 		// Fall through platforms if you are holding down
 		//col.enabled = input.p[index].v_axis >= 0;
 
+		// Check for throwing your items
+		bool try_throw = input.p[index].throw_left || input.p[index].throw_right;
+		if (try_throw && Player.carrying_items) {
+			float x_dir = input.p[index].throw_left ? -1f : 1f;
+
+			if (input.p[index].throw_left) {
+				StartCoroutine(set_just_threw(false));
+			} else {
+				StartCoroutine(set_just_threw(true));
+			}
+
+			Vector2 direction_fast = new Vector2(x_dir, 1f);
+			int fast_index = 0;
+			if (Player.items_carried.Count == 2) {
+				Vector2 direction_slow = new Vector2(x_dir, 0.5f);
+				throw_item(0, direction_slow.normalized * throw_speed_slow);
+				fast_index = 1;
+			}
+			throw_item(fast_index, direction_fast.normalized * throw_speed_fast);
+			Player.items_carried.Clear();
+		}
+
 		// Check if you should be walking
 		bool running = Mathf.Abs(x_input) > 0 && Mathf.Abs(rb.velocity.y) < 0.1f;
 		animator.SetBool("running", running);
@@ -148,10 +186,10 @@ public class movement : MonoBehaviour {
 		update_grav_scale();
 
 		// Transform flip
-		if (x_input > 0) {
+		if (just_threw_right || (!just_threw_left && x_input > 0)) {
 			transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.x, 180f, transform.localRotation.z));
-			no_rotation.localRotation = Quaternion.Euler(new Vector3 (no_rotation.localRotation.x, 180f, no_rotation.localRotation.z));
-		} else if (x_input < 0) {
+			no_rotation.localRotation = Quaternion.Euler(new Vector3(no_rotation.localRotation.x, 180f, no_rotation.localRotation.z));
+		} else if (just_threw_left || (!just_threw_right && x_input < 0)) {
 			transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.x, 0, transform.localRotation.z));
 			no_rotation.localRotation = Quaternion.Euler(new Vector3(no_rotation.localRotation.x, 0, no_rotation.localRotation.z));
 		}
@@ -169,6 +207,49 @@ public class movement : MonoBehaviour {
 		}
 		// todo - jump sound
 		//SoundManager.instance.playJump();
+	}
+
+	// Stun this player briefly
+	public void stun(item Item) {
+		stunned = true;
+		invuln = true;
+		rb.velocity = new Vector2(rb.velocity.x, jump_velo * 0.7f);
+		StartCoroutine(unstun_delayed(0.5f + Item.computed_gold_val * 0.01f, 1f));
+	}
+
+	private IEnumerator unstun_delayed(float unstun_delay, float extra_invuln_delay) {
+		yield return new WaitForSeconds(unstun_delay);
+		stunned = false;
+		yield return new WaitForSeconds(extra_invuln_delay);
+		invuln = false;
+	}
+
+	// Throw an item with certain velocity
+	private void throw_item(int index, Vector2 velocity) {
+		item Item = Player.items_carried[index];
+		physical_item physical_Item = Instantiate(physical_item_prefab);
+
+		physical_Item.Item = Item;
+		physical_Item.thrower = Player;
+		physical_Item.just_thrown = true;
+
+		physical_Item.transform.position = Player.carried_item_srs[index].transform.position;
+		physical_Item.GetComponent<Rigidbody2D>().velocity = velocity;
+	}
+
+	// Update just_threw (right or left) after short delay
+	private IEnumerator set_just_threw(bool right) {
+		if (right) {
+			just_threw_right = true;
+		} else {
+			just_threw_left = true;
+		}
+		yield return new WaitForSeconds(throw_turn_duration);
+		if (right) {
+			just_threw_right = false;
+		} else {
+			just_threw_left = false;
+		}
 	}
 
 	// Ladder usage

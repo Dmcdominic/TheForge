@@ -60,12 +60,12 @@ public static class input {
 			get { return XCI.GetButtonDown(XboxButton.X, controller) || Input.GetKeyDown(swap_items_key); }
 		}
 
-		//bool tp_up {
-		//	get { return XCI.GetButtonDown(XboxButton.RightBumper, controller); }
-		//}
-		//bool tp_down {
-		//	get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller); }
-		//}
+		public bool throw_right {
+			get { return XCI.GetButtonDown(XboxButton.RightBumper, controller) || Input.GetKeyDown(KeyCode.T); }
+		}
+		public bool throw_left {
+			get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller) || Input.GetKeyDown(KeyCode.R); }
+		}
 
 		//public bool switch_floors {
 		//	get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller) || XCI.GetButtonDown(XboxButton.RightBumper, controller); }

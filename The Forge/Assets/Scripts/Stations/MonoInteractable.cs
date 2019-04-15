@@ -49,9 +49,6 @@ public abstract class MonoInteractable : MonoBehaviour {
 		if (collision.CompareTag("Player")) {
 			player p = collision.gameObject.GetComponent<player>();
 			players_touching.Add(p);
-			//if (p != null && can_interact(p)) {
-			//	players_touching.Add(p);
-			//}
 		}
 	}
 
