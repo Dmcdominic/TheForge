@@ -11,7 +11,7 @@ public abstract class MonoStation : MonoInteractable {
 
 	// Returns an item that this player could craft right now at this station.
 	// Returns null if no item exists.
-	public item get_craftable_item(player Player) {
+	protected override item get_craftable_item(player Player) {
 		if (station_info.crate) {
 			return station_info.products[0];
 		}
