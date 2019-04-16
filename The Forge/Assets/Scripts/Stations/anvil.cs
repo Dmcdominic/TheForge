@@ -10,6 +10,8 @@ public class anvil : MonoStation
     private int player_num;
     public int button_mash_num;
 
+    public SpriteRenderer icon_normal;
+    public SpriteRenderer icon_pressed;
     public SpriteRenderer bar_location;
     public spritesheet bar_sprites;
     private static int progress_num = 10;
@@ -25,6 +27,8 @@ public class anvil : MonoStation
     private void Start()
     {
         bar_location.enabled = false;
+        icon_normal.enabled = false;
+        icon_pressed.enabled = false;
         count = 0;
     }
 
@@ -47,6 +51,8 @@ public class anvil : MonoStation
             is_playing = false;
             bar_location.sprite = bar_sprites.sprites[0];
             bar_location.enabled = false;
+            icon_normal.enabled = false;
+            icon_pressed.enabled = false;
         }
 
         if (is_playing)
@@ -55,5 +61,15 @@ public class anvil : MonoStation
             bar_location.sprite = bar_sprites.sprites[count / (button_mash_num / progress_num)];
         }
 
+        if (input.p[player_num].hand_tool_down & is_playing)
+        {
+            icon_normal.enabled = false;
+            icon_pressed.enabled = true;
+        }
+        else if (is_playing)
+        {
+            icon_normal.enabled = true;
+            icon_pressed.enabled = false;
+        }
     }
 }
