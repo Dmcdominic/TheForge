@@ -35,7 +35,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 		foreach (player p in players_touching) {
 			bool p_can_interact = can_interact(p);
 			someone_can_interact = someone_can_interact || p_can_interact;
-			if (input.p[p.index].interact && p_can_interact) {
+			if (input.p[p.index].interact && p_can_interact && !p.Movement.stunned) {
 				on_interact(p);
 				break;
 			}

@@ -69,6 +69,13 @@ public static class input {
 			get { return XCI.GetButtonDown(XboxButton.LeftBumper, controller) || Input.GetKeyDown(KeyCode.R); }
 		}
 
+		public bool platform_right {
+			get { return XCI.GetAxis(XboxAxis.RightTrigger, controller) > 0; }
+		}
+		public bool platform_left {
+			get { return XCI.GetAxis(XboxAxis.LeftTrigger, controller) > 0; }
+		}
+
 		public bool start {
 			get { return XCI.GetButtonDown(XboxButton.Start, controller); }
 		}

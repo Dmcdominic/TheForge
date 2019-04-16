@@ -33,7 +33,7 @@ public class scroll_visuals : MonoBehaviour {
 		requested_item = _requested_item;
 		requested_item_sr.sprite = requested_item.icon;
 		rotation_util.set_rot_z(requested_item_sr.transform, requested_item.icon_angle);
-		gold_TMP.text = requested_item.computed_gold_val.ToString() + " G";
+		gold_TMP.text = requested_item.computed_gold_val.ToString();
 		generate_recipe_steps();
 		visuals_parent.SetActive(true);
 	}
@@ -57,6 +57,9 @@ public class scroll_visuals : MonoBehaviour {
 	// Instantiate a new recipe step
 	private int instantiate_step(item product, float x_pos) {
 		recipe_step new_step = Instantiate(step_prefab, steps_parent.transform);
+		Vector3 station_icon_scale = new_step.station_sr.transform.localScale;
+		Vector3 item_icon_scale = new_step.ingredient_sr.transform.localScale;
+
 		Vector3 pos = new_step.transform.localPosition;
 		new_step.transform.localPosition = new Vector3(x_pos, pos.y, pos.z);
 
@@ -75,6 +78,9 @@ public class scroll_visuals : MonoBehaviour {
 			} else {
 				next_item = item1;
 			}
+		} else {
+			new_step.station_sr.sprite = product.icon;
+			new_step.station_sr.transform.localScale = item_icon_scale;
 		}
 
 		new_step.gameObject.SetActive(true);

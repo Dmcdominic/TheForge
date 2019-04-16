@@ -13,9 +13,11 @@ public class game_controller : MonoBehaviour {
 	public static int[] team_scores = new int[2] { 0, 0 };
 	public static float game_timer;
 	public static bool game_playing;
+	public static bool pre_game;
 
 	// Static settings
-	public static float game_time_in_s = 180f;
+	public static float total_game_time = 180f;
+	public static float pre_game_time = 10f;
 
 	public static int mm_scene = 1;
 	public static int gameplay_scene = 2;
@@ -40,8 +42,9 @@ public class game_controller : MonoBehaviour {
 
 	// Start a game
 	private void start_game() {
-		game_timer = game_time_in_s;
+		game_timer = pre_game_time;
 		game_playing = true;
+		pre_game = true;
 		movement.all_players_frozen = false;
 
 		// Reset scores
@@ -65,6 +68,9 @@ public class game_controller : MonoBehaviour {
 		if (game_playing) {
 			if (game_timer > 0) {
 				game_timer -= Time.deltaTime;
+			} else if (pre_game) {
+				game_timer = total_game_time;
+				pre_game = false;
 			} else {
 				end_game(true);
 			}

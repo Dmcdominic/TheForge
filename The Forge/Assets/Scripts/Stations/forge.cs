@@ -115,7 +115,7 @@ public class forge : MonoStation {
 		physical_item physical_Item = Instantiate(physical_item_prefab);
 
 		physical_Item.Item = working_on;
-		physical_Item.thrower = null;
+		physical_Item.thrower = current_owner;
 		physical_Item.just_thrown = true;
 
 		physical_Item.transform.position = cooking_sr.transform.position;

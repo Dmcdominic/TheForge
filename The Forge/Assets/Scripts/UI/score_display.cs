@@ -4,7 +4,9 @@ using UnityEngine;
 using TMPro;
 
 public class score_display : MonoBehaviour {
-	
+
+	public string[] team_names;
+
 	public TextMeshPro[] player_score_TMPs;
 	public TextMeshPro[] team_score_TMPs;
 
@@ -55,7 +57,7 @@ public class score_display : MonoBehaviour {
 			if (current_display_val[t] < score) {
 				if (delay_timer[t] <= 0) {
 					current_display_val[t]++;
-					team_score_TMPs[t].text = "Team " + (t + 1).ToString() + ": " + current_display_val[t].ToString();
+					team_score_TMPs[t].text = team_names[t] + ": " + current_display_val[t].ToString();
 					if (incr_since_gold_sfx > 0) {
 						incr_since_gold_sfx--;
 					} else {
@@ -68,7 +70,7 @@ public class score_display : MonoBehaviour {
 				}
 			} else if (current_display_val[t] >= score) {
 				current_display_val[t] = score;
-				team_score_TMPs[t].text = "Team " + (t + 1).ToString() + ": " + current_display_val[t].ToString();
+				team_score_TMPs[t].text = team_names[t] + ": " + current_display_val[t].ToString();
 			}
 		}
 	}

@@ -49,16 +49,16 @@ public class physical_item : MonoBehaviour {
 	private void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject.CompareTag("Player")) {
 			player Player = collision.gameObject.GetComponent<player>();
-			if (Player == thrower) {
+			if (Player.team == thrower.team) {
 				if (just_thrown) {
 					just_thrown = false;
 				} else {
 					try_pickup(Player);
 				}
-			} else if (Player != thrower && !Player.GetComponent<movement>().stunned) {
+			} else if (Player.team != thrower.team && !Player.Movement.stunned) {
 				if (flying) {
 					// Stun them
-					Player.GetComponent<movement>().stun(Item);
+					Player.Movement.stun(Item);
 				} else {
 					try_pickup(Player);
 				}
