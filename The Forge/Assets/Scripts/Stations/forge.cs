@@ -17,6 +17,7 @@ public class forge : MonoStation {
 	private bool finished_cooking;
 
 	private TextMeshPro player_indicator;
+	private SpriteRenderer indicator_caret;
 
 	// Static settings
 	public static float cook_interval = 0.9f;
@@ -32,6 +33,7 @@ public class forge : MonoStation {
 	// Init
 	private void Awake() {
 		player_indicator = completed_indicator.GetComponentInChildren<TextMeshPro>();
+		indicator_caret = completed_indicator.GetComponent<SpriteRenderer>();
 
 		current_owner = null;
 		finished_cooking = false;
@@ -46,7 +48,7 @@ public class forge : MonoStation {
 			base.on_interact(Player);
 			take_ingredients_only();
 			start_cooking(Player);
-		} else if (Player == current_owner) {
+		} else if (Player.team == current_owner.team) {
 			user = Player;
 			give_product_only();
 			finished_cooking = false;
@@ -71,14 +73,16 @@ public class forge : MonoStation {
 	private void on_done_cooking() {
 		finished_cooking = true;
 		completed_indicator.SetActive(true);
-		player_indicator.text = player.get_indicator_string(current_owner.index);
+		player_indicator.text = teams.names[current_owner.team];
+		player_indicator.color = teams.lighter_colors[current_owner.team];
+		indicator_caret.color = teams.lighter_colors[current_owner.team];
 		sound_manager.update_loop(sound_manager.instance.furnace_loop, false);
 		StartCoroutine(eject_after_delay());
 	}
 
 	// More specific can_interact
 	public override bool can_interact(player Player) {
-		return (current_owner == null && base.can_interact(Player)) || (current_owner == Player && !current_owner.hands_full && finished_cooking);
+		return (current_owner == null && base.can_interact(Player)) || (current_owner != null && current_owner.team == Player.team && !Player.hands_full && finished_cooking);
 	}
 
 	// Coroutine for cooking the product
