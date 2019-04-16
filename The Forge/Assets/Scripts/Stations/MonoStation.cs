@@ -69,6 +69,23 @@ public abstract class MonoStation : MonoInteractable {
 		//working_on = null;
 	}
 
+	// Give product only
+	public void give_product_only() {
+		if (user == null || working_on == null) {
+			Debug.LogError("Tried to give_product_only at station " + this.gameObject + "but user or working_on was null");
+		}
+
+		//foreach (item ingredient in working_on.ingredients) {
+		//	user.items_carried.Remove(ingredient);
+		//}
+		user.items_carried.Add(working_on);
+		user.Movement.can_move = true;
+		user.set_to_station(null);
+
+		user = null;
+		working_on = null;
+	}
+
 	// Kick the player out of this station, without exchanging the items
 	public void abort_items_swap() {
 		if (user == null || working_on == null) {

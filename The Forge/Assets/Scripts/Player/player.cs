@@ -8,6 +8,7 @@ public class player : MonoBehaviour {
 
 	// Fields
 	public int index;
+	public int team;
 	public TextMeshPro player_indicator;
 	public List<SpriteRenderer> carried_item_srs;
 
@@ -35,6 +36,7 @@ public class player : MonoBehaviour {
 		Movement = GetComponent<movement>();
 		col = GetComponent<Collider2D>();
 		player_indicator.text = get_indicator_string(index);
+		//player_indicator.color = teams.colors[team];
 	}
 
 	// Called every frame

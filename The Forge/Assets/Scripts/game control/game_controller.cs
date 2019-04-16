@@ -8,7 +8,9 @@ public class game_controller : MonoBehaviour {
 	public player[] dwarves;
 
 	// Static vars
-	public static int[] scores = new int[4] { 0, 0, 0, 0 };
+	public static bool teams = true;
+	public static int[] player_scores = new int[4] { 0, 0, 0, 0 };
+	public static int[] team_scores = new int[2] { 0, 0 };
 	public static float game_timer;
 	public static bool game_playing;
 
@@ -43,8 +45,11 @@ public class game_controller : MonoBehaviour {
 		movement.all_players_frozen = false;
 
 		// Reset scores
-		for (int p=0; p < scores.Length; p++) {
-			scores[p] = 0;
+		for (int p=0; p < player_scores.Length; p++) {
+			player_scores[p] = 0;
+		}
+		for (int t = 0; t < team_scores.Length; t++) {
+			player_scores[t] = 0;
 		}
 	}
 
@@ -64,5 +69,11 @@ public class game_controller : MonoBehaviour {
 				end_game(true);
 			}
 		}
+	}
+
+	// Add to a player's personal score, AND team score
+	public static void increment_player_score(player Player, int incr) {
+		player_scores[Player.index] += incr;
+		team_scores[Player.team] += incr;
 	}
 }
