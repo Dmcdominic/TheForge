@@ -585,6 +585,8 @@ MonoBehaviour:
   cooking_sr: {fileID: 7444612771256739324}
   completed_indicator: {fileID: 7444612770673877489}
   cooking_sprites: {fileID: 11400000, guid: d58fee9ad6f294747a3ab8daef1df9e1, type: 2}
+  physical_item_prefab: {fileID: 485857332524252866, guid: 60d60f3ad438f9049af8d0ad49e7fa3c,
+    type: 3}
 --- !u!61 &7444612771895695004
 BoxCollider2D:
   m_ObjectHideFlags: 0

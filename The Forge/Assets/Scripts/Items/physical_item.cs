@@ -10,12 +10,15 @@ public class physical_item : MonoBehaviour {
 	public player thrower;
 	public bool just_thrown = false;
 
+	[HideInInspector]
+	public bool flashing = false;
+
 	// Private vars
 	private bool flying = false;
-	private bool flying_delayed = false;
 
 	// Static settings
-	public static int expiration_time = 6;
+	public static float expiration_time = 7f;
+	public static float flashing_time = 3f;
 	public static float flying_velo_threshold = 1.5f;
 
 	// Component references
@@ -31,6 +34,7 @@ public class physical_item : MonoBehaviour {
 	private void Start() {
 		sr.sprite = Item.icon;
 		StartCoroutine(set_just_thrown_delayed(false, 0.3f));
+		StartCoroutine(expire_after_delay());
 	}
 
 	// Called every frame
@@ -79,5 +83,13 @@ public class physical_item : MonoBehaviour {
 	private IEnumerator set_just_thrown_delayed(bool val, float delay) {
 		yield return new WaitForSeconds(delay);
 		just_thrown = val;
+	}
+
+	// Destroy this object after the appropriate delay
+	private IEnumerator expire_after_delay() {
+		yield return new WaitForSeconds(expiration_time - flashing_time);
+		flashing = true;
+		yield return new WaitForSeconds(flashing_time);
+		destroy_this();
 	}
 }
