@@ -10,6 +10,7 @@ public class movement : MonoBehaviour {
 	public static float throw_speed_slow = 4f;
 	public static float throw_turn_duration = 0.15f;
 	public static float ladder_axis_threshold = 0.6f;
+	public static float stacking_height_check = 0.55f;
 
 	// Public fields
 	public float x_mult;
@@ -57,6 +58,8 @@ public class movement : MonoBehaviour {
 	private bool just_threw_left = false;
 	private bool just_threw_right = false;
 
+	private List<player> players_touching = new List<player>();
+
 	// Component references
 	private Rigidbody2D rb;
 	private Collider2D col;
@@ -77,7 +80,7 @@ public class movement : MonoBehaviour {
 		movement_enabled = true;
 	}
 
-	// Update is called once per frame
+	// Called once per frame
 	void FixedUpdate() {
 		if (!can_move) {
 			if (stunned) {
@@ -200,10 +203,18 @@ public class movement : MonoBehaviour {
 			transform.localRotation = Quaternion.Euler(new Vector3(transform.localRotation.x, 0, transform.localRotation.z));
 			no_rotation.localRotation = Quaternion.Euler(new Vector3(no_rotation.localRotation.x, 0, no_rotation.localRotation.z));
 		}
+		
+		// Adjust the velocity of whoever is standing on you
+		foreach (player p in players_touching) {
+			if (p.transform.position.y > transform.position.y + stacking_height_check) {
+				p.Movement.platform_velo = new Vector2(rb.velocity.x, 0);
+			}
+		}
 
 		// Update animations
 		animator.SetBool("carrying", Player.carrying_items);
 	}
+
 
 	// Jump!
 	private void jump() {
@@ -312,6 +323,27 @@ public class movement : MonoBehaviour {
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (collision.CompareTag("Ladder")) {
 			ladder_count--;
+		}
+	}
+
+	// Player stacking management
+	private void OnCollisionEnter2D(Collision2D collision) {
+		if (collision.gameObject.CompareTag("Player")) {
+			player p = collision.gameObject.GetComponent<player>();
+			players_touching.Add(p);
+			if (p.transform.position.y > transform.position.y + stacking_height_check) {
+				p.Movement.platform_velo = new Vector2(rb.velocity.x, 0);
+			}
+		}
+	}
+
+	private void OnCollisionExit2D(Collision2D collision) {
+		if (collision.gameObject.CompareTag("Player")) {
+			player p = collision.gameObject.GetComponent<player>();
+			if (p != null) {
+				players_touching.Remove(p);
+				p.Movement.platform_velo = new Vector2(0, 0);
+			}
 		}
 	}
 }
