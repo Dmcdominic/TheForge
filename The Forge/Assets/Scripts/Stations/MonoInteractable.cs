@@ -24,7 +24,8 @@ public abstract class MonoInteractable : MonoBehaviour {
 	}
 
 	// Verifies that the indicator should be displayed.
-	// Calls on_interact() if any of the touching players are 
+	// Calls on_interact() if any of the touching players are trying to interact, and are able to.
+	// If you want to use this in a parent class, make sure to call the base method.
 	protected virtual void Update() {
 		if (occupied()) {
 			indicator.SetActive(false);
@@ -80,8 +81,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 			players_touching.Add(p);
 		}
 	}
-
-	//private void OnCollisionExit2D(Collision2D collision) {
+	
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (collision.CompareTag("Player")) {
 			player p = collision.gameObject.GetComponent<player>();

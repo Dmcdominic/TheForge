@@ -15,6 +15,7 @@ public class physical_item : MonoBehaviour {
 
 	// Private vars
 	private bool flying = false;
+	private bool picked_up = false;
 
 	// Static settings
 	public static float expiration_time = 7f;
@@ -33,14 +34,12 @@ public class physical_item : MonoBehaviour {
 	}
 	private void Start() {
 		sr.sprite = Item.icon;
-		StartCoroutine(set_just_thrown_delayed(false, 0.3f));
+		StartCoroutine(set_just_thrown_delayed(false, 0.1f));
 		StartCoroutine(expire_after_delay());
 	}
 
 	// Called every frame
 	private void Update() {
-		// TODO - disappears after a few seconds, and flashes.
-
 		// Update flying value
 		flying = rb.velocity.magnitude > flying_velo_threshold;
 	}
@@ -50,13 +49,13 @@ public class physical_item : MonoBehaviour {
 		if (collision.gameObject.CompareTag("Player")) {
 			player Player = collision.gameObject.GetComponent<player>();
 			if (Player.team == thrower.team) {
-				if (just_thrown) {
+				if (just_thrown && Player == thrower) {
 					just_thrown = false;
 				} else {
 					try_pickup(Player);
 				}
 			} else if (Player.team != thrower.team && !Player.Movement.stunned) {
-				if (flying) {
+				if (flying || just_thrown) {
 					// Stun them
 					Player.Movement.stun(Item);
 				} else {
@@ -68,8 +67,9 @@ public class physical_item : MonoBehaviour {
 
 	// A player should pick this item up, if possible
 	private void try_pickup(player Player) {
-		if (!Player.hands_full) {
+		if (!Player.hands_full && !picked_up) {
 			Player.items_carried.Add(Item);
+			picked_up = true;
 			destroy_this();
 		}
 	}
@@ -77,6 +77,7 @@ public class physical_item : MonoBehaviour {
 	// Destroy this object
 	private void destroy_this() {
 		Destroy(gameObject);
+
 	}
 
 	// Set just_thrown after a short delay
