@@ -16,8 +16,8 @@ public class timer_display : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		float timer_var = game_controller.game_timer;
-		float timer_min = Mathf.FloorToInt(timer_var) / 60;
-		float timer_sec = timer_var % 60;
+		int timer_min = Mathf.FloorToInt(timer_var) / 60;
+		int timer_sec = Mathf.FloorToInt(timer_var % 60);
 
 		if (timer_sec < 10) {
 			//timer.text = timer_min + ":0" + timer_sec.ToString("F1");

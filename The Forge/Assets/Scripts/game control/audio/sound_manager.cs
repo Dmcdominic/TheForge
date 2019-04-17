@@ -14,10 +14,12 @@ public class sound_manager : MonoBehaviour {
 	public AudioSource thunderclap;
 	public AudioSource walk_into_player;
 	public AudioSource opening_box;
+	public AudioSource punch;
 
 	// Loops
 	public AudioSource furnace_loop;
 	public AudioSource whetstone_loop;
+	public AudioSource crafting_table_loop;
 
 	// Sfx-sets
 	public List<AudioSource> footsteps;

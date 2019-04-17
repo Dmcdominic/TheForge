@@ -8,12 +8,16 @@ public class game_controller : MonoBehaviour {
 	public player[] dwarves;
 
 	// Static vars
-	public static int[] scores = new int[4] { 0, 0, 0, 0 };
+	public static bool teams = true;
+	public static int[] player_scores = new int[4] { 0, 0, 0, 0 };
+	public static int[] team_scores = new int[2] { 0, 0 };
 	public static float game_timer;
 	public static bool game_playing;
+	public static bool pre_game;
 
 	// Static settings
-	public static float game_time_in_s = 180f;
+	public static float total_game_time = 180f;
+	public static float pre_game_time = 10f;
 
 	public static int mm_scene = 1;
 	public static int gameplay_scene = 2;
@@ -38,13 +42,17 @@ public class game_controller : MonoBehaviour {
 
 	// Start a game
 	private void start_game() {
-		game_timer = game_time_in_s;
+		game_timer = pre_game_time;
 		game_playing = true;
+		pre_game = true;
 		movement.all_players_frozen = false;
 
 		// Reset scores
-		for (int p=0; p < scores.Length; p++) {
-			scores[p] = 0;
+		for (int p=0; p < player_scores.Length; p++) {
+			player_scores[p] = 0;
+		}
+		for (int t = 0; t < team_scores.Length; t++) {
+			player_scores[t] = 0;
 		}
 	}
 
@@ -60,9 +68,18 @@ public class game_controller : MonoBehaviour {
 		if (game_playing) {
 			if (game_timer > 0) {
 				game_timer -= Time.deltaTime;
+			} else if (pre_game) {
+				game_timer = total_game_time;
+				pre_game = false;
 			} else {
 				end_game(true);
 			}
 		}
+	}
+
+	// Add to a player's personal score, AND team score
+	public static void increment_player_score(player Player, int incr) {
+		player_scores[Player.index] += incr;
+		team_scores[Player.team] += incr;
 	}
 }

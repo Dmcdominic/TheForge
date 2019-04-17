@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 930019905320192375}
   - component: {fileID: 930019905320192374}
+  - component: {fileID: 8977293253811131545}
   m_Layer: 8
   m_Name: Dwarf Visuals
   m_TagString: Untagged
@@ -112,6 +113,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8977293253811131545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930019905320192264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 831d5319e9ee2f541897cb68b0ea0ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &930019905702387834
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +371,6 @@ MonoBehaviour:
   - {fileID: 930019906118566905}
   - {fileID: 930019905702387832}
   items_carried: []
-  current_station: {fileID: 0}
 --- !u!114 &930019906390442618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,6 +390,10 @@ MonoBehaviour:
   raycast_dist: 0.13
   ladder_velo: 2.2
   no_rotation: {fileID: 7412136308325818572}
+  physical_item_prefab: {fileID: 485857332524252866, guid: 60d60f3ad438f9049af8d0ad49e7fa3c,
+    type: 3}
+  stunned: 0
+  invuln: 0
 --- !u!61 &2560987869739121806
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -387,7 +403,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 930019906390442623}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 2eb657cf7ddc3c846a992f31bee1c0cc, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -5285,7 +5301,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1695448093
   m_SortingLayer: 1
-  m_SortingOrder: 3
+  m_SortingOrder: 10
 --- !u!33 &4034700316273349768
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -27,20 +27,49 @@ public abstract class MonoInteractable : MonoBehaviour {
 	// Calls on_interact() if any of the touching players are 
 	protected virtual void Update() {
 		if (occupied()) {
+			indicator.SetActive(false);
 			return;
 		}
 		
 		bool someone_can_interact = false;
+		item craftable = null;
 		foreach (player p in players_touching) {
 			bool p_can_interact = can_interact(p);
 			someone_can_interact = someone_can_interact || p_can_interact;
-			if (input.p[p.index].interact && p_can_interact) {
+			item new_craftable = get_craftable_item(p);
+			craftable = new_craftable != null ? new_craftable : craftable;
+			if (input.p[p.index].interact && p_can_interact && !p.Movement.stunned) {
 				on_interact(p);
 				break;
 			}
 		}
 		
+		// Don't display recipes for crates
+		if (craftable != null && craftable.is_base_item) {
+			craftable = null;
+		}
+
 		indicator.SetActive(someone_can_interact);
+		set_recipe_indicator(craftable);
+	}
+
+	// Recipe indicator management
+	private recipe_indicator_control _RIC;
+	private recipe_indicator_control RIC {
+		get {
+			if (_RIC == null) {
+				_RIC = indicator.GetComponent<recipe_indicator_control>();
+			}
+			return _RIC;
+		}
+	}
+
+	private void set_recipe_indicator(item product) {
+		RIC.display_recipe_for(product);
+	}
+
+	protected virtual item get_craftable_item(player Player) {
+		return null;
 	}
 
 	// Handles the player interaction indicator.
@@ -49,9 +78,6 @@ public abstract class MonoInteractable : MonoBehaviour {
 		if (collision.CompareTag("Player")) {
 			player p = collision.gameObject.GetComponent<player>();
 			players_touching.Add(p);
-			//if (p != null && can_interact(p)) {
-			//	players_touching.Add(p);
-			//}
 		}
 	}
 
