@@ -84,7 +84,7 @@ public static class input {
 			get { return XCI.GetButtonDown(XboxButton.Back, controller); }
 		}
 
-		// Axes
+		// Left joystick axes (with keyboard alternatives)
 		public float h_axis {
 			get {
 				float xbox = XCI.GetAxis(XboxAxis.LeftStickX, controller);
@@ -95,7 +95,6 @@ public static class input {
 				return (xbox != 0) ? xbox : keyboard;
 			}
 		}
-
 		public float v_axis {
 			get {
 				float xbox = XCI.GetAxis(XboxAxis.LeftStickY, controller);
@@ -104,6 +103,19 @@ public static class input {
 				}
 				float keyboard = Input.GetAxisRaw(keyboard_V);
 				return (xbox != 0) ? xbox : keyboard;
+			}
+		}
+
+		// Right joystick axes
+		public float right_h_axis {
+			get {
+				return XCI.GetAxis(XboxAxis.RightStickX, controller);
+			}
+		}
+
+		public float right_v_axis {
+			get {
+				return XCI.GetAxis(XboxAxis.RightStickY, controller);
 			}
 		}
 	}

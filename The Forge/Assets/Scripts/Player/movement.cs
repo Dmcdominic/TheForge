@@ -9,6 +9,7 @@ public class movement : MonoBehaviour {
 	public static float throw_speed_fast = 7f;
 	public static float throw_speed_slow = 4f;
 	public static float throw_turn_duration = 0.15f;
+	public static float ladder_axis_threshold = 0.6f;
 
 	// Public fields
 	public float x_mult;
@@ -28,6 +29,9 @@ public class movement : MonoBehaviour {
 	public bool stunned;
 	[HideInInspector]
 	public bool invuln;
+
+	[HideInInspector]
+	public Vector2 platform_velo;
 	
 	// Movement management
 	private bool movement_enabled;
@@ -76,11 +80,10 @@ public class movement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate() {
 		if (!can_move) {
-			//rb.velocity = new Vector2(0, rb.velocity.y);
 			if (stunned) {
-				rb.velocity = new Vector2(0, rb.velocity.y);
+				rb.velocity = new Vector2(0, rb.velocity.y) + platform_velo;
 			} else {
-				rb.velocity = new Vector2(0, 0);
+				rb.velocity = new Vector2(0, 0) + platform_velo;
 			}
 			col.isTrigger = false;
 			animator.SetBool("running", false);
@@ -94,15 +97,14 @@ public class movement : MonoBehaviour {
 		float x_input = input.p[index].h_axis;
 		bool jump_pressed = input.p[index].jump;
 		float y_input = input.p[index].v_axis;
-		//bool jump_pressed = y_input > 0;
 
 		// Horizontal movement
-		rb.velocity = new Vector2(x_input * x_mult, rb.velocity.y);
+		rb.velocity = new Vector2(x_input * x_mult, rb.velocity.y) + platform_velo;
 
 		// Ladder check
-		bool up_ladder = touching_ladder && y_input > 0;
-		bool down_ladder = touching_ladder && y_input < 0;
-		if (rb.velocity.y <= -0.1f && !touching_ladder) {
+		bool up_ladder = touching_ladder && y_input > ladder_axis_threshold;
+		bool down_ladder = touching_ladder && y_input < -ladder_axis_threshold;
+		if (!touching_ladder || rb.velocity.y <= -0.1f) {
 			just_jumped_off_ladder = false;
 		}
 
