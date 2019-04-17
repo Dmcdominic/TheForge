@@ -792,9 +792,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ef82ac43fd4be4693bbb967d77f1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score_TMPs:
-  - {fileID: 157326405}
-  - {fileID: 223430646}
+  player_score_TMPs: []
+  team_score_TMPs: []
 --- !u!4 &232860081
 Transform:
   m_ObjectHideFlags: 0
@@ -1970,6 +1969,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1051615055}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1180488444 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7444612770673877489, guid: 4a8aa094af19f7949a9ed8858623d2a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 688666964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1224948676
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2946,6 +2951,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8585723387210928180, guid: dd3f5867a8d901145b98809cc3255d0e,
+        type: 3}
+      propertyPath: completed_indicator
+      value: 
+      objectReference: {fileID: 1180488444}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd3f5867a8d901145b98809cc3255d0e, type: 3}
 --- !u!4 &1813965707 stripped
