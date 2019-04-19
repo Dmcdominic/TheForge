@@ -26,24 +26,25 @@ public class moving_platform : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		bool try_move_left = false;
-		bool try_move_right = false;
+		int try_move_left = 0;
+		int try_move_right = 0;
 
 		foreach (player p in players_touching) {
 			p.Movement.platform_velo = rb.velocity;
 			if (input.p[p.index].platform_left) {
-				try_move_left = true;
+				try_move_left++;
 			}
 			if (input.p[p.index].platform_right) {
-				try_move_right = true;
+				try_move_right++;
 			}
 		}
 
+		int right_sum = try_move_right - try_move_left;
 
-		if (try_move_left && !try_move_right && !touching_left_edge) {
-			rb.velocity = new Vector2(-max_movespeed, 0);
-		} else if (try_move_right && !try_move_left && !touching_right_edge) {
-			rb.velocity = new Vector2(max_movespeed, 0);
+		if (right_sum < 0 && !touching_left_edge) {
+			rb.velocity = new Vector2(max_movespeed * right_sum, 0);
+		} else if (right_sum > 0 && !touching_right_edge) {
+			rb.velocity = new Vector2(max_movespeed * right_sum, 0);
 		//} else if (touching_left_edge || touching_right_edge) {
 		} else {
 			rb.velocity = new Vector2(0, 0);

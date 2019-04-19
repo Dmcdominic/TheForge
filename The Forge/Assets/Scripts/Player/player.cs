@@ -72,9 +72,11 @@ public class player : MonoBehaviour {
 		current_station = station;
 		if (station == null) {
 			col.enabled = true;
+			//Movement.clear_all_players_touching();
 			Movement.can_move = true;
 		} else {
 			col.enabled = false;
+			Movement.clear_all_players_touching();
 			Movement.can_move = false;
 		}
 	}

@@ -54,6 +54,7 @@ public class movement : MonoBehaviour {
 	private int ladder_count = 0;
 	private bool touching_ladder { get { return ladder_count > 0; } }
 	private bool holding_onto_ladder = false;
+	private float ladder_pos;
 
 	private bool just_threw_left = false;
 	private bool just_threw_right = false;
@@ -81,7 +82,7 @@ public class movement : MonoBehaviour {
 	}
 
 	// Called once per frame
-	void FixedUpdate() {
+	void Update() {
 		if (!can_move) {
 			if (stunned) {
 				rb.velocity = new Vector2(0, rb.velocity.y) + platform_velo;
@@ -103,23 +104,9 @@ public class movement : MonoBehaviour {
 
 		// Horizontal movement
 		rb.velocity = new Vector2(x_input * x_mult, rb.velocity.y) + platform_velo;
+		platform_velo = new Vector2(0, 0);
 
-		// Ladder check
-		bool up_ladder = touching_ladder && y_input > ladder_axis_threshold;
-		bool down_ladder = touching_ladder && y_input < -ladder_axis_threshold;
-		if (!touching_ladder || rb.velocity.y <= -0.1f) {
-			just_jumped_off_ladder = false;
-		}
-
-		holding_onto_ladder = !just_jumped_off_ladder && (up_ladder || down_ladder || (touching_ladder && holding_onto_ladder));
-		if (holding_onto_ladder) {
-			col.isTrigger = true;
-			update_velo_on_ladder(up_ladder, down_ladder);
-		} else {
-			col.isTrigger = false;
-		}
-
-		// Jump controls
+		// Check footing
 		Vector3 left_foot_pos = new Vector3(col.bounds.min.x, col.bounds.min.y);
 		Vector3 right_foot_pos = new Vector3(col.bounds.max.x, col.bounds.min.y);
 
@@ -141,6 +128,25 @@ public class movement : MonoBehaviour {
 				}
 			}
 		}
+
+		// Ladder check
+		bool up_ladder = touching_ladder && y_input > ladder_axis_threshold;
+		bool down_ladder = touching_ladder && y_input < -ladder_axis_threshold;
+		if (!touching_ladder || rb.velocity.y <= -0.1f) {
+			just_jumped_off_ladder = false;
+		}
+
+		holding_onto_ladder = !just_jumped_off_ladder && (up_ladder || down_ladder || (touching_ladder && holding_onto_ladder));
+		if (holding_onto_ladder) {
+			col.isTrigger = true;
+			clear_all_players_touching();
+			update_velo_on_ladder(up_ladder, down_ladder, has_footing);
+		} else {
+			col.isTrigger = false;
+			//clear_all_players_touching();
+		}
+
+		// Jump controls
 
 		//if ((has_footing && rb.velocity.y <= 0.1f) || touching_ladder) {
 		if (has_footing || touching_ladder) {
@@ -207,7 +213,13 @@ public class movement : MonoBehaviour {
 		// Adjust the velocity of whoever is standing on you
 		foreach (player p in players_touching) {
 			if (p.transform.position.y > transform.position.y + stacking_height_check) {
-				p.Movement.platform_velo = new Vector2(rb.velocity.x, 0);
+				if (p.Movement.platform_velo.x * rb.velocity.x < 0) {
+					p.Movement.platform_velo += new Vector2(rb.velocity.x, 0);
+				} else
+				
+				if (p.Movement.platform_velo.magnitude < Mathf.Abs(rb.velocity.x)) {
+					p.Movement.platform_velo = new Vector2(rb.velocity.x, 0);
+				}
 			}
 		}
 
@@ -272,8 +284,12 @@ public class movement : MonoBehaviour {
 	}
 
 	// Ladder usage
-	private void update_velo_on_ladder(bool up_ladder, bool down_ladder) {
+	private void update_velo_on_ladder(bool up_ladder, bool down_ladder, bool has_footing) {
 		if (!holding_onto_ladder) {
+			return;
+		}
+		if (down_ladder && ladder_pos > transform.position.y && has_footing) {
+			rb.velocity = new Vector2(rb.velocity.x, 0);
 			return;
 		}
 		if (up_ladder) {
@@ -318,6 +334,7 @@ public class movement : MonoBehaviour {
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.CompareTag("Ladder")) {
 			ladder_count++;
+			ladder_pos = collision.transform.position.y;
 		}
 	}
 	private void OnTriggerExit2D(Collider2D collision) {
@@ -345,5 +362,19 @@ public class movement : MonoBehaviour {
 				p.Movement.platform_velo = new Vector2(0, 0);
 			}
 		}
+	}
+
+	// Remove a single player from the players_touching list
+	public void remove_player_touching(player Player) {
+		players_touching.Remove(Player);
+	}
+
+	// Clear all players from your players_touching list, and yourself from their lists
+	public void clear_all_players_touching() {
+		while (players_touching.Count > 0) {
+			players_touching[0].Movement.remove_player_touching(Player);
+			players_touching.RemoveAt(0);
+		}
+		players_touching.Clear();
 	}
 }

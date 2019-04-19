@@ -70,10 +70,10 @@ public static class input {
 		}
 
 		public bool platform_right {
-			get { return XCI.GetAxis(XboxAxis.RightTrigger, controller) > 0; }
+			get { return XCI.GetAxis(XboxAxis.RightTrigger, controller) > 0 || Input.GetKey(KeyCode.Alpha3); }
 		}
 		public bool platform_left {
-			get { return XCI.GetAxis(XboxAxis.LeftTrigger, controller) > 0; }
+			get { return XCI.GetAxis(XboxAxis.LeftTrigger, controller) > 0 || Input.GetKey(KeyCode.Alpha1); ; }
 		}
 
 		public bool start {

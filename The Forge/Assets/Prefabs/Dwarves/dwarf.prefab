@@ -366,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  team: 0
   player_indicator: {fileID: 6105222250739355649}
   carried_item_srs:
   - {fileID: 930019906118566905}
@@ -394,6 +395,7 @@ MonoBehaviour:
     type: 3}
   stunned: 0
   invuln: 0
+  platform_velo: {x: 0, y: 0}
 --- !u!61 &2560987869739121806
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5299,8 +5301,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1695448093
-  m_SortingLayer: 1
+  m_SortingLayerID: 1834850817
+  m_SortingLayer: 4
   m_SortingOrder: 10
 --- !u!33 &4034700316273349768
 MeshFilter:
@@ -5416,11 +5418,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8453784666278394204}
