@@ -13,7 +13,7 @@ public class score_display : MonoBehaviour {
 
 	// Static settings
 	public static float display_incr_delay = 0.04f;
-	public static int gold_sfx_interval = 2;
+	public static int gold_sfx_interval = 3;
 
 	// private vars
 	private int incr_since_gold_sfx = 0;

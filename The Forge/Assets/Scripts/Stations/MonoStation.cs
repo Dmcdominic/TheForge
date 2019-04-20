@@ -5,9 +5,11 @@ using UnityEngine;
 public abstract class MonoStation : MonoInteractable {
 
 	public station station_info;
+	public SpriteRenderer highlight_sr;
 
 	protected player user = null;
 	protected item working_on = null;
+	
 
 	// Returns an item that this player could craft right now at this station.
 	// Returns null if no item exists.
@@ -28,6 +30,14 @@ public abstract class MonoStation : MonoInteractable {
 			}
 		}
 		return null;
+	}
+
+	protected override void on_set_indicator(bool active) {
+		if (highlight_sr) {
+			highlight_sr.sprite = station_info.highlight;
+			highlight_sr.color = station_info.highlight_col;
+			highlight_sr.gameObject.SetActive(active);
+		}
 	}
 
 	// Should return true iff a player is already using this object

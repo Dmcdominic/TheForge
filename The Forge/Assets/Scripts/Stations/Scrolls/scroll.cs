@@ -11,6 +11,8 @@ public class scroll : MonoInteractable {
 	[HideInInspector]
 	public item requested_item;
 
+	public SpriteRenderer highlight_sr;
+
 	// Private vars
 	private scroll_visuals visuals;
 
@@ -75,6 +77,12 @@ public class scroll : MonoInteractable {
 			// Todo - order expired sfx?
 		}
 		StartCoroutine(refresh_scroll_delayed());
+	}
+
+	protected override void on_set_indicator(bool active) {
+		if (highlight_sr) {
+			highlight_sr.gameObject.SetActive(active);
+		}
 	}
 
 	// Returns true iff Player is holding the requested item

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: forge
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 703bada53f35d4a44b7e9e2e2b09abef, type: 3}
+  highlight: {fileID: 21300000, guid: 69ee112c09fa02f46ab3f6747616fd77, type: 3}
+  highlight_col: {r: 0.8018868, g: 0, b: 0.08672635, a: 1}
   crate: 0
-  products:
-  - {fileID: 11400000, guid: db3b385f1970a5644bf669d4305e86ca, type: 2}

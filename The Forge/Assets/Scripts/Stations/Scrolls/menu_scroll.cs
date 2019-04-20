@@ -13,6 +13,8 @@ public class menu_scroll : MonoInteractable {
 	public TextMeshPro menu_TMP;
 	public item required_item;
 
+	public SpriteRenderer highlight_sr;
+
 	// Static settings
 	private static readonly float really_time = 5f;
 
@@ -65,6 +67,12 @@ public class menu_scroll : MonoInteractable {
 					StartCoroutine(un_really());
 				}
 				break;
+		}
+	}
+
+	protected override void on_set_indicator(bool active) {
+		if (highlight_sr) {
+			highlight_sr.gameObject.SetActive(active);
 		}
 	}
 

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: crafting_table
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: d5ccca03dd8200b46872c2a3daaf3168, type: 3}
+  highlight: {fileID: 21300000, guid: 3ad3dffc3eec09c428cd93ff87582ddb, type: 3}
+  highlight_col: {r: 1, g: 0.97351444, b: 0, a: 1}
   crate: 0
