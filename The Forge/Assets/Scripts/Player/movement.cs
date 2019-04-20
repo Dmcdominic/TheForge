@@ -76,8 +76,11 @@ public class movement : MonoBehaviour {
 		Player = GetComponent<player>();
 
 		base_grav_scale = rb.gravityScale;
-		index = Player.index;
+	}
 
+	// Complete the initialization after other Awake methods have been called.
+	private void Start() {
+		index = Player.index;
 		movement_enabled = true;
 	}
 

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class scroll : MonoInteractable {
 
@@ -16,7 +17,7 @@ public class scroll : MonoInteractable {
 	// Static settings
 	private static readonly float scroll_respawn_min = 4f;
 	private static readonly float scroll_respawn_max = 8f;
-	private static readonly float initial_spawn_interval = 0.5f;
+	private static readonly float initial_spawn_interval = 2f;
 
 	// Static vars
 	public static item[] current_requests = new item[3];
@@ -24,6 +25,11 @@ public class scroll : MonoInteractable {
 
 	// Init
 	private void Awake() {
+		// Disable this component if we are in the main menu
+		if (SceneManager.GetActiveScene().buildIndex == game_controller.mm_scene) {
+			enabled = false;
+			return;
+		}
 		visuals = GetComponent<scroll_visuals>();
 	}
 

@@ -11,6 +11,7 @@ public class player : MonoBehaviour {
 	public int team;
 	public TextMeshPro player_indicator;
 	public List<SpriteRenderer> carried_item_srs;
+	public dwarf_anim_info anim_info;
 
 	// Public vars
 	public string display_index { get { return (index + 1).ToString(); } }
@@ -26,6 +27,7 @@ public class player : MonoBehaviour {
 	[HideInInspector]
 	public movement Movement { get; private set; }
 	private Collider2D col;
+	private Animator animator;
 
 	// Static vars
 	public static int item_limit = 2;
@@ -35,8 +37,14 @@ public class player : MonoBehaviour {
 	private void Awake() {
 		Movement = GetComponent<movement>();
 		col = GetComponent<Collider2D>();
+		animator = GetComponent<Animator>();
+	}
+
+	// More setup once index has been set
+	private void Start() {
 		player_indicator.text = get_indicator_string(index);
 		//player_indicator.color = teams.colors[team];
+		animator.runtimeAnimatorController = anim_info.anim_controllers[team];
 	}
 
 	// Called every frame

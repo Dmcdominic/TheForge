@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class game_controller : MonoBehaviour {
 
@@ -22,6 +24,8 @@ public class game_controller : MonoBehaviour {
 	public static int mm_scene = 1;
 	public static int gameplay_scene = 2;
 
+	public static int max_dwarves = 4;
+
 
 	// Static instance setup
 	public static game_controller instance;
@@ -35,9 +39,23 @@ public class game_controller : MonoBehaviour {
 		// Init
 		instance = this;
 		DontDestroyOnLoad(gameObject);
+		SceneManager.activeSceneChanged += onActiveSceneChanged;
 
-		// For testing (TODO - remove):
-		start_game();
+		onActiveSceneChanged(SceneManager.GetActiveScene());
+	}
+
+	private void onActiveSceneChanged(Scene next) {
+		if (next.buildIndex == mm_scene) {
+			pre_game = false;
+			game_playing = false;
+			movement.all_players_frozen = false;
+		} else if (next.buildIndex > mm_scene) {
+			// Start the game immediately
+			start_game();
+		}
+	}
+	private void onActiveSceneChanged(Scene prev, Scene next) {
+		onActiveSceneChanged(next);
 	}
 
 	// Start a game

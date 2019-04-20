@@ -371,6 +371,7 @@ MonoBehaviour:
   carried_item_srs:
   - {fileID: 930019906118566905}
   - {fileID: 930019905702387832}
+  anim_info: {fileID: 11400000, guid: 546f441beb62bdb4c80c2351ed46b8fe, type: 2}
   items_carried: []
 --- !u!114 &930019906390442618
 MonoBehaviour:
@@ -5418,11 +5419,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8453784666278394204}

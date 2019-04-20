@@ -14,6 +14,7 @@ public class forge : MonoStation {
 
 	// Private vars
 	private player current_owner;
+	private int current_team = -1;
 	private bool finished_cooking;
 
 	private TextMeshPro player_indicator;
@@ -36,6 +37,7 @@ public class forge : MonoStation {
 		indicator_caret = completed_indicator.GetComponent<SpriteRenderer>();
 
 		current_owner = null;
+		current_team = -1;
 		finished_cooking = false;
 		cooking_sr.enabled = false;
 		completed_indicator.SetActive(false);
@@ -53,6 +55,7 @@ public class forge : MonoStation {
 			give_product_only();
 			finished_cooking = false;
 			current_owner = null;
+			current_team = -1;
 			cooking_sr.enabled = false;
 			flashing = false;
 			completed_indicator.SetActive(false);
@@ -64,6 +67,7 @@ public class forge : MonoStation {
 	// Start the forge cooking
 	private void start_cooking(player Player) {
 		current_owner = Player;
+		current_team = Player.team;
 		finished_cooking = false;
 		StartCoroutine(cook());
 		sound_manager.update_loop(sound_manager.instance.furnace_loop, true);
@@ -73,16 +77,16 @@ public class forge : MonoStation {
 	private void on_done_cooking() {
 		finished_cooking = true;
 		completed_indicator.SetActive(true);
-		player_indicator.text = teams.names[current_owner.team];
-		player_indicator.color = teams.lighter_colors[current_owner.team];
-		indicator_caret.color = teams.lighter_colors[current_owner.team];
+		player_indicator.text = teams.names[current_team];
+		player_indicator.color = teams.lighter_colors[current_team];
+		indicator_caret.color = teams.lighter_colors[current_team];
 		sound_manager.update_loop(sound_manager.instance.furnace_loop, false);
 		StartCoroutine(eject_after_delay());
 	}
 
 	// More specific can_interact
 	public override bool can_interact(player Player) {
-		return (current_owner == null && base.can_interact(Player)) || (current_owner != null && current_owner.team == Player.team && !Player.hands_full && finished_cooking);
+		return (current_team == -1 && base.can_interact(Player)) || (current_team == Player.team && !Player.hands_full && finished_cooking);
 	}
 
 	// Coroutine for cooking the product
@@ -128,6 +132,7 @@ public class forge : MonoStation {
 		// Internal cleanup
 		finished_cooking = false;
 		current_owner = null;
+		current_team = -1;
 		cooking_sr.enabled = false;
 		flashing = false;
 		completed_indicator.SetActive(false);
