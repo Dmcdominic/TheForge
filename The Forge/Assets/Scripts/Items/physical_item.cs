@@ -18,9 +18,9 @@ public class physical_item : MonoBehaviour {
 	private bool picked_up = false;
 
 	// Static settings
-	public static float expiration_time = 7f;
-	public static float flashing_time = 3f;
-	public static float flying_velo_threshold = 1.5f;
+	public static readonly float expiration_time = 7f;
+	public static readonly float flashing_time = 3f;
+	public static readonly float flying_velo_threshold = 1.5f;
 
 	// Component references
 	private SpriteRenderer sr;
