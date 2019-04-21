@@ -22,6 +22,7 @@ public class forge : MonoStation {
 
 	// Static settings
 	public static float cook_interval = 0.9f;
+	public static float mm_cook_interval = 0.3f;
 	public static float ejection_time = 6f;
 	public static float flashing_time = 3f;
 	public static float eject_speed = 6f;
@@ -91,11 +92,12 @@ public class forge : MonoStation {
 
 	// Coroutine for cooking the product
 	private IEnumerator cook() {
+		bool in_main_menu = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == game_controller.mm_scene;
 		int cooking_stage = 0;
 		cooking_sr.sprite = cooking_sprites.sprites[cooking_stage];
 		cooking_sr.enabled = true;
 		while (cooking_stage + 1 < cooking_sprites.sprites.Count) {
-			yield return new WaitForSeconds(cook_interval);
+			yield return new WaitForSeconds(in_main_menu ? mm_cook_interval : cook_interval);
 			cooking_stage++;
 			cooking_sr.sprite = cooking_sprites.sprites[cooking_stage];
 		}

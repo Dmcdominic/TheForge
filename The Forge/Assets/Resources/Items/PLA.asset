@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
+  m_Name: PLA
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 5b86f69a86ed44f419a795f3912a4495, type: 3}
+  icon_angle: 45
+  ingredients:
+  - {fileID: 11400000, guid: d07477cc4a5407141ab7146a934ff5fb, type: 2}
+  - {fileID: 11400000, guid: a3b04de46adb3de4cbc3c5bd926057e7, type: 2}
+  station: {fileID: 11400000, guid: 731ead471c212d941ba4dfecab050a45, type: 2}
+  tier: 100

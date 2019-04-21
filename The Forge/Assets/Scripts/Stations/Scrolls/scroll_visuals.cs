@@ -40,10 +40,15 @@ public class scroll_visuals : MonoBehaviour {
 
 	// Hide all scroll visuals
 	public void clear_scroll() {
-		foreach(Transform trans in steps_parent.transform) {
+		clear_recipe_steps();
+		visuals_parent.SetActive(false);
+	}
+
+	// Hide all recipe steps
+	public void clear_recipe_steps() {
+		foreach (Transform trans in steps_parent.transform) {
 			Destroy(trans.gameObject);
 		}
-		visuals_parent.SetActive(false);
 	}
 
 	// ========== Recipes Steps ==========

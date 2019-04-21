@@ -47,10 +47,21 @@ public class grindstone : MonoStation {
     {
         base.Update();
         // Your stuff here
+
+		if (is_playing) {
+			// CJ - I put this in as a workaround while you are/were still fixing it.
+			// If you see this before any merge conflicts happen, great, just delete it.
+			// But there's a good chance this created one, so, here's your chance to learn how to resolve them.
+			// Right click this script in SourceTree and choose "keep mine" (or something like that).
+			is_playing = false;
+			on_done_grinding();
+			return;
+		}
+
         if (is_playing == true)
         {
-            //index = Player.index;
-            float x_input = input.p[index].h_axis;
+			//index = Player.index;
+			float x_input = input.p[index].h_axis;
             float y_input = input.p[index].v_axis;
 
             finished_grinding = false;
@@ -84,7 +95,7 @@ public class grindstone : MonoStation {
                     is_playing = false;
                 }
             }
-        }
+		}
     }
 
     // Called when the product is done grinding
@@ -92,7 +103,7 @@ public class grindstone : MonoStation {
         complete_items_swap();
         finished_grinding = true;
         completed_indicator.SetActive(true);
-        player_indicator.text = player.get_indicator_string(current_owner.index);
+        //player_indicator.text = player.get_indicator_string(current_owner.index);
         sound_manager.update_loop(sound_manager.instance.whetstone_loop, false);
     }
 

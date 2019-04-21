@@ -34,6 +34,8 @@ public class menu_scroll : MonoInteractable {
 		}
 
 		visuals = GetComponent<scroll_visuals>();
+		visuals.init_visuals(required_item);
+
 		if (option == menu_options.Play) {
 			menu_TMP.text = "?";
 		} else {
@@ -50,6 +52,7 @@ public class menu_scroll : MonoInteractable {
 					SceneManager.LoadScene(game_controller.gameplay_scene);
 				} else if (Player.items_carried.Contains(required_item)) {
 					Player.items_carried.Remove(required_item);
+					visuals.clear_recipe_steps();
 					play_button_placed = true;
 					// Todo - update scroll visual with play button?
 					menu_TMP.text = option.ToString();
