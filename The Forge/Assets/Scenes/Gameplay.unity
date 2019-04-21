@@ -208,7 +208,7 @@ MonoBehaviour:
   m_fontSizeMin: 2
   m_fontSizeMax: 20
   m_fontStyle: 0
-  m_textAlignment: 1028
+  m_textAlignment: 516
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1350,9 +1350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ef82ac43fd4be4693bbb967d77f1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_score_TMPs:
-  - {fileID: 471505310}
-  - {fileID: 14902787}
   team_score_TMPs:
   - {fileID: 471505310}
   - {fileID: 14902787}
@@ -1669,7 +1666,7 @@ MonoBehaviour:
   m_fontSizeMin: 2
   m_fontSizeMax: 20
   m_fontStyle: 0
-  m_textAlignment: 1028
+  m_textAlignment: 516
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2545,7 +2542,7 @@ PrefabInstance:
     - target: {fileID: 199409112640923519, guid: 96143602aaf82a845bf251833505c2d1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.806
+      value: 2.83
       objectReference: {fileID: 0}
     - target: {fileID: 199409112640923519, guid: 96143602aaf82a845bf251833505c2d1,
         type: 3}
@@ -2600,7 +2597,7 @@ PrefabInstance:
     - target: {fileID: 199409112640923519, guid: 96143602aaf82a845bf251833505c2d1,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.19999999
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 199409112640923519, guid: 96143602aaf82a845bf251833505c2d1,
         type: 3}

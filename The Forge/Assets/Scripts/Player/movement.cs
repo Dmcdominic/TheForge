@@ -190,6 +190,7 @@ public class movement : MonoBehaviour {
 				throw_item(0, direction_slow.normalized * throw_speed_slow);
 				fast_index = 1;
 			}
+			direction_fast = new Vector2(x_dir, 0.4f);
 			throw_item(fast_index, direction_fast.normalized * throw_speed_fast);
 			Player.items_carried.Clear();
 		}

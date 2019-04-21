@@ -7,7 +7,11 @@ using UnityEngine;
 /// </summary>
 [CreateAssetMenu(menuName = "item")]
 public class item : ScriptableObject {
-	
+
+	// Static settings
+	public static readonly int max_gameplay_tier = 50;
+
+	// Public properties
 	public Sprite icon;
 	public float icon_angle = 45f;
 	public List<item> ingredients;
@@ -31,6 +35,12 @@ public class item : ScriptableObject {
 				}
 			}
 			return _computed_gold_val;
+		}
+	}
+
+	public bool craftable_outside_mm {
+		get {
+			return tier <= max_gameplay_tier;
 		}
 	}
 

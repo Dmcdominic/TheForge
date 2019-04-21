@@ -149,6 +149,7 @@ MonoBehaviour:
   option: 0
   menu_TMP: {fileID: 4403241794453718651}
   required_item: {fileID: 11400000, guid: f5794b8b4f569bc4f9919a6313b8e537, type: 2}
+  completed_play: {fileID: 0}
   highlight_sr: {fileID: 6569913535530628310}
 --- !u!114 &2348505604828402384
 MonoBehaviour:
@@ -398,7 +399,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0.4}
-  m_SizeDelta: {x: 1.1, y: 0.8}
+  m_SizeDelta: {x: 1.1, y: 0.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &2238834029294717932
 MeshRenderer:
@@ -551,7 +552,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}

@@ -48,7 +48,7 @@ public class scroll : MonoInteractable {
 	}
 	// Initialize this scroll with a random order
 	public void init_order() {
-		List<item> tier_1_items = items_oracle.all.Where<item>(x => x.tier > 0).ToList<item>();
+		List<item> tier_1_items = items_oracle.all.Where<item>(x => 0 < x.tier && x.tier < 10).ToList<item>();
 		item chosen_item = tier_1_items[Random.Range(0, tier_1_items.Count)];
 		// Try a few times to avoid choosing an item that's already up there
 		for (int i=0; i < 2; i++) {

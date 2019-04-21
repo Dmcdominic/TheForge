@@ -6,11 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class game_controller : MonoBehaviour {
 
-	// Public fields
-	public player[] dwarves;
-
 	// Static vars
 	public static bool teams = true;
+	public static int the_team = 0;
 	public static int[] player_scores = new int[4] { 0, 0, 0, 0 };
 	public static int[] team_scores = new int[2] { 0, 0 };
 	public static float game_timer;
@@ -41,7 +39,7 @@ public class game_controller : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 		SceneManager.activeSceneChanged += onActiveSceneChanged;
 
-		onActiveSceneChanged(SceneManager.GetActiveScene());
+		//onActiveSceneChanged(SceneManager.GetActiveScene());
 	}
 
 	private void onActiveSceneChanged(Scene next) {
@@ -60,10 +58,18 @@ public class game_controller : MonoBehaviour {
 
 	// Start a game
 	private void start_game() {
-		game_timer = pre_game_time;
-		game_playing = true;
-		pre_game = true;
-		movement.all_players_frozen = false;
+		// Some initial setup
+		bool team_0 = false;
+		bool team_1 = false;
+		for (int dwarf = 0; dwarf < dwarf_spawner.dwarf_teams.Length; dwarf++) {
+			int team = dwarf_spawner.dwarf_teams[dwarf];
+			team_0 = team_0 || team == 0;
+			team_1 = team_1 || team == 1;
+		}
+		teams = (team_0 && team_1);
+		the_team = team_0 ? 0 : 1;
+
+		// TODO - team_scores[1] = high_score;
 
 		// Reset scores
 		for (int p=0; p < player_scores.Length; p++) {
@@ -72,6 +78,12 @@ public class game_controller : MonoBehaviour {
 		for (int t = 0; t < team_scores.Length; t++) {
 			player_scores[t] = 0;
 		}
+
+		// Get the timer and players going
+		game_timer = pre_game_time;
+		game_playing = true;
+		pre_game = true;
+		movement.all_players_frozen = false;
 	}
 
 	// End a game
