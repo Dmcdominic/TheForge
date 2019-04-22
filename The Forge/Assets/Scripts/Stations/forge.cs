@@ -20,12 +20,15 @@ public class forge : MonoStation {
 	private TextMeshPro player_indicator;
 	private SpriteRenderer indicator_caret;
 
+	// Static vars
+	public static item cooking_rn;
+
 	// Static settings
-	public static float cook_interval = 0.9f;
-	public static float mm_cook_interval = 0.3f;
-	public static float ejection_time = 6f;
-	public static float flashing_time = 3f;
-	public static float eject_speed = 6f;
+	public static readonly float cook_interval = 0.9f;
+	public static readonly float mm_cook_interval = 0.3f;
+	public static readonly float ejection_time = 6f;
+	public static readonly float flashing_time = 3f;
+	public static readonly float eject_speed = 6f;
 
 	// Ejection management
 	private bool flashing = false;
@@ -43,6 +46,7 @@ public class forge : MonoStation {
 		cooking_sr.enabled = false;
 		completed_indicator.SetActive(false);
 		flashing = false;
+		cooking_rn = null;
 	}
 
 	public override void on_interact(player Player) {
@@ -50,10 +54,12 @@ public class forge : MonoStation {
 		if (current_owner == null) {
 			base.on_interact(Player);
 			take_ingredients_only();
+			cooking_rn = working_on;
 			start_cooking(Player);
 		} else if (Player.team == current_owner.team) {
 			user = Player;
 			give_product_only();
+			cooking_rn = null;
 			finished_cooking = false;
 			current_owner = null;
 			current_team = -1;
@@ -134,6 +140,7 @@ public class forge : MonoStation {
 		// Internal cleanup
 		finished_cooking = false;
 		current_owner = null;
+		cooking_rn = null;
 		current_team = -1;
 		cooking_sr.enabled = false;
 		flashing = false;

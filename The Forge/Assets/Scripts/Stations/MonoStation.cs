@@ -10,6 +10,11 @@ public abstract class MonoStation : MonoInteractable {
 
 	protected player user = null;
 	protected item working_on = null;
+	public item get_working_on {
+		get {
+			return working_on;
+		}
+	}
 
 
 	// Called every frame

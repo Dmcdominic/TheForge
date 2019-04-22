@@ -16,13 +16,14 @@ public class tutorial_controller : MonoBehaviour {
 
 	// Called once per frame
 	void Update() {
-		if (menu_scroll.play_button_placed) {
+		if (menu_scroll.play_button_placed || is_item_in_possession(final_target_item)) {
 			next_item = null;
 			return;
 		}
 		
 		next_item = final_target_item;
-		while (!are_all_ingredients_ready(next_item)) {
+
+		while (!are_all_ingredients_ready(next_item) && !in_progress(next_item)) {
 			bool updated_ingred = false;
 			foreach (item ingredient in next_item.ingredients) {
 				if (!is_item_in_possession(ingredient)) {
@@ -77,5 +78,29 @@ public class tutorial_controller : MonoBehaviour {
 			}
 		}
 		return false;
+	}
+
+	// Check if anyone is at a station, creating this item already
+	public static bool in_progress(item Item) {
+		if (Item == forge.cooking_rn) {
+			return true;
+		}
+		return false;
+		
+		//if (Item.is_base_item) {
+		//	return false;
+		//}
+
+		//foreach (player dwarf in dwarf_spawner.dwarves) {
+		//	if (dwarf == null) {
+		//		continue;
+		//	}
+			
+		//	if (dwarf.current_station != null && dwarf.current_station.get_working_on == Item) {
+		//		print("Working on " + Item.name + "in " + dwarf.current_station);
+		//		return true;
+		//	}
+		//}
+		//return false;
 	}
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1018698514d49904e8452d01c0950855, type: 3}
   m_Name: grindstone
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: ca59b11c15e5f7043a19f0e5ed1111f2, type: 3}
+  icon: {fileID: 21300000, guid: 2bb6345d465fecd4ab915fad9ca1be11, type: 3}
   highlight: {fileID: 21300000, guid: 27bf98734b324e9439f561deb8645549, type: 3}
-  highlight_col: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+  highlight_col: {r: 1, g: 0.5137255, b: 0.32941177, a: 1}
   crate: 0
