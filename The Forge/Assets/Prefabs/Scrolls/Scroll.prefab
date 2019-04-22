@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1655740272381839996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1779548073429105443}
+  m_Layer: 11
+  m_Name: Sub-visuals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1779548073429105443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655740272381839996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7197497841373155633}
+  - {fileID: 2348505604551393502}
+  - {fileID: 2348505605590155189}
+  m_Father: {fileID: 2348505606422555412}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2348505604551393501
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,12 +57,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2348505604551393501}
-  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalRotation: {x: -0, y: -0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2348505606422555412}
-  m_RootOrder: 2
+  m_Father: {fileID: 1779548073429105443}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!212 &2348505604551393503
 SpriteRenderer:
@@ -93,6 +126,7 @@ GameObject:
   - component: {fileID: 2348505604828402384}
   - component: {fileID: 2348505604828402391}
   - component: {fileID: 2348505604828402390}
+  - component: {fileID: 8549603005298096376}
   m_Layer: 11
   m_Name: Scroll
   m_TagString: Untagged
@@ -165,7 +199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipe_steps_spacing: 0.35
   visuals_parent: {fileID: 2348505606422555419}
+  visuals_sub_parent: {fileID: 1655740272381839996}
   gold_TMP: {fileID: 4492957249372103071}
+  menu_visuals_parent: {fileID: 9082900240311458742}
   requested_item_sr: {fileID: 2348505604551393503}
   steps_parent: {fileID: 2348505605590155188}
   step_prefab: {fileID: 1801655066518411047, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
@@ -217,6 +253,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &8549603005298096376
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2348505604828402388}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fee586486daa5aa42881051accbd98a4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2348505605590155188
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,12 +296,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2348505605590155188}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0, y: -0.19999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2348505606291179777}
-  m_Father: {fileID: 2348505606422555412}
-  m_RootOrder: 3
+  m_Father: {fileID: 1779548073429105443}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2348505606346706001
 GameObject:
@@ -317,7 +372,7 @@ SpriteRenderer:
   m_SortingLayerID: 1695448093
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6a42caf709ffdde47bf43d06bc96346f, type: 3}
+  m_Sprite: {fileID: 21300014, guid: 44b60eec5cc343c4fb45dfdab2d9fa34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -356,9 +411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2348505606346706002}
-  - {fileID: 7197497841373155633}
-  - {fileID: 2348505604551393502}
-  - {fileID: 2348505605590155189}
+  - {fileID: 1779548073429105443}
   m_Father: {fileID: 2348505604828402389}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -760,13 +813,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8263276755344758244}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2406843990791232434}
-  m_Father: {fileID: 2348505606422555412}
-  m_RootOrder: 1
+  m_Father: {fileID: 1779548073429105443}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1183,12 +1236,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec80e9ce344b0794b9e71eeaa7b30b11, type: 3}
---- !u!4 &2348505606291179777 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1801655066518411044, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
-    type: 3}
-  m_PrefabInstance: {fileID: 4149876682874101285}
-  m_PrefabAsset: {fileID: 0}
 --- !u!212 &2348505605218284289 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1801655065726922020, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
@@ -1198,6 +1245,12 @@ SpriteRenderer:
 --- !u!212 &2348505605388110337 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1801655065624122404, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
+    type: 3}
+  m_PrefabInstance: {fileID: 4149876682874101285}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2348505606291179777 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1801655066518411044, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
     type: 3}
   m_PrefabInstance: {fileID: 4149876682874101285}
   m_PrefabAsset: {fileID: 0}

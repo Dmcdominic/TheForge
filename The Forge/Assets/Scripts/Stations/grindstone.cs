@@ -39,6 +39,7 @@ public class grindstone : MonoStation {
     public override void on_interact(player Player) {
         base.on_interact(Player);
         player_num = Player.index;
+		index = Player.index;
         is_playing = true;
     }
 
@@ -47,16 +48,6 @@ public class grindstone : MonoStation {
     {
         base.Update();
         // Your stuff here
-
-		if (is_playing) {
-			// CJ - I put this in as a workaround while you are/were still fixing it.
-			// If you see this before any merge conflicts happen, great, just delete it.
-			// But there's a good chance this created one, so, here's your chance to learn how to resolve them.
-			// Right click this script in SourceTree and choose "keep mine" (or something like that).
-			is_playing = false;
-			on_done_grinding();
-			return;
-		}
 
         if (is_playing == true)
         {

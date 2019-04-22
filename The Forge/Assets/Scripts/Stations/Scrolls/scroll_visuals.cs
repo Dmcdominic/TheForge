@@ -9,7 +9,9 @@ public class scroll_visuals : MonoBehaviour {
 	public float recipe_steps_spacing;
 
 	public GameObject visuals_parent;
+	public GameObject visuals_sub_parent;
 	public TextMeshPro gold_TMP;
+	public GameObject menu_visuals_parent;
 	public SpriteRenderer requested_item_sr;
 	public GameObject steps_parent;
 	public recipe_step step_prefab;
@@ -20,9 +22,13 @@ public class scroll_visuals : MonoBehaviour {
 	// Static vars
 	public static Vector3 init_steps_parent_pos = Vector3.zero;
 
+	// Component references
+	private Animator animator;
+
 
 	// Init
 	private void Awake() {
+		animator = GetComponent<Animator>();
 		if (init_steps_parent_pos == Vector3.zero) {
 			init_steps_parent_pos = steps_parent.transform.localPosition;
 		}
@@ -34,14 +40,21 @@ public class scroll_visuals : MonoBehaviour {
 		requested_item_sr.sprite = requested_item.icon;
 		rotation_util.set_rot_z(requested_item_sr.transform, requested_item.icon_angle);
 		gold_TMP.text = requested_item.computed_gold_val.ToString();
-		generate_recipe_steps();
+		clear_recipe_steps();
+		//generate_recipe_steps();
 		visuals_parent.SetActive(true);
+		visuals_sub_parent.SetActive(false);
+		menu_visuals_parent.SetActive(false);
+		animator.SetTrigger("unfurl");
 	}
 
 	// Hide all scroll visuals
 	public void clear_scroll() {
 		clear_recipe_steps();
 		visuals_parent.SetActive(false);
+		menu_visuals_parent.SetActive(false);
+		visuals_sub_parent.SetActive(false);
+		menu_visuals_parent.SetActive(false);
 	}
 
 	// Hide all recipe steps
@@ -51,9 +64,24 @@ public class scroll_visuals : MonoBehaviour {
 		}
 	}
 
+
+	// ========== Animation access ==========
+	public void reveal_requested_item() {
+		visuals_sub_parent.SetActive(true);
+		menu_visuals_parent.SetActive(true);
+	}
+
+	public void reveal_recipe() {
+		generate_recipe_steps();
+	}
+
+
 	// ========== Recipes Steps ==========
 	// Set up the recipe steps visuals
 	private void generate_recipe_steps() {
+		if (requested_item == null) {
+			return;
+		}
 		int total_steps = instantiate_step(requested_item, 0);
 		steps_parent.transform.localPosition = init_steps_parent_pos;
 		steps_parent.transform.Translate(recipe_steps_spacing * (total_steps - 1) / 2f, 0, 0);

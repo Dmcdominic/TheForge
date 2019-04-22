@@ -7,6 +7,7 @@ public abstract class MonoStation : MonoInteractable {
 
 	public station station_info;
 	public SpriteRenderer highlight_sr;
+	public SpriteRenderer highlight_large_sr;
 
 	protected player user = null;
 	protected item working_on = null;
@@ -20,9 +21,10 @@ public abstract class MonoStation : MonoInteractable {
 	// Called every frame
 	protected override void Update() {
 		base.Update();
-		if (tutorial_controller.this_station_next(station_info)) {
-			on_set_indicator(true);
-		}
+		set_large_highlight(tutorial_controller.this_station_next(station_info));
+		//if (tutorial_controller.this_station_next(station_info)) {
+		//	on_set_indicator(true);
+		//}
 	}
 
 	// Returns an item that this player could craft right now at this station.
@@ -53,13 +55,20 @@ public abstract class MonoStation : MonoInteractable {
 	}
 
 	protected override void on_set_indicator(bool active) {
-		if (tutorial_controller.this_station_next(station_info)) {
-			active = true;
-		}
+		//if (tutorial_controller.this_station_next(station_info)) {
+		//	active = true;
+		//}
 		if (highlight_sr) {
 			highlight_sr.sprite = station_info.highlight;
 			highlight_sr.color = station_info.highlight_col;
 			highlight_sr.gameObject.SetActive(active);
+		}
+	}
+
+	private void set_large_highlight(bool active) {
+		if (highlight_large_sr) {
+			highlight_large_sr.color = station_info.highlight_col;
+			highlight_large_sr.gameObject.SetActive(active);
 		}
 	}
 
