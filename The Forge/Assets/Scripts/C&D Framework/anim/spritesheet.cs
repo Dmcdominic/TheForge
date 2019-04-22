@@ -42,17 +42,34 @@ public class spritesheet : ScriptableObject {
 		//IOrderedEnumerable<Object> ordered_sprites = sprites.OrderBy(sprite => sprite.name);
 		IOrderedEnumerable<Object> ordered_sprites = sprites.OrderBy(sprite => string_util.PadNumbers(sprite.name));
 
-		spritesheet new_spritesheet = ScriptableObject.CreateInstance<spritesheet>();
-		new_spritesheet.sprites = new List<Sprite>();
-
-		foreach (Object sprite in ordered_sprites) {
-			if (sprite is Sprite) {
-				new_spritesheet.sprites.Add((Sprite)sprite);
-			}
-		}
-
+		// Try to find an existing asset for this spritesheet, and repopulate it.
+		// Otherwise, generate a new spritesheet asset.
 		string new_path = save_util.remove_extension(path) + ".asset";
-		AssetDatabase.CreateAsset(new_spritesheet, new_path);
+		spritesheet spritesheet_found = AssetDatabase.LoadAssetAtPath<spritesheet>(new_path);
+		if (spritesheet_found != null) {
+			spritesheet_found.sprites.Clear();
+
+			foreach (Object sprite in ordered_sprites) {
+				if (sprite is Sprite) {
+					spritesheet_found.sprites.Add((Sprite)sprite);
+				}
+			}
+
+			AssetDatabase.SaveAssets();
+			Debug.Log("Spritesheet for: " + obj + " successfully saved to existing asset at: " + new_path);
+		} else {
+			spritesheet new_spritesheet = ScriptableObject.CreateInstance<spritesheet>();
+			new_spritesheet.sprites = new List<Sprite>();
+
+			foreach (Object sprite in ordered_sprites) {
+				if (sprite is Sprite) {
+					new_spritesheet.sprites.Add((Sprite)sprite);
+				}
+			}
+
+			AssetDatabase.CreateAsset(new_spritesheet, new_path);
+			Debug.Log("Spritesheet for: " + obj + " successfully saved to new asset at: " + new_path);
+		}
 		return true;
 	}
 #endif

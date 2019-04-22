@@ -15,9 +15,12 @@ public class sound_manager : MonoBehaviour {
 	public AudioSource walk_into_player;
 	public AudioSource opening_box;
 	public AudioSource punch;
+	public AudioSource oven_ding;
+	public AudioSource forge_eject;
 
 	// Loops
 	public AudioSource furnace_loop;
+	public AudioSource ticking_loop;
 	public AudioSource whetstone_loop;
 	public AudioSource crafting_table_loop;
 
@@ -44,7 +47,9 @@ public class sound_manager : MonoBehaviour {
 	// Make sure the looping audio doesn't continue if we switch scenes
 	private void OnSceneSwitch(Scene oldScene, Scene newScene) {
 		update_loop(furnace_loop, false);
+		update_loop(ticking_loop, false);
 		update_loop(whetstone_loop, false);
+		update_loop(crafting_table_loop, false);
 	}
 
 

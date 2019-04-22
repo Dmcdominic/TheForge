@@ -28,7 +28,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 	// If you want to use this in a parent class, make sure to call the base method.
 	protected virtual void Update() {
 		if (occupied()) {
-			indicator.SetActive(false);
+			set_indicator(false);
 			return;
 		}
 		
@@ -50,7 +50,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 			craftable = null;
 		}
 
-		indicator.SetActive(someone_can_interact);
+		set_indicator(someone_can_interact);
 		set_recipe_indicator(craftable);
 	}
 
@@ -71,6 +71,14 @@ public abstract class MonoInteractable : MonoBehaviour {
 
 	protected virtual item get_craftable_item(player Player) {
 		return null;
+	}
+
+	// Set the indicator
+	protected void set_indicator(bool active) {
+		indicator.SetActive(active);
+		on_set_indicator(active);
+	}
+	protected virtual void on_set_indicator(bool active) {
 	}
 
 	// Handles the player interaction indicator.

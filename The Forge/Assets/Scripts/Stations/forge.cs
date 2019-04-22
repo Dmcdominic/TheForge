@@ -14,16 +14,22 @@ public class forge : MonoStation {
 
 	// Private vars
 	private player current_owner;
+	private int current_team = -1;
 	private bool finished_cooking;
 
 	private TextMeshPro player_indicator;
 	private SpriteRenderer indicator_caret;
 
+	// Static vars
+	public static item cooking_rn;
+	public static int total_cooking;
+
 	// Static settings
-	public static float cook_interval = 0.9f;
-	public static float ejection_time = 6f;
-	public static float flashing_time = 3f;
-	public static float eject_speed = 6f;
+	public static readonly float cook_interval = 0.9f;
+	public static readonly float mm_cook_interval = 0.3f;
+	public static readonly float ejection_time = 6f;
+	public static readonly float flashing_time = 3f;
+	public static readonly float eject_speed = 6f;
 
 	// Ejection management
 	private bool flashing = false;
@@ -36,10 +42,13 @@ public class forge : MonoStation {
 		indicator_caret = completed_indicator.GetComponent<SpriteRenderer>();
 
 		current_owner = null;
+		current_team = -1;
 		finished_cooking = false;
 		cooking_sr.enabled = false;
 		completed_indicator.SetActive(false);
 		flashing = false;
+		cooking_rn = null;
+		total_cooking = 0;
 	}
 
 	public override void on_interact(player Player) {
@@ -47,12 +56,15 @@ public class forge : MonoStation {
 		if (current_owner == null) {
 			base.on_interact(Player);
 			take_ingredients_only();
+			cooking_rn = working_on;
 			start_cooking(Player);
 		} else if (Player.team == current_owner.team) {
 			user = Player;
 			give_product_only();
+			cooking_rn = null;
 			finished_cooking = false;
 			current_owner = null;
+			current_team = -1;
 			cooking_sr.enabled = false;
 			flashing = false;
 			completed_indicator.SetActive(false);
@@ -64,34 +76,47 @@ public class forge : MonoStation {
 	// Start the forge cooking
 	private void start_cooking(player Player) {
 		current_owner = Player;
+		current_team = Player.team;
 		finished_cooking = false;
 		StartCoroutine(cook());
+		total_cooking++;
+		total_cooking = total_cooking > 0 ? total_cooking : 1;
 		sound_manager.update_loop(sound_manager.instance.furnace_loop, true);
+		sound_manager.update_loop(sound_manager.instance.ticking_loop, true);
 	}
 
 	// Called when the product is done cooking
 	private void on_done_cooking() {
 		finished_cooking = true;
 		completed_indicator.SetActive(true);
-		player_indicator.text = teams.names[current_owner.team];
-		player_indicator.color = teams.lighter_colors[current_owner.team];
-		indicator_caret.color = teams.lighter_colors[current_owner.team];
-		sound_manager.update_loop(sound_manager.instance.furnace_loop, false);
+		player_indicator.text = teams.names[current_team];
+		player_indicator.color = teams.lighter_colors[current_team];
+		indicator_caret.color = teams.lighter_colors[current_team];
 		StartCoroutine(eject_after_delay());
+
+		// SFX
+		total_cooking--;
+		if (total_cooking <= 0) {
+			total_cooking = 0;
+			sound_manager.update_loop(sound_manager.instance.furnace_loop, false);
+			sound_manager.update_loop(sound_manager.instance.ticking_loop, false);
+		}
+		sound_manager.play_one_shot(sound_manager.instance.oven_ding);
 	}
 
 	// More specific can_interact
 	public override bool can_interact(player Player) {
-		return (current_owner == null && base.can_interact(Player)) || (current_owner != null && current_owner.team == Player.team && !Player.hands_full && finished_cooking);
+		return (current_team == -1 && base.can_interact(Player)) || (current_team == Player.team && !Player.hands_full && finished_cooking);
 	}
 
 	// Coroutine for cooking the product
 	private IEnumerator cook() {
+		bool in_main_menu = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == game_controller.mm_scene;
 		int cooking_stage = 0;
 		cooking_sr.sprite = cooking_sprites.sprites[cooking_stage];
 		cooking_sr.enabled = true;
 		while (cooking_stage + 1 < cooking_sprites.sprites.Count) {
-			yield return new WaitForSeconds(cook_interval);
+			yield return new WaitForSeconds(in_main_menu ? mm_cook_interval : cook_interval);
 			cooking_stage++;
 			cooking_sr.sprite = cooking_sprites.sprites[cooking_stage];
 		}
@@ -125,9 +150,14 @@ public class forge : MonoStation {
 		physical_Item.transform.position = cooking_sr.transform.position;
 		physical_Item.GetComponent<Rigidbody2D>().velocity = velocity;
 
+		// SFX
+		sound_manager.play_one_shot(sound_manager.instance.forge_eject);
+
 		// Internal cleanup
 		finished_cooking = false;
 		current_owner = null;
+		cooking_rn = null;
+		current_team = -1;
 		cooking_sr.enabled = false;
 		flashing = false;
 		completed_indicator.SetActive(false);

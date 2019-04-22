@@ -9,6 +9,8 @@ using UnityEngine;
 public class station : ScriptableObject {
 	
 	public Sprite icon;
+	public Sprite highlight;
+	public Color highlight_col = Color.white;
 	public bool crate;
 
 	private List<item> _products;

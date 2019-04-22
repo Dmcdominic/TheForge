@@ -28,10 +28,13 @@ public class anim_piece : MonoBehaviour {
 	}
 
 	public virtual void refresh_sprite() {
-		if (0 <= animation_index && animation_index < anim_Palettes_Bundle.sets.Count) {
-			anim_palettes_set set = anim_Palettes_Bundle.sets[animation_index];
-			if (0 <= palette_index && palette_index < set.palettes.Count) {
-				spritesheet sheet = set.palettes[palette_index];
+		if (sprite_renderer == null) {
+			return;
+		}
+		if (0 <= palette_index && palette_index < anim_Palettes_Bundle.sets.Count) {
+			anim_palettes_set set = anim_Palettes_Bundle.sets[palette_index];
+			if (0 <= animation_index && animation_index < set.palettes.Count) {
+				spritesheet sheet = set.palettes[animation_index];
 				if (0 <= sprite_index && sprite_index < sheet.sprites.Count) {
 					sprite_renderer.sprite = sheet.sprites[sprite_index];
 				}

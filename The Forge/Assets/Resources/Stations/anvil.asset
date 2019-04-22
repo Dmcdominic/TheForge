@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1018698514d49904e8452d01c0950855, type: 3}
   m_Name: anvil
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 94a51b93f58b6d34192758c1d4cedabe, type: 3}
+  icon: {fileID: 21300000, guid: 2d657662142d7f84b8f40cba121bf0da, type: 3}
+  highlight: {fileID: 21300000, guid: 3d6e37f297f0283448761d1da0ce5a8f, type: 3}
+  highlight_col: {r: 0.3882353, g: 0.26666668, b: 0.43137255, a: 1}
   crate: 0
-  products:
-  - {fileID: 11400000, guid: 123527a925dca8c45ad583edf718ba6f, type: 2}
-  - {fileID: 11400000, guid: d482eb59191b1f1458333587876ac8f7, type: 2}

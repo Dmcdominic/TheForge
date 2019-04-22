@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class scroll : MonoInteractable {
 
@@ -10,13 +11,15 @@ public class scroll : MonoInteractable {
 	[HideInInspector]
 	public item requested_item;
 
+	public SpriteRenderer highlight_sr;
+
 	// Private vars
 	private scroll_visuals visuals;
 
 	// Static settings
 	private static readonly float scroll_respawn_min = 4f;
 	private static readonly float scroll_respawn_max = 8f;
-	private static readonly float initial_spawn_interval = 0.5f;
+	private static readonly float initial_spawn_interval = 2f;
 
 	// Static vars
 	public static item[] current_requests = new item[3];
@@ -24,6 +27,11 @@ public class scroll : MonoInteractable {
 
 	// Init
 	private void Awake() {
+		// Disable this component if we are in the main menu
+		if (SceneManager.GetActiveScene().buildIndex == game_controller.mm_scene) {
+			enabled = false;
+			return;
+		}
 		visuals = GetComponent<scroll_visuals>();
 	}
 
@@ -40,7 +48,7 @@ public class scroll : MonoInteractable {
 	}
 	// Initialize this scroll with a random order
 	public void init_order() {
-		List<item> tier_1_items = items_oracle.all.Where<item>(x => x.tier > 0).ToList<item>();
+		List<item> tier_1_items = items_oracle.all.Where<item>(x => 0 < x.tier && x.tier < 10).ToList<item>();
 		item chosen_item = tier_1_items[Random.Range(0, tier_1_items.Count)];
 		// Try a few times to avoid choosing an item that's already up there
 		for (int i=0; i < 2; i++) {
@@ -69,6 +77,12 @@ public class scroll : MonoInteractable {
 			// Todo - order expired sfx?
 		}
 		StartCoroutine(refresh_scroll_delayed());
+	}
+
+	protected override void on_set_indicator(bool active) {
+		if (highlight_sr) {
+			highlight_sr.gameObject.SetActive(active);
+		}
 	}
 
 	// Returns true iff Player is holding the requested item

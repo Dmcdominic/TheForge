@@ -11,6 +11,7 @@ public class anim_parent : MonoBehaviour {
 	public void set_all_animation(int anim_index) {
 		foreach (anim_piece piece in anim_pieces) {
 			piece.animation_index = anim_index;
+			piece.refresh_sprite();
 		}
 	}
 
@@ -18,12 +19,14 @@ public class anim_parent : MonoBehaviour {
 		palette_index = inc_palette_index;
 		foreach (anim_piece piece in anim_pieces) {
 			piece.palette_index = inc_palette_index;
+			piece.refresh_sprite();
 		}
 	}
 
 	public void set_all_sprite(int sprite_index) {
 		foreach (anim_piece piece in anim_pieces) {
 			piece.sprite_index = sprite_index;
+			piece.refresh_sprite();
 		}
 	}
 

@@ -40,10 +40,15 @@ public class scroll_visuals : MonoBehaviour {
 
 	// Hide all scroll visuals
 	public void clear_scroll() {
-		foreach(Transform trans in steps_parent.transform) {
+		clear_recipe_steps();
+		visuals_parent.SetActive(false);
+	}
+
+	// Hide all recipe steps
+	public void clear_recipe_steps() {
+		foreach (Transform trans in steps_parent.transform) {
 			Destroy(trans.gameObject);
 		}
-		visuals_parent.SetActive(false);
 	}
 
 	// ========== Recipes Steps ==========
@@ -71,15 +76,16 @@ public class scroll_visuals : MonoBehaviour {
 			if (product.ingredients.Count == 2) {
 				item item2 = product.ingredients[1];
 				item easier_item = get_easier_item(item1, item2);
-				new_step.ingredient_sr.sprite = easier_item.icon;
+				new_step.ingredient_sr.sprite = easier_item.mini_icon;
 				next_item = (easier_item == item1) ? item2 : item1;
 			} else if (item1.is_base_item) {
-				new_step.ingredient_sr.sprite = item1.icon;
+				new_step.ingredient_sr.sprite = item1.mini_icon;
 			} else {
 				next_item = item1;
 			}
 		} else {
-			new_step.station_sr.sprite = product.icon;
+			new_step.station_sr.sprite = null;
+			new_step.ingredient_sr.sprite = product.mini_icon;
 			new_step.station_sr.transform.localScale = item_icon_scale;
 		}
 

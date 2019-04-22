@@ -44,16 +44,9 @@ public class anvil : MonoStation
 			//Debug.Log("count = " + count);
         }
 
-        if (count == button_mash_num && is_playing)
-        {
-            complete_items_swap();
-            count = 0;
-            is_playing = false;
-            bar_location.sprite = bar_sprites.sprites[0];
-            bar_location.enabled = false;
-            icon_normal.enabled = false;
-            icon_pressed.enabled = false;
-        }
+        if (count == button_mash_num && is_playing) {
+			complete_event();
+		}
 
         if (is_playing)
         {
@@ -72,4 +65,23 @@ public class anvil : MonoStation
             icon_pressed.enabled = false;
         }
     }
+
+	// End the minigame
+	private void complete_event(bool abort = false) {
+		if (!abort) {
+			complete_items_swap();
+		}
+		count = 0;
+		is_playing = false;
+		bar_location.sprite = bar_sprites.sprites[0];
+		bar_location.enabled = false;
+		icon_normal.enabled = false;
+		icon_pressed.enabled = false;
+	}
+
+	// Reset the 
+	public override void abort_items_swap() {
+		complete_event(true);
+		base.abort_items_swap();
+	}
 }

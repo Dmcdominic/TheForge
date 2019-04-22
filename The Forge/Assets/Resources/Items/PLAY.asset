@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc6bf6d2faeaa84fb5ecc04846f11dc, type: 3}
+  m_Name: PLAY
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 56489875297c5b241adfdf96522e43fd, type: 3}
+  icon_angle: 45
+  ingredients:
+  - {fileID: 11400000, guid: 5fd98ada46d433e4990cdbcb56ede00e, type: 2}
+  - {fileID: 11400000, guid: f5794b8b4f569bc4f9919a6313b8e537, type: 2}
+  station: {fileID: 11400000, guid: f864d68c219a0d24aa81dae79748384e, type: 2}
+  tier: 100
