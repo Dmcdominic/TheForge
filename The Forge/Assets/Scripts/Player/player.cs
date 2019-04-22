@@ -28,6 +28,7 @@ public class player : MonoBehaviour {
 	public movement Movement { get; private set; }
 	private Collider2D col;
 	private Animator animator;
+	private anim_parent anim_Parent;
 
 	// Static vars
 	public static int item_limit = 2;
@@ -38,13 +39,17 @@ public class player : MonoBehaviour {
 		Movement = GetComponent<movement>();
 		col = GetComponent<Collider2D>();
 		animator = GetComponent<Animator>();
+		anim_Parent = GetComponent<anim_parent>();
 	}
 
 	// More setup once index has been set
 	private void Start() {
 		player_indicator.text = get_indicator_string(index);
 		//player_indicator.color = teams.colors[team];
-		animator.runtimeAnimatorController = anim_info.anim_controllers[team];
+		//animator.runtimeAnimatorController = anim_info.anim_controllers[team];
+
+		// Anim initialization
+		anim_Parent.set_all_palette(index + team * 4);
 	}
 
 	// Called every frame

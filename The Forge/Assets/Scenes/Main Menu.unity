@@ -1187,18 +1187,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &312781441 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 930019906390442622, guid: 9b170ea7491f0b64991d5b9f012dfe0b,
-    type: 3}
-  m_PrefabInstance: {fileID: 930019905344423351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 074c0eb79b41e65499d79ed5c29e97a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &326221131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7444612771895695006, guid: 4a8aa094af19f7949a9ed8858623d2a2,
@@ -2723,18 +2711,6 @@ Transform:
   m_Father: {fileID: 424864546}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1038614540 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 930019906390442622, guid: 9b170ea7491f0b64991d5b9f012dfe0b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1149566968}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 074c0eb79b41e65499d79ed5c29e97a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1149566968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3940,9 +3916,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82fff3493aa4ae4eb942aac4e565390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dwarves:
-  - {fileID: 1038614540}
-  - {fileID: 312781441}
 --- !u!4 &1823540795
 Transform:
   m_ObjectHideFlags: 0
@@ -4924,11 +4897,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4261082272875788799, guid: 56a9b7a5f13cf344daaf0321ee77e158,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8263276755344758244, guid: 56a9b7a5f13cf344daaf0321ee77e158,
         type: 3}
       propertyPath: m_IsActive
@@ -4942,6 +4910,11 @@ PrefabInstance:
     - target: {fileID: 4873363554253715305, guid: 56a9b7a5f13cf344daaf0321ee77e158,
         type: 3}
       propertyPath: m_inputSource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4261082272875788799, guid: 56a9b7a5f13cf344daaf0321ee77e158,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

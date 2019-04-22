@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 930019905320192375}
   - component: {fileID: 930019905320192374}
   - component: {fileID: 8977293253811131545}
+  - component: {fileID: 1364865963048673920}
   m_Layer: 8
   m_Name: Dwarf Visuals
   m_TagString: Untagged
@@ -125,6 +126,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831d5319e9ee2f541897cb68b0ea0ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1364865963048673920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930019905320192264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9410a687ca59b464fbdc8ac65a244382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim_Palettes_Bundle: {fileID: 11400000, guid: 0f55eef671c7c924396341a37091bafe,
+    type: 2}
+  animation_index: 0
+  palette_index: 0
+  sprite_index: 0
 --- !u!1 &930019905702387834
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +346,7 @@ GameObject:
   - component: {fileID: 930019906390442618}
   - component: {fileID: 2560987869739121806}
   - component: {fileID: 930019906390442619}
+  - component: {fileID: 237691052521481757}
   - component: {fileID: 930019906390442617}
   m_Layer: 8
   m_Name: dwarf
@@ -444,6 +463,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &237691052521481757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 930019906390442623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea4ea6cab61eab84fae95226492aacb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim_pieces:
+  - {fileID: 1364865963048673920}
 --- !u!95 &930019906390442617
 Animator:
   serializedVersion: 3
@@ -454,7 +487,7 @@ Animator:
   m_GameObject: {fileID: 930019906390442623}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f26ba3a1ce2938948bfe62e23a227157, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5423976e517f2994ea6c124619634fd7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5419,11 +5452,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8453784666278394204}
