@@ -61,10 +61,12 @@ public class game_controller : MonoBehaviour {
 		// Some initial setup
 		bool team_0 = false;
 		bool team_1 = false;
-		for (int dwarf = 0; dwarf < dwarf_spawner.dwarf_teams.Length; dwarf++) {
-			int team = dwarf_spawner.dwarf_teams[dwarf];
-			team_0 = team_0 || team == 0;
-			team_1 = team_1 || team == 1;
+		if (dwarf_spawner.dwarf_teams != null) {
+			for (int dwarf = 0; dwarf < dwarf_spawner.dwarf_teams.Length; dwarf++) {
+				int team = dwarf_spawner.dwarf_teams[dwarf];
+				team_0 = team_0 || team == 0;
+				team_1 = team_1 || team == 1;
+			}
 		}
 		teams = (team_0 && team_1);
 		the_team = team_0 ? 0 : 1;

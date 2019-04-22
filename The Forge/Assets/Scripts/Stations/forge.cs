@@ -22,6 +22,7 @@ public class forge : MonoStation {
 
 	// Static vars
 	public static item cooking_rn;
+	public static int total_cooking;
 
 	// Static settings
 	public static readonly float cook_interval = 0.9f;
@@ -47,6 +48,7 @@ public class forge : MonoStation {
 		completed_indicator.SetActive(false);
 		flashing = false;
 		cooking_rn = null;
+		total_cooking = 0;
 	}
 
 	public override void on_interact(player Player) {
@@ -77,7 +79,10 @@ public class forge : MonoStation {
 		current_team = Player.team;
 		finished_cooking = false;
 		StartCoroutine(cook());
+		total_cooking++;
+		total_cooking = total_cooking > 0 ? total_cooking : 1;
 		sound_manager.update_loop(sound_manager.instance.furnace_loop, true);
+		sound_manager.update_loop(sound_manager.instance.ticking_loop, true);
 	}
 
 	// Called when the product is done cooking
@@ -87,8 +92,16 @@ public class forge : MonoStation {
 		player_indicator.text = teams.names[current_team];
 		player_indicator.color = teams.lighter_colors[current_team];
 		indicator_caret.color = teams.lighter_colors[current_team];
-		sound_manager.update_loop(sound_manager.instance.furnace_loop, false);
 		StartCoroutine(eject_after_delay());
+
+		// SFX
+		total_cooking--;
+		if (total_cooking <= 0) {
+			total_cooking = 0;
+			sound_manager.update_loop(sound_manager.instance.furnace_loop, false);
+			sound_manager.update_loop(sound_manager.instance.ticking_loop, false);
+		}
+		sound_manager.play_one_shot(sound_manager.instance.oven_ding);
 	}
 
 	// More specific can_interact
@@ -136,6 +149,9 @@ public class forge : MonoStation {
 
 		physical_Item.transform.position = cooking_sr.transform.position;
 		physical_Item.GetComponent<Rigidbody2D>().velocity = velocity;
+
+		// SFX
+		sound_manager.play_one_shot(sound_manager.instance.forge_eject);
 
 		// Internal cleanup
 		finished_cooking = false;

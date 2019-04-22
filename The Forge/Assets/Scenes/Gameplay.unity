@@ -3201,7 +3201,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3365e93ed2d8d414fbc3c96c09ae2a71,
+      objectReference: {fileID: 21300000, guid: 15df7082c75f5954aa68e4d5ec815626,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc106c9db176c3f449815691f68077fe, type: 3}
@@ -3661,9 +3661,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82fff3493aa4ae4eb942aac4e565390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dwarves:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!4 &1823540795
 Transform:
   m_ObjectHideFlags: 0
@@ -4093,7 +4090,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 581beb5277f1ae3428f88fea6a3e2aa9,
+      objectReference: {fileID: 21300000, guid: a5b1a65e627b4a24f9876e2f5b664824,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc106c9db176c3f449815691f68077fe, type: 3}

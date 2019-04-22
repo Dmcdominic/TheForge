@@ -14,6 +14,7 @@ public class item : ScriptableObject {
 	// Public properties
 	public Sprite icon;
 	public float icon_angle = 45f;
+	public Sprite mini_icon;
 	public List<item> ingredients;
 	public station station;
 	public int tier;
