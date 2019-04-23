@@ -45,7 +45,7 @@ public class moving_platform : MonoBehaviour {
 			rb.velocity = new Vector2(max_movespeed * right_sum, 0);
 		} else if (right_sum > 0 && !touching_right_edge) {
 			rb.velocity = new Vector2(max_movespeed * right_sum, 0);
-		//} else if (touching_left_edge || touching_right_edge) {
+			//} else if (touching_left_edge || touching_right_edge) {
 		} else {
 			rb.velocity = new Vector2(0, 0);
 		}

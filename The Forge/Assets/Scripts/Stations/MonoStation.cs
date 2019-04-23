@@ -7,7 +7,7 @@ public abstract class MonoStation : MonoInteractable {
 
 	public station station_info;
 	public SpriteRenderer highlight_sr;
-	public SpriteRenderer highlight_large_sr;
+	public SpriteRenderer tutorial_indicator;
 
 	protected player user = null;
 	protected item working_on = null;
@@ -66,9 +66,9 @@ public abstract class MonoStation : MonoInteractable {
 	}
 
 	private void set_large_highlight(bool active) {
-		if (highlight_large_sr) {
-			highlight_large_sr.color = station_info.highlight_col;
-			highlight_large_sr.gameObject.SetActive(active);
+		if (tutorial_indicator) {
+			tutorial_indicator.color = station_info.highlight_col;
+			tutorial_indicator.gameObject.SetActive(active);
 		}
 	}
 

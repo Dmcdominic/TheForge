@@ -15,6 +15,7 @@ public class menu_scroll : MonoInteractable {
 	public GameObject completed_play;
 
 	public SpriteRenderer highlight_sr;
+	public SpriteRenderer tutorial_pointer;
 
 	// Static settings
 	private static readonly float really_time = 5f;
@@ -32,6 +33,7 @@ public class menu_scroll : MonoInteractable {
 	// Only leave this component enabled if we are in the main menu
 	private void Awake() {
 		if (SceneManager.GetActiveScene().buildIndex != game_controller.mm_scene) {
+			tutorial_pointer.gameObject.SetActive(false);
 			enabled = false;
 			return;
 		}
@@ -46,6 +48,15 @@ public class menu_scroll : MonoInteractable {
 			menu_TMP.text = option.ToString();
 		}
 		menu_TMP.gameObject.SetActive(true);
+		tutorial_pointer.gameObject.SetActive(false);
+	}
+
+	// Check for tutorial indicator status
+	protected override void Update() {
+		base.Update();
+		if (option == menu_options.Play) {
+			tutorial_pointer.gameObject.SetActive(tutorial_controller.is_final_item_ready);
+		}
 	}
 
 

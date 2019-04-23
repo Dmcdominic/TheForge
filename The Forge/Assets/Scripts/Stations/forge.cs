@@ -23,9 +23,10 @@ public class forge : MonoStation {
 	// Static vars
 	public static item cooking_rn;
 	public static int total_cooking;
+	public static int total_flashing;
 
 	// Static settings
-	public static readonly float cook_interval = 0.9f;
+	public static readonly float cook_interval = 0.8f;
 	public static readonly float mm_cook_interval = 0.3f;
 	public static readonly float ejection_time = 6f;
 	public static readonly float flashing_time = 3f;
@@ -46,19 +47,20 @@ public class forge : MonoStation {
 		finished_cooking = false;
 		cooking_sr.enabled = false;
 		completed_indicator.SetActive(false);
-		flashing = false;
+		set_flashing(false);
 		cooking_rn = null;
 		total_cooking = 0;
 	}
 
 	public override void on_interact(player Player) {
 		StopAllCoroutines();
-		if (current_owner == null) {
+		//if (current_owner == null) {
+		if (current_team == -1) {
 			base.on_interact(Player);
 			take_ingredients_only();
 			cooking_rn = working_on;
 			start_cooking(Player);
-		} else if (Player.team == current_owner.team) {
+		} else if (Player.team == current_team) {
 			user = Player;
 			give_product_only();
 			cooking_rn = null;
@@ -66,7 +68,7 @@ public class forge : MonoStation {
 			current_owner = null;
 			current_team = -1;
 			cooking_sr.enabled = false;
-			flashing = false;
+			set_flashing(false);
 			completed_indicator.SetActive(false);
 		} else {
 			Debug.LogError("Unexpected interaction with forge");
@@ -125,9 +127,9 @@ public class forge : MonoStation {
 
 	// Eject the ingot after the appropriate delay
 	private IEnumerator eject_after_delay() {
-		flashing = false;
+		set_flashing(false);
 		yield return new WaitForSeconds(ejection_time - flashing_time);
-		flashing = true;
+		set_flashing(true);
 		flash_timer = 0;
 		yield return new WaitForSeconds(flashing_time);
 		eject_item();
@@ -159,7 +161,7 @@ public class forge : MonoStation {
 		cooking_rn = null;
 		current_team = -1;
 		cooking_sr.enabled = false;
-		flashing = false;
+		set_flashing(false);
 		completed_indicator.SetActive(false);
 
 		user = null;
@@ -178,6 +180,21 @@ public class forge : MonoStation {
 		} else {
 			color_util.set_alpha(cooking_sr, 1f);
 			flash_timer = 0;
+		}
+	}
+
+	// Set the flashing bool
+	private void set_flashing(bool value) {
+		if (flashing == value) {
+			return;
+		}
+		flashing = value;
+		total_flashing += flashing ? 1 : -1;
+		if (total_flashing <= 0) {
+			total_flashing = 0;
+			sound_manager.update_loop(sound_manager.instance.sizzling_loop, false);
+		} else if (total_flashing > 0) {
+			sound_manager.update_loop(sound_manager.instance.sizzling_loop, true);
 		}
 	}
 }

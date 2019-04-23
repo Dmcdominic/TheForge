@@ -49,7 +49,7 @@ public class player : MonoBehaviour {
 		//animator.runtimeAnimatorController = anim_info.anim_controllers[team];
 
 		// Anim initialization
-		anim_Parent.set_all_palette(index + team * 4);
+		anim_Parent.set_all_palette(index + (1-team) * 4);
 	}
 
 	// Called every frame

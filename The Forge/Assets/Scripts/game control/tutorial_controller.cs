@@ -9,6 +9,7 @@ public class tutorial_controller : MonoBehaviour {
 
 	// Static vars
 	public static item next_item = null;
+	public static bool is_final_item_ready = false;
 	public static bool this_station_next(station Station) {
 		return (next_item != null && next_item.station == Station);
 	}
@@ -18,9 +19,11 @@ public class tutorial_controller : MonoBehaviour {
 	void Update() {
 		if (menu_scroll.play_button_placed || is_item_in_possession(final_target_item)) {
 			next_item = null;
+			is_final_item_ready = !menu_scroll.play_button_placed;
 			return;
 		}
-		
+		is_final_item_ready = false;
+
 		next_item = final_target_item;
 
 		while (!are_all_ingredients_ready(next_item) && !in_progress(next_item)) {
@@ -42,6 +45,8 @@ public class tutorial_controller : MonoBehaviour {
 	private void OnDestroy() {
 		next_item = null;
 	}
+
+	// ========= Global dwarf item status util ==========
 
 	// Check if any dwarf is holding a particular item
 	public static bool is_item_in_possession(item Item) {

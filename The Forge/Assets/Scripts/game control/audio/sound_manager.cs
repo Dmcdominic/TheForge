@@ -21,6 +21,7 @@ public class sound_manager : MonoBehaviour {
 	// Loops
 	public AudioSource furnace_loop;
 	public AudioSource ticking_loop;
+	public AudioSource sizzling_loop;
 	public AudioSource whetstone_loop;
 	public AudioSource crafting_table_loop;
 

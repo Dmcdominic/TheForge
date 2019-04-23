@@ -52,7 +52,8 @@ public class grindstone2 : MonoStation
                         cycle = 0;
                         count = 0;
                         is_playing = false;
-                    }
+						sound_manager.update_loop(sound_manager.instance.whetstone_loop, false);
+					}
                     else
                     {
                         cycle = 1;

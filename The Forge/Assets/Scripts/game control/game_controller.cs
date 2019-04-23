@@ -43,6 +43,7 @@ public class game_controller : MonoBehaviour {
 	}
 
 	private void onActiveSceneChanged(Scene next) {
+		physical_item.init_all_physicals();
 		if (next.buildIndex == mm_scene) {
 			pre_game = false;
 			game_playing = false;
