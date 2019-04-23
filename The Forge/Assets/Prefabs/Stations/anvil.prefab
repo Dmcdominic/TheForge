@@ -452,7 +452,8 @@ MonoBehaviour:
   station_info: {fileID: 11400000, guid: 731ead471c212d941ba4dfecab050a45, type: 2}
   highlight_sr: {fileID: 6257705468162155273}
   tutorial_indicator: {fileID: 613682218781393240}
-  button_mash_num: 10
+  button_mash_num: 20
+  quickcraft_button_mash_num: 5
   icon_normal: {fileID: 2246113216209280343}
   icon_pressed: {fileID: 8020841046761030117}
   bar_location: {fileID: 7195603338128385211}

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class sound_manager : MonoBehaviour {
 	// Songs
 	public AudioSource Royal_Entrance;
+	public AudioSource Powerhouse;
 
 	// One-shots
 	public AudioSource anvil_hit;
@@ -51,6 +52,14 @@ public class sound_manager : MonoBehaviour {
 		update_loop(ticking_loop, false);
 		update_loop(whetstone_loop, false);
 		update_loop(crafting_table_loop, false);
+
+		if (newScene.buildIndex == game_controller.mm_scene) {
+			Royal_Entrance.Play();
+			Powerhouse.Stop();
+		} else if (newScene.buildIndex > game_controller.mm_scene) {
+			Royal_Entrance.Stop();
+			Powerhouse.Play();
+		}
 	}
 
 

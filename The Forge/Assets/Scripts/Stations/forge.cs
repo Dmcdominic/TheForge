@@ -27,6 +27,7 @@ public class forge : MonoStation {
 
 	// Static settings
 	public static readonly float cook_interval = 0.8f;
+	public static readonly float quickcraft_cook_interval = 0.2f;
 	public static readonly float mm_cook_interval = 0.3f;
 	public static readonly float ejection_time = 6f;
 	public static readonly float flashing_time = 3f;
@@ -118,7 +119,10 @@ public class forge : MonoStation {
 		cooking_sr.sprite = cooking_sprites.sprites[cooking_stage];
 		cooking_sr.enabled = true;
 		while (cooking_stage + 1 < cooking_sprites.sprites.Count) {
-			yield return new WaitForSeconds(in_main_menu ? mm_cook_interval : cook_interval);
+			bool has_quickcraft = powerups_controller.has_powerup(current_team, powerups.quick_craft);
+			float current_cook_interval = in_main_menu ? mm_cook_interval : cook_interval;
+			current_cook_interval = has_quickcraft ? quickcraft_cook_interval : current_cook_interval;
+			yield return new WaitForSeconds(current_cook_interval);
 			cooking_stage++;
 			cooking_sr.sprite = cooking_sprites.sprites[cooking_stage];
 		}

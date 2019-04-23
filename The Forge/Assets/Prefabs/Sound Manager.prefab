@@ -824,6 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Royal_Entrance: {fileID: 4195378190005680491}
+  Powerhouse: {fileID: 1559627537676790807}
   anvil_hit: {fileID: 3050651019779975293}
   bu_bu: {fileID: 3050651018273799545}
   coin: {fileID: 3050651019559454813}
@@ -1265,7 +1266,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 365f0da10af911b42adeec4f8ac7afaa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

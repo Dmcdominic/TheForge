@@ -23,6 +23,7 @@ public class game_controller : MonoBehaviour {
 	public static int gameplay_scene = 2;
 
 	public static int max_dwarves = 4;
+	public static int max_teams = 2;
 
 
 	// Static instance setup
@@ -38,8 +39,6 @@ public class game_controller : MonoBehaviour {
 		instance = this;
 		DontDestroyOnLoad(gameObject);
 		SceneManager.activeSceneChanged += onActiveSceneChanged;
-
-		//onActiveSceneChanged(SceneManager.GetActiveScene());
 	}
 
 	private void onActiveSceneChanged(Scene next) {

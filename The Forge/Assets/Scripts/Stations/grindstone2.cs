@@ -11,12 +11,17 @@ public class grindstone2 : MonoStation
 
     private int player_num;
 
+	// Static settings
+	private static readonly int counts_required = 3;
+	private static readonly int quickcraft_counts_required = 1;
+
     public override void on_interact(player Player)
     {
         base.on_interact(Player);
         player_num = Player.index;
         is_playing = true;
-    }
+		sound_manager.update_loop(sound_manager.instance.whetstone_loop, true);
+	}
 
     private void Start()
     {
@@ -32,12 +37,12 @@ public class grindstone2 : MonoStation
         // Your stuff here
         if (is_playing)
         {
-            sound_manager.update_loop(sound_manager.instance.whetstone_loop, true);
-
             float x_input = input.p[player_num].h_axis;
             float y_input = input.p[player_num].v_axis;
 
-            if (y_input >= 0.7f)
+			int current_counts_required = powerups_controller.has_powerup(user.team, powerups.quick_craft) ? quickcraft_counts_required : counts_required;
+
+			if (y_input >= 0.7f)
             {
                 if (prev == null)
                 {
@@ -46,12 +51,13 @@ public class grindstone2 : MonoStation
                 } else if (cycle == 4 && prev == "Left")
                 {
                     count += 1;
-                    if (count == 3)
+                    if (count >= current_counts_required)
                     {
                         complete_items_swap();
                         cycle = 0;
                         count = 0;
                         is_playing = false;
+						prev = null;
 						sound_manager.update_loop(sound_manager.instance.whetstone_loop, false);
 					}
                     else
@@ -75,4 +81,13 @@ public class grindstone2 : MonoStation
             }
         }
     }
+
+	public override void abort_items_swap() {
+		base.abort_items_swap();
+		cycle = 0;
+		count = 0;
+		is_playing = false;
+		prev = null;
+		sound_manager.update_loop(sound_manager.instance.whetstone_loop, false);
+	}
 }
