@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class grindstone2 : MonoStation
 {
+	public GameObject controls_and_progress_indicator;
+
     private int count = 0;
     private int cycle = 0;
     private string prev = null;
@@ -20,6 +22,7 @@ public class grindstone2 : MonoStation
         base.on_interact(Player);
         player_num = Player.index;
         is_playing = true;
+		controls_and_progress_indicator.SetActive(true);
 		sound_manager.update_loop(sound_manager.instance.whetstone_loop, true);
 	}
 
@@ -58,6 +61,7 @@ public class grindstone2 : MonoStation
                         count = 0;
                         is_playing = false;
 						prev = null;
+						controls_and_progress_indicator.SetActive(false);
 						sound_manager.update_loop(sound_manager.instance.whetstone_loop, false);
 					}
                     else
@@ -88,6 +92,7 @@ public class grindstone2 : MonoStation
 		count = 0;
 		is_playing = false;
 		prev = null;
+		controls_and_progress_indicator.SetActive(false);
 		sound_manager.update_loop(sound_manager.instance.whetstone_loop, false);
 	}
 }

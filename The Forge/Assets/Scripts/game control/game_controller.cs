@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class game_controller : MonoBehaviour {
 
+	public GameObject temp_endgame_screen;
+
 	// Static vars
 	public static bool teams = true;
 	public static int the_team = 0;
@@ -17,7 +19,7 @@ public class game_controller : MonoBehaviour {
 
 	// Static settings
 	public static float total_game_time = 180f;
-	public static float pre_game_time = 10f;
+	public static float pre_game_time = 15f;
 
 	public static int mm_scene = 1;
 	public static int gameplay_scene = 2;
@@ -31,6 +33,7 @@ public class game_controller : MonoBehaviour {
 
 	private void Awake() {
 		if (instance != null && instance != this) {
+			instance.temp_endgame_screen = this.temp_endgame_screen;
 			Destroy(gameObject);
 			return;
 		}
@@ -92,6 +95,7 @@ public class game_controller : MonoBehaviour {
 	private void end_game(bool times_up) {
 		game_playing = false;
 		movement.all_players_frozen = true;
+		temp_endgame_screen.SetActive(true);
 		// TODO - end game screen here
 	}
 

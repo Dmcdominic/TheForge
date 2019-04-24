@@ -36,7 +36,8 @@ public class tutorial_controller : MonoBehaviour {
 				}
 			}
 			if (!updated_ingred) {
-				break;
+				//break;
+				next_item = next_item.ingredients[next_item.ingredients.Count - 1];
 			}
 		}
 	}
@@ -71,6 +72,7 @@ public class tutorial_controller : MonoBehaviour {
 			if (dwarf == null) {
 				continue;
 			}
+
 			bool has_all_ingred = true;
 			foreach (item ingredient in next_item.ingredients) {
 				if (!dwarf.items_carried.Contains(ingredient)) {
@@ -78,6 +80,7 @@ public class tutorial_controller : MonoBehaviour {
 					break;
 				}
 			}
+
 			if (has_all_ingred) {
 				return true;
 			}

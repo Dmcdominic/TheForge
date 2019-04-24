@@ -9,7 +9,10 @@ public class movement : MonoBehaviour {
 	public static float throw_speed_fast = 7f;
 	public static float throw_speed_slow = 4f;
 	public static float throw_turn_duration = 0.15f;
+
 	public static float ladder_axis_threshold = 0.6f;
+	public static float ladder_x_mult = 0.6f;
+
 	public static float stacking_height_check = 0.55f;
 
 	// Public fields
@@ -41,6 +44,8 @@ public class movement : MonoBehaviour {
 		get { return movement_enabled && !stunned && !all_players_frozen; }
 		set { movement_enabled = value; }
 	}
+
+	private float x_ladder_mult { get { return holding_onto_ladder ? ladder_x_mult : 1; } }
 
 	// Private vars
 	private int index;
@@ -106,7 +111,7 @@ public class movement : MonoBehaviour {
 		float y_input = input.p[index].v_axis;
 
 		// Horizontal movement
-		float movespeed = x_input * x_mult * powerups_controller.speed_mult(Player);
+		float movespeed = x_input * x_mult * powerups_controller.speed_mult(Player) * x_ladder_mult;
 		rb.velocity = new Vector2(movespeed, rb.velocity.y) + platform_velo;
 		platform_velo = new Vector2(0, 0);
 

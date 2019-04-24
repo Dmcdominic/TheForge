@@ -46,6 +46,7 @@ public class scroll_visuals : MonoBehaviour {
 		visuals_sub_parent.SetActive(false);
 		menu_visuals_parent.SetActive(false);
 		animator.SetTrigger("unfurl");
+		sound_manager.play_one_shot(sound_manager.instance.scroll_unfurling);
 	}
 
 	// Hide all scroll visuals
