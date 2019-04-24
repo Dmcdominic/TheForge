@@ -49,7 +49,7 @@ public class player : MonoBehaviour {
 		//animator.runtimeAnimatorController = anim_info.anim_controllers[team];
 
 		// Anim initialization
-		anim_Parent.set_all_palette(index + (1-team) * 4);
+		anim_Parent.set_all_palette(get_anim_palette_index());
 	}
 
 	// Called every frame
@@ -109,5 +109,13 @@ public class player : MonoBehaviour {
 	// Get the player's indicator string
 	public static string get_indicator_string(int index) {
 		return "P" + (index + 1).ToString();
+	}
+
+	// Get the player's animation palette index
+	public static int get_anim_palette_index(int index, int team) {
+		return index + (1 - team) * 4;
+	}
+	public int get_anim_palette_index() {
+		return index + (1 - team) * 4;
 	}
 }
