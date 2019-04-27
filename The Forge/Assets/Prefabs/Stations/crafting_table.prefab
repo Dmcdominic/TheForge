@@ -561,6 +561,7 @@ MonoBehaviour:
   indicator: {fileID: 4076209773527323551}
   station_info: {fileID: 11400000, guid: f864d68c219a0d24aa81dae79748384e, type: 2}
   highlight_sr: {fileID: 7516995957192482155}
+  tutorial_indicator: {fileID: 0}
   indic: {fileID: 9085934760804341535}
   bar: {fileID: 293839516089057184}
   is_playing: 0
@@ -580,7 +581,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0.112065434}
+  m_Offset: {x: 0, y: 0.0010359883}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -591,7 +592,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.77586913}
+  m_Size: {x: 1, y: 0.997928}
   m_EdgeRadius: 0
 --- !u!50 &8646229949231678388
 Rigidbody2D:
@@ -833,6 +834,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5722966155006984311, guid: 152f931c88b8f34419ff211b282d73e9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4880281392811085599, guid: 152f931c88b8f34419ff211b282d73e9,
         type: 3}
       propertyPath: recipe_indicator
@@ -857,11 +863,6 @@ PrefabInstance:
         type: 3}
       propertyPath: product_sr
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5722966155006984311, guid: 152f931c88b8f34419ff211b282d73e9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152f931c88b8f34419ff211b282d73e9, type: 3}
