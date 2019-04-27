@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Collider2D))]
 public class moving_platform : MonoBehaviour {
@@ -45,9 +46,13 @@ public class moving_platform : MonoBehaviour {
 			rb.velocity = new Vector2(max_movespeed * right_sum, 0);
 		} else if (right_sum > 0 && !touching_right_edge) {
 			rb.velocity = new Vector2(max_movespeed * right_sum, 0);
-		//} else if (touching_left_edge || touching_right_edge) {
+			//} else if (touching_left_edge || touching_right_edge) {
 		} else {
-			rb.velocity = new Vector2(0, 0);
+			if (SceneManager.GetActiveScene().buildIndex == game_controller.mm_scene && !touching_right_edge && players_touching.Count == 0) {
+				rb.velocity = new Vector2(max_movespeed, 0);
+			} else {
+				rb.velocity = new Vector2(0, 0);
+			}
 		}
 
 		left_indicator.SetActive(players_touching.Count > 0 && !touching_left_edge);

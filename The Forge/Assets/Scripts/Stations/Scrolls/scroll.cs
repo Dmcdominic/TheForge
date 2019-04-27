@@ -45,10 +45,25 @@ public class scroll : MonoInteractable {
 		requested_item = _requested_item;
 		current_requests[index] = requested_item;
 		visuals.init_visuals(requested_item);
+
+		switch(_requested_item.name.ToLower()) {
+			case "bow":
+				sound_manager.play_source(sound_manager.instance.bow_line);
+				break;
+			case "hammer":
+				sound_manager.play_source(sound_manager.instance.hammer_line);
+				break;
+			case "sword":
+				sound_manager.play_source(sound_manager.instance.sword_line);
+				break;
+			case "shield":
+				sound_manager.play_source(sound_manager.instance.shield_line);
+				break;
+		}
 	}
 	// Initialize this scroll with a random order
 	public void init_order() {
-		List<item> tier_1_items = items_oracle.all.Where<item>(x => x.tier > 0).ToList<item>();
+		List<item> tier_1_items = items_oracle.all.Where<item>(x => 0 < x.tier && x.tier < 10).ToList<item>();
 		item chosen_item = tier_1_items[Random.Range(0, tier_1_items.Count)];
 		// Try a few times to avoid choosing an item that's already up there
 		for (int i=0; i < 2; i++) {

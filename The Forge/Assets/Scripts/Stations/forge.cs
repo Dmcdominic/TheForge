@@ -20,12 +20,18 @@ public class forge : MonoStation {
 	private TextMeshPro player_indicator;
 	private SpriteRenderer indicator_caret;
 
+	// Static vars
+	public static item cooking_rn;
+	public static int total_cooking;
+	public static int total_flashing;
+
 	// Static settings
-	public static float cook_interval = 0.9f;
-	public static float mm_cook_interval = 0.3f;
-	public static float ejection_time = 6f;
-	public static float flashing_time = 3f;
-	public static float eject_speed = 6f;
+	public static readonly float cook_interval = 0.8f;
+	public static readonly float quickcraft_cook_interval = 0.2f;
+	public static readonly float mm_cook_interval = 0.3f;
+	public static readonly float ejection_time = 6f;
+	public static readonly float flashing_time = 3f;
+	public static readonly float eject_speed = 6f;
 
 	// Ejection management
 	private bool flashing = false;
@@ -42,23 +48,28 @@ public class forge : MonoStation {
 		finished_cooking = false;
 		cooking_sr.enabled = false;
 		completed_indicator.SetActive(false);
-		flashing = false;
+		set_flashing(false);
+		cooking_rn = null;
+		total_cooking = 0;
 	}
 
 	public override void on_interact(player Player) {
 		StopAllCoroutines();
-		if (current_owner == null) {
+		//if (current_owner == null) {
+		if (current_team == -1) {
 			base.on_interact(Player);
 			take_ingredients_only();
+			cooking_rn = working_on;
 			start_cooking(Player);
-		} else if (Player.team == current_owner.team) {
+		} else if (Player.team == current_team) {
 			user = Player;
 			give_product_only();
+			cooking_rn = null;
 			finished_cooking = false;
 			current_owner = null;
 			current_team = -1;
 			cooking_sr.enabled = false;
-			flashing = false;
+			set_flashing(false);
 			completed_indicator.SetActive(false);
 		} else {
 			Debug.LogError("Unexpected interaction with forge");
@@ -71,7 +82,10 @@ public class forge : MonoStation {
 		current_team = Player.team;
 		finished_cooking = false;
 		StartCoroutine(cook());
+		total_cooking++;
+		total_cooking = total_cooking > 0 ? total_cooking : 1;
 		sound_manager.update_loop(sound_manager.instance.furnace_loop, true);
+		sound_manager.update_loop(sound_manager.instance.ticking_loop, true);
 	}
 
 	// Called when the product is done cooking
@@ -81,8 +95,16 @@ public class forge : MonoStation {
 		player_indicator.text = teams.names[current_team];
 		player_indicator.color = teams.lighter_colors[current_team];
 		indicator_caret.color = teams.lighter_colors[current_team];
-		sound_manager.update_loop(sound_manager.instance.furnace_loop, false);
 		StartCoroutine(eject_after_delay());
+
+		// SFX
+		total_cooking--;
+		if (total_cooking <= 0) {
+			total_cooking = 0;
+			sound_manager.update_loop(sound_manager.instance.furnace_loop, false);
+			sound_manager.update_loop(sound_manager.instance.ticking_loop, false);
+		}
+		sound_manager.play_one_shot(sound_manager.instance.oven_ding);
 	}
 
 	// More specific can_interact
@@ -97,7 +119,10 @@ public class forge : MonoStation {
 		cooking_sr.sprite = cooking_sprites.sprites[cooking_stage];
 		cooking_sr.enabled = true;
 		while (cooking_stage + 1 < cooking_sprites.sprites.Count) {
-			yield return new WaitForSeconds(in_main_menu ? mm_cook_interval : cook_interval);
+			bool has_quickcraft = powerups_controller.has_powerup(current_team, powerups.quick_craft);
+			float current_cook_interval = in_main_menu ? mm_cook_interval : cook_interval;
+			current_cook_interval = has_quickcraft ? quickcraft_cook_interval : current_cook_interval;
+			yield return new WaitForSeconds(current_cook_interval);
 			cooking_stage++;
 			cooking_sr.sprite = cooking_sprites.sprites[cooking_stage];
 		}
@@ -106,9 +131,9 @@ public class forge : MonoStation {
 
 	// Eject the ingot after the appropriate delay
 	private IEnumerator eject_after_delay() {
-		flashing = false;
+		set_flashing(false);
 		yield return new WaitForSeconds(ejection_time - flashing_time);
-		flashing = true;
+		set_flashing(true);
 		flash_timer = 0;
 		yield return new WaitForSeconds(flashing_time);
 		eject_item();
@@ -131,12 +156,16 @@ public class forge : MonoStation {
 		physical_Item.transform.position = cooking_sr.transform.position;
 		physical_Item.GetComponent<Rigidbody2D>().velocity = velocity;
 
+		// SFX
+		sound_manager.play_one_shot(sound_manager.instance.forge_eject);
+
 		// Internal cleanup
 		finished_cooking = false;
 		current_owner = null;
+		cooking_rn = null;
 		current_team = -1;
 		cooking_sr.enabled = false;
-		flashing = false;
+		set_flashing(false);
 		completed_indicator.SetActive(false);
 
 		user = null;
@@ -155,6 +184,21 @@ public class forge : MonoStation {
 		} else {
 			color_util.set_alpha(cooking_sr, 1f);
 			flash_timer = 0;
+		}
+	}
+
+	// Set the flashing bool
+	private void set_flashing(bool value) {
+		if (flashing == value) {
+			return;
+		}
+		flashing = value;
+		total_flashing += flashing ? 1 : -1;
+		if (total_flashing <= 0) {
+			total_flashing = 0;
+			sound_manager.update_loop(sound_manager.instance.sizzling_loop, false);
+		} else if (total_flashing > 0) {
+			sound_manager.update_loop(sound_manager.instance.sizzling_loop, true);
 		}
 	}
 }

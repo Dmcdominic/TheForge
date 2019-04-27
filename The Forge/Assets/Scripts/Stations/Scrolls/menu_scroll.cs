@@ -12,14 +12,18 @@ public class menu_scroll : MonoInteractable {
 	public menu_options option;
 	public TextMeshPro menu_TMP;
 	public item required_item;
+	public GameObject completed_play;
 
 	public SpriteRenderer highlight_sr;
+	public SpriteRenderer tutorial_pointer;
 
 	// Static settings
 	private static readonly float really_time = 5f;
 
+	// Static vars
+	public static bool play_button_placed;
+
 	// Private vars
-	private bool play_button_placed;
 	private bool quit_button_really;
 
 	// Component references
@@ -29,19 +33,30 @@ public class menu_scroll : MonoInteractable {
 	// Only leave this component enabled if we are in the main menu
 	private void Awake() {
 		if (SceneManager.GetActiveScene().buildIndex != game_controller.mm_scene) {
+			tutorial_pointer.gameObject.SetActive(false);
 			enabled = false;
 			return;
 		}
 
 		visuals = GetComponent<scroll_visuals>();
-		visuals.init_visuals(required_item);
 
 		if (option == menu_options.Play) {
+			play_button_placed = false;
 			menu_TMP.text = "?";
+			visuals.init_visuals(required_item);
 		} else {
 			menu_TMP.text = option.ToString();
 		}
 		menu_TMP.gameObject.SetActive(true);
+		tutorial_pointer.gameObject.SetActive(false);
+	}
+
+	// Check for tutorial indicator status
+	protected override void Update() {
+		base.Update();
+		if (option == menu_options.Play) {
+			tutorial_pointer.gameObject.SetActive(tutorial_controller.is_final_item_ready);
+		}
 	}
 
 
@@ -52,10 +67,13 @@ public class menu_scroll : MonoInteractable {
 					SceneManager.LoadScene(game_controller.gameplay_scene);
 				} else if (Player.items_carried.Contains(required_item)) {
 					Player.items_carried.Remove(required_item);
-					visuals.clear_recipe_steps();
 					play_button_placed = true;
-					// Todo - update scroll visual with play button?
-					menu_TMP.text = option.ToString();
+
+					// Update scroll visuals
+					visuals.clear_recipe_steps();
+					completed_play.SetActive(true);
+					menu_TMP.enabled = false;
+					//menu_TMP.text = option.ToString();
 				}
 				break;
 			case menu_options.Credits:

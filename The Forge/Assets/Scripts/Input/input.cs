@@ -8,8 +8,8 @@ using XboxCtrlrInput;
 /// </summary>
 public static class input {
 	public static player[] p = {
-		new player(0, XboxController.First, "Horizontal_1", "Vertical_1", KeyCode.Space, KeyCode.E, KeyCode.Q, KeyCode.F),
-		new player(1, XboxController.Second, "Horizontal_2", "Vertical_2", KeyCode.Return, KeyCode.RightShift, KeyCode.Slash, KeyCode.RightControl),
+		new player(0, XboxController.First, "Horizontal_1", "Vertical_1", KeyCode.Space, KeyCode.E, KeyCode.Q, KeyCode.F, KeyCode.O, KeyCode.I),
+		new player(1, XboxController.Second, "Horizontal_2", "Vertical_2", KeyCode.Return, KeyCode.RightShift, KeyCode.Slash, KeyCode.RightControl, KeyCode.L, KeyCode.K),
 		new player(2, XboxController.Third, null, null),
 		new player(3, XboxController.Fourth, null, null)
 	};
@@ -26,9 +26,12 @@ public static class input {
 		private KeyCode interact_key;
 		private KeyCode hand_tool_key;
 		private KeyCode swap_items_key;
+		private KeyCode start_key;
+		private KeyCode back_key;
 
 		public player(int _index, XboxController _controller, string _keyboard_H = null, string _keyboard_V = null,
-			KeyCode _jump_key = KeyCode.None, KeyCode _interact_key = KeyCode.None, KeyCode _hand_tool_key = KeyCode.None, KeyCode _swap_items_key = KeyCode.None) {
+			KeyCode _jump_key = KeyCode.None, KeyCode _interact_key = KeyCode.None, KeyCode _hand_tool_key = KeyCode.None, KeyCode _swap_items_key = KeyCode.None,
+			KeyCode _start_key = KeyCode.None, KeyCode _back_key = KeyCode.None) {
 			index = _index;
 			controller = _controller;
 			keyboard_H = _keyboard_H;
@@ -37,6 +40,8 @@ public static class input {
 			interact_key = _interact_key;
 			hand_tool_key = _hand_tool_key;
 			swap_items_key = _swap_items_key;
+			start_key = _start_key;
+			back_key = _back_key;
 		}
 
 		// Buttons
@@ -77,11 +82,11 @@ public static class input {
 		}
 
 		public bool start {
-			get { return XCI.GetButtonDown(XboxButton.Start, controller); }
+			get { return XCI.GetButtonDown(XboxButton.Start, controller) || Input.GetKeyDown(start_key); }
 		}
 
 		public bool back {
-			get { return XCI.GetButtonDown(XboxButton.Back, controller); }
+			get { return XCI.GetButtonDown(XboxButton.Back, controller) || Input.GetKeyDown(back_key); }
 		}
 
 		// Left joystick axes (with keyboard alternatives)

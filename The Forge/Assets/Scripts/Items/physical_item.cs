@@ -21,6 +21,7 @@ public class physical_item : MonoBehaviour {
 	public static readonly float expiration_time = 7f;
 	public static readonly float flashing_time = 3f;
 	public static readonly float flying_velo_threshold = 1.5f;
+	public static int limit_per_item = 4;
 
 	// Component references
 	private SpriteRenderer sr;
@@ -33,6 +34,7 @@ public class physical_item : MonoBehaviour {
 		rb = GetComponent<Rigidbody2D>();
 	}
 	private void Start() {
+		add_new_physical(this);
 		sr.sprite = Item.icon;
 		StartCoroutine(set_just_thrown_delayed(false, 0.1f));
 		StartCoroutine(expire_after_delay());
@@ -92,5 +94,37 @@ public class physical_item : MonoBehaviour {
 		flashing = true;
 		yield return new WaitForSeconds(flashing_time);
 		destroy_this();
+	}
+
+	// ======== Physical item limit management ==========
+	private static Dictionary<item, Queue<physical_item>> _all_physicals;
+	public static Dictionary<item, Queue<physical_item>> all_physicals {
+		get {
+			if (_all_physicals == null) {
+				init_all_physicals();
+			}
+			return _all_physicals;
+		}
+	}
+
+	public static void init_all_physicals() {
+		_all_physicals = new Dictionary<item, Queue<physical_item>>();
+		foreach (item Item in items_oracle.all) {
+			_all_physicals.Add(Item, new Queue<physical_item>());
+		}
+	}
+
+	private static void add_new_physical(physical_item physical_Item) {
+		item Item = physical_Item.Item;
+		Queue<physical_item> queue = all_physicals[Item];
+		queue.Enqueue(physical_Item);
+
+		while (queue.Peek() == null) {
+			queue.Dequeue();
+		}
+
+		while (queue.Count > limit_per_item) {
+			queue.Dequeue().destroy_this();
+		}
 	}
 }

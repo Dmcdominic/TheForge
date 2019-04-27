@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1018698514d49904e8452d01c0950855, type: 3}
   m_Name: forge
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 703bada53f35d4a44b7e9e2e2b09abef, type: 3}
+  icon: {fileID: 21300000, guid: 7e9bfaacb8fa635418f9ee8ed3464d59, type: 3}
   highlight: {fileID: 21300000, guid: 69ee112c09fa02f46ab3f6747616fd77, type: 3}
-  highlight_col: {r: 0.8018868, g: 0, b: 0.08672635, a: 1}
+  highlight_col: {r: 0.627451, g: 0.1764706, b: 0.1764706, a: 1}
   crate: 0

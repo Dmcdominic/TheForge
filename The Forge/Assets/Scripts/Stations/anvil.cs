@@ -9,12 +9,13 @@ public class anvil : MonoStation
 
     private int player_num;
     public int button_mash_num;
+	public int quickcraft_button_mash_num;
 
     public SpriteRenderer icon_normal;
     public SpriteRenderer icon_pressed;
     public SpriteRenderer bar_location;
     public spritesheet bar_sprites;
-    private static int progress_num = 10;
+    private static readonly int progress_num = 10;
 
     public override void on_interact(player Player)
     {
@@ -44,21 +45,19 @@ public class anvil : MonoStation
 			//Debug.Log("count = " + count);
         }
 
-        if (count == button_mash_num && is_playing)
-        {
-            complete_items_swap();
-            count = 0;
-            is_playing = false;
-            bar_location.sprite = bar_sprites.sprites[0];
-            bar_location.enabled = false;
-            icon_normal.enabled = false;
-            icon_pressed.enabled = false;
-        }
+		if (!is_playing) {
+			return;
+		}
+
+		int current_button_mash_num = powerups_controller.has_powerup(user.team, powerups.quick_craft) ? quickcraft_button_mash_num : button_mash_num;
+        if (count >= current_button_mash_num && is_playing) {
+			complete_event();
+		}
 
         if (is_playing)
         {
             bar_location.enabled = true;
-            bar_location.sprite = bar_sprites.sprites[count / (button_mash_num / progress_num)];
+            bar_location.sprite = bar_sprites.sprites[Mathf.FloorToInt((float)count / ((float)current_button_mash_num / (float)progress_num))];
         }
 
         if (input.p[player_num].hand_tool_down & is_playing)
@@ -72,4 +71,23 @@ public class anvil : MonoStation
             icon_pressed.enabled = false;
         }
     }
+
+	// End the minigame
+	private void complete_event(bool abort = false) {
+		if (!abort) {
+			complete_items_swap();
+		}
+		count = 0;
+		is_playing = false;
+		bar_location.sprite = bar_sprites.sprites[0];
+		bar_location.enabled = false;
+		icon_normal.enabled = false;
+		icon_pressed.enabled = false;
+	}
+
+	// Reset the 
+	public override void abort_items_swap() {
+		complete_event(true);
+		base.abort_items_swap();
+	}
 }

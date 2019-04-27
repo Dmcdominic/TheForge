@@ -9,7 +9,7 @@ public class crate : MonoStation {
 
 	// Init
 	private void Awake() {
-		item_contained_SR.sprite = station_info.products[0].icon;
+		item_contained_SR.sprite = station_info.products[0].mini_icon;
 	}
 
 	public override void on_interact(player Player) {

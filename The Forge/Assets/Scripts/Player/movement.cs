@@ -9,7 +9,10 @@ public class movement : MonoBehaviour {
 	public static float throw_speed_fast = 7f;
 	public static float throw_speed_slow = 4f;
 	public static float throw_turn_duration = 0.15f;
+
 	public static float ladder_axis_threshold = 0.6f;
+	public static float ladder_x_mult = 0.6f;
+
 	public static float stacking_height_check = 0.55f;
 
 	// Public fields
@@ -41,6 +44,8 @@ public class movement : MonoBehaviour {
 		get { return movement_enabled && !stunned && !all_players_frozen; }
 		set { movement_enabled = value; }
 	}
+
+	private float x_ladder_mult { get { return holding_onto_ladder ? ladder_x_mult : 1; } }
 
 	// Private vars
 	private int index;
@@ -106,7 +111,8 @@ public class movement : MonoBehaviour {
 		float y_input = input.p[index].v_axis;
 
 		// Horizontal movement
-		rb.velocity = new Vector2(x_input * x_mult, rb.velocity.y) + platform_velo;
+		float movespeed = x_input * x_mult * powerups_controller.speed_mult(Player) * x_ladder_mult;
+		rb.velocity = new Vector2(movespeed, rb.velocity.y) + platform_velo;
 		platform_velo = new Vector2(0, 0);
 
 		// Check footing
@@ -190,6 +196,7 @@ public class movement : MonoBehaviour {
 				throw_item(0, direction_slow.normalized * throw_speed_slow);
 				fast_index = 1;
 			}
+			direction_fast = new Vector2(x_dir, 0.4f);
 			throw_item(fast_index, direction_fast.normalized * throw_speed_fast);
 			Player.items_carried.Clear();
 		}
@@ -233,7 +240,7 @@ public class movement : MonoBehaviour {
 
 	// Jump!
 	private void jump() {
-		rb.velocity = new Vector2(rb.velocity.x, jump_velo);
+		rb.velocity = new Vector2(rb.velocity.x, jump_velo * powerups_controller.jump_mult(Player));
 		holding_onto_ladder = false;
 		if (touching_ladder) {
 			just_jumped_off_ladder = true;
@@ -296,9 +303,9 @@ public class movement : MonoBehaviour {
 			return;
 		}
 		if (up_ladder) {
-			rb.velocity = new Vector2(rb.velocity.x, ladder_velo);
+			rb.velocity = new Vector2(rb.velocity.x, ladder_velo * powerups_controller.speed_ladder_mult(Player));
 		} else if (down_ladder) {
-			rb.velocity = new Vector2(rb.velocity.x, -ladder_velo);
+			rb.velocity = new Vector2(rb.velocity.x, -ladder_velo * powerups_controller.speed_ladder_mult(Player));
 		} else {
 			rb.velocity = new Vector2(rb.velocity.x, 0);
 		}
@@ -310,7 +317,7 @@ public class movement : MonoBehaviour {
 		//bool jump_held = y_input > 0;
 
 		if (stunned) {
-			rb.gravityScale = base_grav_scale * falling_grav_mult;
+			rb.gravityScale = base_grav_scale * falling_grav_mult * powerups_controller.jump_grav_mult(Player);
 			return;
 		} else if (!can_move) {
 			rb.gravityScale = 0;
@@ -321,14 +328,14 @@ public class movement : MonoBehaviour {
 		if (holding_onto_ladder) {
 			rb.gravityScale = 0;
 		} else if (rb.velocity.y < 0) {
-			rb.gravityScale = base_grav_scale * falling_grav_mult;
+			rb.gravityScale = base_grav_scale * falling_grav_mult * powerups_controller.jump_grav_mult(Player);
 			//animator.SetBool("falling", true);
 		} else {
 			//animator.SetBool("falling", false);
 			if (jump_held) {
-				rb.gravityScale = base_grav_scale;
+				rb.gravityScale = base_grav_scale * powerups_controller.jump_grav_mult(Player);
 			} else {
-				rb.gravityScale = base_grav_scale * falling_grav_mult;
+				rb.gravityScale = base_grav_scale * falling_grav_mult * powerups_controller.jump_grav_mult(Player);
 			}
 		}
 	}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9e6866cd89897438f7285464f6f2ac, type: 3}
+  m_Name: Dwarf Anim Bundle
+  m_EditorClassIdentifier: 
+  sets:
+  - {fileID: 11400000, guid: b1bd4f4a0a76b394f8ba2eff37b1888a, type: 2}
+  - {fileID: 11400000, guid: 0734f3dee1d15ad48b6005263d22acd2, type: 2}
+  - {fileID: 11400000, guid: bc8f8ff23ba63314aa45aadc90a1729b, type: 2}
+  - {fileID: 11400000, guid: 0e0d54f2267bb0247b9a7e53caf93ae2, type: 2}
+  - {fileID: 11400000, guid: 1488036673697b5499ce5499bc4b8ebe, type: 2}
+  - {fileID: 11400000, guid: f6d5872528c5d2e4787a361f14a45d71, type: 2}
+  - {fileID: 11400000, guid: 72fac17c1ec2c574aa416b30d32fe8b0, type: 2}
+  - {fileID: 11400000, guid: 721c51bbcb8f8d14dbedc3c796fa2838, type: 2}

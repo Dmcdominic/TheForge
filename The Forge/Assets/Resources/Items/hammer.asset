@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: hammer
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 62842f194c6c8954ebf63c3c84e4ee60, type: 3}
+  icon_angle: 45
+  mini_icon: {fileID: 21300000, guid: e9de5d2157c21bd42b9fe079a8243ba3, type: 3}
   ingredients:
   - {fileID: 11400000, guid: d482eb59191b1f1458333587876ac8f7, type: 2}
   - {fileID: 11400000, guid: a3b04de46adb3de4cbc3c5bd926057e7, type: 2}

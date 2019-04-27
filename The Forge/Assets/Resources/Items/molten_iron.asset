@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: molten_iron
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 002e92e072ca4ec4fb5a5fddf8adb1e0, type: 3}
+  icon_angle: 45
+  mini_icon: {fileID: 21300000, guid: 107aa4a3c9cc2f94e93222c08826a855, type: 3}
   ingredients:
   - {fileID: 11400000, guid: f5794b8b4f569bc4f9919a6313b8e537, type: 2}
   station: {fileID: 11400000, guid: a83d27b5da2fcfe47a7f8b1cc5ea26c0, type: 2}
+  tier: 0

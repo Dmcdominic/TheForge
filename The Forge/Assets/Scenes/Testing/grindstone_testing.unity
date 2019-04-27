@@ -1336,6 +1336,7 @@ MonoBehaviour:
   cooking_sr: {fileID: 893668905}
   completed_indicator: {fileID: 1510345252}
   cooking_sprites: {fileID: 11400000, guid: d58fee9ad6f294747a3ab8daef1df9e1, type: 2}
+  physical_item_prefab: {fileID: 0}
 --- !u!4 &326221131
 Transform:
   m_ObjectHideFlags: 0
@@ -1479,9 +1480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ef82ac43fd4be4693bbb967d77f1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score_TMPs:
-  - {fileID: 471505310}
-  - {fileID: 14902787}
+  player_score_TMPs: []
+  team_score_TMPs: []
 --- !u!1 &424864545
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,9 +1846,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 541447802}
-  - component: {fileID: 541447801}
   - component: {fileID: 541447800}
   - component: {fileID: 541447799}
+  - component: {fileID: 541447801}
   m_Layer: 10
   m_Name: grindstone
   m_TagString: Untagged
@@ -1912,12 +1912,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 541447798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d0e66d9f2c2db498189ada6dd85f4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e771bd3549414f068e3b10e0b908c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indicator: {fileID: 960137250}
+  indicator: {fileID: 1414192051}
   station_info: {fileID: 11400000, guid: 656021c0d8fa7df4aa4f15e546d7d45d, type: 2}
-  completed_indicator: {fileID: 1510345252}
 --- !u!4 &541447802
 Transform:
   m_ObjectHideFlags: 0
@@ -2528,12 +2527,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152f931c88b8f34419ff211b282d73e9, type: 3}
---- !u!1 &960137250 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5722966153295963035, guid: 152f931c88b8f34419ff211b282d73e9,
-    type: 3}
-  m_PrefabInstance: {fileID: 960015053}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &960137251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5722966153295963034, guid: 152f931c88b8f34419ff211b282d73e9,
@@ -3195,6 +3188,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2348505604828402389, guid: 56a9b7a5f13cf344daaf0321ee77e158,
     type: 3}
   m_PrefabInstance: {fileID: 1355910066}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1414192051 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5722966153295963035, guid: 152f931c88b8f34419ff211b282d73e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 960015053}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1438747485
 GameObject:
@@ -3877,6 +3876,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicator: {fileID: 1201755302}
   station_info: {fileID: 11400000, guid: 731ead471c212d941ba4dfecab050a45, type: 2}
+  button_mash_num: 0
+  icon_normal: {fileID: 0}
+  icon_pressed: {fileID: 0}
+  bar_location: {fileID: 0}
+  bar_sprites: {fileID: 0}
 --- !u!50 &1729007155
 Rigidbody2D:
   serializedVersion: 4

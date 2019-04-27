@@ -54,7 +54,7 @@ public class recipe_indicator_control : MonoBehaviour {
 			sr.gameObject.SetActive(false);
 		} else {
 			sr.gameObject.SetActive(true);
-			sr.sprite = Item.icon;
+			sr.sprite = Item.mini_icon;
 		}
 	}
 }
