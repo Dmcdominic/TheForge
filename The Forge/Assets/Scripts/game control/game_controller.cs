@@ -18,14 +18,14 @@ public class game_controller : MonoBehaviour {
 	public static bool pre_game;
 
 	// Static settings
-	public static float total_game_time = 180f;
-	public static float pre_game_time = 15f;
+	public static readonly float total_game_time = 240f;
+	public static readonly float pre_game_time = 15f;
 
-	public static int mm_scene = 1;
-	public static int gameplay_scene = 2;
+	public static readonly int mm_scene = 1;
+	public static readonly int gameplay_scene = 2;
 
-	public static int max_dwarves = 4;
-	public static int max_teams = 2;
+	public static readonly int max_dwarves = 4;
+	public static readonly int max_teams = 2;
 
 
 	// Static instance setup

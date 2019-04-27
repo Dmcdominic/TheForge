@@ -4533,7 +4533,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: GG Guys
+  m_text: GG Gamers
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 086dc8c1bd9109049b2d1ad6db6bc771, type: 2}
   m_sharedMaterial: {fileID: 21831617794270242, guid: 086dc8c1bd9109049b2d1ad6db6bc771,

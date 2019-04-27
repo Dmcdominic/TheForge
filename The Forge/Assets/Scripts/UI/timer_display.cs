@@ -19,6 +19,10 @@ public class timer_display : MonoBehaviour {
 		int timer_min = Mathf.FloorToInt(timer_var) / 60;
 		int timer_sec = Mathf.FloorToInt(timer_var % 60);
 
+		if (timer_sec < 0) {
+			timer_sec = 0;
+		}
+
 		string seconds_string = timer_sec.ToString("F0");
 		if (seconds_string == "60") {
 			seconds_string = "59";
