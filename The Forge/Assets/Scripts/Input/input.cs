@@ -84,6 +84,9 @@ public static class input {
 		public bool start {
 			get { return XCI.GetButtonDown(XboxButton.Start, controller) || Input.GetKeyDown(start_key); }
 		}
+		public bool start_held {
+			get { return XCI.GetButton(XboxButton.Start, controller) || Input.GetKey(start_key); }
+		}
 
 		public bool back {
 			get { return XCI.GetButtonDown(XboxButton.Back, controller) || Input.GetKeyDown(back_key); }

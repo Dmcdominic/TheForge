@@ -192,13 +192,14 @@ public class movement : MonoBehaviour {
 			Vector2 direction_fast = new Vector2(x_dir, 1f);
 			int fast_index = 0;
 			if (Player.items_carried.Count == 2) {
-				Vector2 direction_slow = new Vector2(x_dir, 0.5f);
-				throw_item(0, direction_slow.normalized * throw_speed_slow);
+				//Vector2 direction_slow = new Vector2(x_dir, 0.5f);
+				//throw_item(0, direction_slow.normalized * throw_speed_slow);
 				fast_index = 1;
 			}
 			direction_fast = new Vector2(x_dir, 0.4f);
 			throw_item(fast_index, direction_fast.normalized * throw_speed_fast);
-			Player.items_carried.Clear();
+			//Player.items_carried.Clear();
+			Player.items_carried.RemoveAt(Player.items_carried.Count - 1);
 		}
 
 		// Check if you should be walking

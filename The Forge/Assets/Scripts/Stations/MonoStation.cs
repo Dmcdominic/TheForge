@@ -67,7 +67,7 @@ public abstract class MonoStation : MonoInteractable {
 
 	private void set_large_highlight(bool active) {
 		if (tutorial_indicator) {
-			tutorial_indicator.color = station_info.highlight_col;
+			//tutorial_indicator.color = station_info.highlight_col;
 			tutorial_indicator.gameObject.SetActive(active);
 		}
 	}

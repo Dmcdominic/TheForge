@@ -28,10 +28,12 @@ public class crafting_table_indicator : MonoBehaviour
     private int counter;
     private int miss_counter;
     private bool in_center;
-    private int player_num;
     private bool is_playing;
 
     private bool been_hit;
+
+	// Component references
+	private crafting_table crafting_Table;
 
 
     public bool finished = false;
@@ -40,10 +42,11 @@ public class crafting_table_indicator : MonoBehaviour
     {
         direction = 1;
         counter = 0;
-        total_num = GameObject.Find("crafting_table").GetComponent<crafting_table>().total_num;
-        miss_num = GameObject.Find("crafting_table").GetComponent<crafting_table>().miss_num;
-        player_num = GameObject.Find("crafting_table").GetComponent<crafting_table>().player_num;
-        boost_size = GameObject.Find("crafting_table").GetComponent<crafting_table>().boost_size;
+		crafting_Table = GameObject.Find("crafting_table").GetComponent<crafting_table>();
+
+		total_num = crafting_Table.total_num;
+        miss_num = crafting_Table.miss_num;
+        boost_size = crafting_Table.boost_size;
         bar_location.enabled = false;
         icon_normal.enabled = false;
         icon_pressed.enabled = false;
@@ -56,8 +59,10 @@ public class crafting_table_indicator : MonoBehaviour
         indic.transform.position += Vector3.right * direction * Time.deltaTime;
 
         is_playing = GameObject.Find("crafting_table").GetComponent<crafting_table>().is_playing;
-      
-        if (in_center && input.p[player_num].hand_tool && is_playing)
+		int player_num = crafting_Table.player_num;
+
+
+		if (in_center && input.p[player_num].hand_tool && is_playing)
         {
             if (!been_hit)
             {

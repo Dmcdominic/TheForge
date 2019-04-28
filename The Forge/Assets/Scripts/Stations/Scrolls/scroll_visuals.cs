@@ -83,13 +83,13 @@ public class scroll_visuals : MonoBehaviour {
 		if (requested_item == null) {
 			return;
 		}
-		int total_steps = instantiate_step(requested_item, 0);
+		int total_steps = instantiate_step(requested_item, 0, true);
 		steps_parent.transform.localPosition = init_steps_parent_pos;
 		steps_parent.transform.Translate(recipe_steps_spacing * (total_steps - 1) / 2f, 0, 0);
 	}
 
 	// Instantiate a new recipe step
-	private int instantiate_step(item product, float x_pos) {
+	private int instantiate_step(item product, float x_pos, bool first = false) {
 		recipe_step new_step = Instantiate(step_prefab, steps_parent.transform);
 		Vector3 station_icon_scale = new_step.station_sr.transform.localScale;
 		Vector3 item_icon_scale = new_step.ingredient_sr.transform.localScale;
@@ -100,20 +100,29 @@ public class scroll_visuals : MonoBehaviour {
 		item next_item = null;
 
 		new_step.station_sr.sprite = product.station.icon;
+		new_step.arrow_up.enabled = false;
+		new_step.arrow_diag.enabled = false;
+		new_step.arrow_right.enabled = !first;
+
 		if (!product.is_base_item) {
 			item item1 = product.ingredients[0];
 			if (product.ingredients.Count == 2) {
 				item item2 = product.ingredients[1];
 				item easier_item = get_easier_item(item1, item2);
 				new_step.ingredient_sr.sprite = easier_item.mini_icon;
+				new_step.arrow_up.enabled = true;
 				next_item = (easier_item == item1) ? item2 : item1;
 			} else if (item1.is_base_item) {
 				new_step.ingredient_sr.sprite = item1.mini_icon;
+				new_step.arrow_up.enabled = true;
 			} else {
 				next_item = item1;
+				new_step.ingredient_sr.sprite = null;
 			}
 		} else {
 			new_step.station_sr.sprite = null;
+			new_step.arrow_right.enabled = false;
+			new_step.arrow_diag.enabled = true;
 			new_step.ingredient_sr.sprite = product.mini_icon;
 			new_step.station_sr.transform.localScale = item_icon_scale;
 		}
