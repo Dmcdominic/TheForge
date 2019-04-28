@@ -75,6 +75,13 @@ public class crafting_table_indicator : MonoBehaviour
         if (!in_center)
         {
             been_hit = false;
+            //lose some progress if hit outside the red zone
+            if (input.p[player_num].hand_tool)
+            {
+                counter -= boost_size;
+                if (counter < 0)
+                    counter = 0;
+            }
 
         }
 
