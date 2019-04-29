@@ -8,6 +8,11 @@ public class crafting_table : MonoStation
     public GameObject bar;
     public GameObject indicator_reset;
 
+    public SpriteRenderer icon_normal;
+    public SpriteRenderer icon_pressed;
+
+    public SpriteRenderer bar_location;
+
     public bool is_playing = false;
     public int player_num;
     public int total_num;
@@ -28,6 +33,9 @@ public class crafting_table : MonoStation
     {
         indic.SetActive(false);
         bar.SetActive(false);
+        bar_location.enabled = false;
+        icon_normal.enabled = false;
+        icon_pressed.enabled = false;
         is_playing = false;
     }
 
@@ -47,9 +55,6 @@ public class crafting_table : MonoStation
             if (is_finished)
             {
                 complete_items_swap();
-                SpriteRenderer icon_normal = GameObject.Find("indicator").GetComponent<crafting_table_indicator>().icon_normal;
-                SpriteRenderer icon_pressed = GameObject.Find("indicator").GetComponent<crafting_table_indicator>().icon_pressed;
-                SpriteRenderer bar_location = GameObject.Find("indicator").GetComponent<crafting_table_indicator>().bar_location;
                 bar_location.enabled = false;
                 icon_normal.enabled = false;
                 icon_pressed.enabled = false;

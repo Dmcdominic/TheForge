@@ -998,6 +998,9 @@ MonoBehaviour:
   indic: {fileID: 9085934760804341535}
   bar: {fileID: 293839516089057184}
   indicator_reset: {fileID: 5606350420354009899}
+  icon_normal: {fileID: 6778131942610806735}
+  icon_pressed: {fileID: 1705116552869671473}
+  bar_location: {fileID: 4021627977273460680}
   is_playing: 0
   player_num: 0
   total_num: 30
@@ -1208,11 +1211,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8646229949231678391}
     m_Modifications:
-    - target: {fileID: 5722966153295963035, guid: 152f931c88b8f34419ff211b282d73e9,
-        type: 3}
-      propertyPath: m_Name
-      value: Interact Indicator
-      objectReference: {fileID: 0}
     - target: {fileID: 5722966153295963034, guid: 152f931c88b8f34419ff211b282d73e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1267,6 +1265,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5722966153295963035, guid: 152f931c88b8f34419ff211b282d73e9,
+        type: 3}
+      propertyPath: m_Name
+      value: Interact Indicator
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152f931c88b8f34419ff211b282d73e9, type: 3}
