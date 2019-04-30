@@ -10,7 +10,6 @@ public class crafting_table : MonoStation
 
     public SpriteRenderer icon_normal;
     public SpriteRenderer icon_pressed;
-
     public SpriteRenderer bar_location;
 
     public bool is_playing = false;
@@ -54,14 +53,7 @@ public class crafting_table : MonoStation
             is_finished = GameObject.Find("indicator").GetComponent<crafting_table_indicator>().finished;
             if (is_finished)
             {
-                complete_items_swap();
-                bar_location.enabled = false;
-                icon_normal.enabled = false;
-                icon_pressed.enabled = false;
-                indic.transform.position = indicator_reset.transform.position;
-                is_playing = false;
-                is_finished = false;
-
+                complete_event();
             }
         }
         else
@@ -72,8 +64,26 @@ public class crafting_table : MonoStation
 
     }
 
+    // End the minigame
+    private void complete_event(bool abort = false)
+    {
+        if (!abort)
+        {
+            complete_items_swap();
+        }
+        bar_location.enabled = false;
+        icon_normal.enabled = false;
+        icon_pressed.enabled = false;
+        indic.transform.position = indicator_reset.transform.position;
+        is_playing = false;
+        is_finished = false;
+    }
+
+    // Reset the minigame when you want to abort_items_swap
+    public override void abort_items_swap()
+    {
+        complete_event(true);
+        base.abort_items_swap();
+    }
 
 }
-
-
-   
