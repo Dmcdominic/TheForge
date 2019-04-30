@@ -18,8 +18,7 @@ public class game_controller : MonoBehaviour {
 	public static bool pre_game;
 
 	// Static settings
-	//public static readonly float total_game_time = 240f;
-	public static readonly float total_game_time = 2f;
+	public static readonly float total_game_time = 240f;
 	public static readonly float pre_game_time = 15f;
 
 	public static readonly int mm_scene = 1;
