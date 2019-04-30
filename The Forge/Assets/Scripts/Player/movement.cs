@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(player))]
 public class movement : MonoBehaviour {
 	// Static settings
-	public static float throw_speed_fast = 7f;
+	public static float throw_speed_fast = 8f;
 	public static float throw_speed_slow = 4f;
 	public static float throw_turn_duration = 0.15f;
 
@@ -189,7 +189,7 @@ public class movement : MonoBehaviour {
 				StartCoroutine(set_just_threw(true));
 			}
 
-			Vector2 direction_fast = new Vector2(x_dir, 1f);
+			Vector2 direction_fast = new Vector2(x_dir, 0.4f);
 			int fast_index = 0;
 			if (Player.items_carried.Count == 2) {
 				//Vector2 direction_slow = new Vector2(x_dir, 0.5f);

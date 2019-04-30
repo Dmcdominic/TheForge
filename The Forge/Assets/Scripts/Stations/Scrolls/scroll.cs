@@ -36,7 +36,6 @@ public class scroll : MonoInteractable {
 	}
 
 	private void Start() {
-		// for testing. TODO - spawn scrolls better
 		StartCoroutine(init_first_order_delayed());
 	}
 
@@ -119,7 +118,9 @@ public class scroll : MonoInteractable {
 	// After a random delay, replaces this scroll
 	private IEnumerator refresh_scroll_delayed() {
 		yield return new WaitForSeconds(Random.Range(scroll_respawn_min, scroll_respawn_max));
-		init_order();
+		if (game_controller.game_playing) {
+			init_order();
+		}
 	}
 
 	// Init this order once the pre_game is over, and after the appropriate delay
