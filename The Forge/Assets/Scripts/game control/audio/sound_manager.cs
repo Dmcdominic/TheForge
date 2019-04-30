@@ -63,7 +63,9 @@ public class sound_manager : MonoBehaviour {
 		StopAllCoroutines();
 
 		if (newScene.buildIndex == game_controller.mm_scene) {
-			Royal_Entrance.Play();
+			//Royal_Entrance.Play();
+			play_one_shot(thunderclap);
+			StartCoroutine(start_track_delayed(Royal_Entrance, thunderclap.clip.length - 0.7f));
 			Powerhouse.Stop();
 		} else if (newScene.buildIndex > game_controller.mm_scene) {
 			Royal_Entrance.Stop();

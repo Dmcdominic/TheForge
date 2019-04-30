@@ -1256,16 +1256,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2348505605590155189}
     m_Modifications:
-    - target: {fileID: 1801655066518411045, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
-        type: 3}
-      propertyPath: m_Name
-      value: recipe_step
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801655066518411045, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1801655066518411044, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1319,6 +1309,16 @@ PrefabInstance:
     - target: {fileID: 1801655066518411044, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801655066518411045, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
+        type: 3}
+      propertyPath: m_Name
+      value: recipe_step
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801655066518411045, guid: ec80e9ce344b0794b9e71eeaa7b30b11,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

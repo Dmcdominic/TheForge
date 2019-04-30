@@ -18,7 +18,8 @@ public class game_controller : MonoBehaviour {
 	public static bool pre_game;
 
 	// Static settings
-	public static readonly float total_game_time = 240f;
+	//public static readonly float total_game_time = 240f;
+	public static readonly float total_game_time = 2f;
 	public static readonly float pre_game_time = 15f;
 
 	public static readonly int mm_scene = 1;
@@ -74,14 +75,14 @@ public class game_controller : MonoBehaviour {
 		teams = (team_0 && team_1);
 		the_team = team_0 ? 0 : 1;
 
-		// TODO - team_scores[1] = high_score;
+		// TODO - read high score from disk
 
 		// Reset scores
 		for (int p=0; p < player_scores.Length; p++) {
 			player_scores[p] = 0;
 		}
 		for (int t = 0; t < team_scores.Length; t++) {
-			player_scores[t] = 0;
+			team_scores[t] = 0;
 		}
 
 		// Get the timer and players going
@@ -93,6 +94,7 @@ public class game_controller : MonoBehaviour {
 
 	// End a game
 	private void end_game(bool times_up) {
+		abort_all_stations();
 		game_playing = false;
 		movement.all_players_frozen = true;
 		temp_endgame_screen.SetActive(true);
@@ -117,5 +119,14 @@ public class game_controller : MonoBehaviour {
 	public static void increment_player_score(player Player, int incr) {
 		player_scores[Player.index] += incr;
 		team_scores[Player.team] += incr;
+	}
+
+	// Abort ALL stations currently being used
+	private void abort_all_stations() {
+		foreach (player dwarf in dwarf_spawner.dwarves) {
+			if (dwarf.current_station != null) {
+				dwarf.current_station.abort_items_swap();
+			}
+		}
 	}
 }

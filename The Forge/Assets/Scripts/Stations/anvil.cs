@@ -85,7 +85,7 @@ public class anvil : MonoStation
 		icon_pressed.enabled = false;
 	}
 
-	// Reset the 
+	// Reset the minigame when you want to abort_items_swap
 	public override void abort_items_swap() {
 		complete_event(true);
 		base.abort_items_swap();

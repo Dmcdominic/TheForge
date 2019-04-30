@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class scroll_visuals : MonoBehaviour {
@@ -46,7 +47,9 @@ public class scroll_visuals : MonoBehaviour {
 		visuals_sub_parent.SetActive(false);
 		menu_visuals_parent.SetActive(false);
 		animator.SetTrigger("unfurl");
-		sound_manager.play_one_shot(sound_manager.instance.scroll_unfurling);
+		if (SceneManager.GetActiveScene().buildIndex > game_controller.mm_scene) {
+			sound_manager.play_one_shot(sound_manager.instance.scroll_unfurling);
+		}
 	}
 
 	// Hide all scroll visuals
