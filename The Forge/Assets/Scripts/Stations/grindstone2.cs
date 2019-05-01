@@ -42,17 +42,13 @@ public class grindstone2 : MonoStation
 
 			int current_counts_required = powerups_controller.has_powerup(user.team, powerups.quick_craft) ? quickcraft_counts_required : counts_required;
 
-			if (y_input >= 0.7f)
-            {
-                if (prev == null)
-                {
+			if (y_input >= 0.7f) {
+                if (prev == null) {
                     cycle += 1;
                     prev = "Up";
-                } else if (cycle == 4 && prev == "Left")
-                {
+                } else if (cycle == 4 && prev == "Horiz") {
                     count += 1;
-                    if (count >= current_counts_required)
-                    {
+                    if (count >= current_counts_required) {
                         complete_items_swap();
                         cycle = 0;
                         count = 0;
@@ -60,24 +56,20 @@ public class grindstone2 : MonoStation
 						prev = null;
 						sound_manager.update_loop(sound_manager.instance.whetstone_loop, false);
 					}
-                    else
-                    {
+                    else {
                         cycle = 1;
                         prev = "Up";
                     }
                 }
-            } else if (x_input >= 0.7f && prev == "Up")
-            {
+            } else if ((x_input >= 0.7f || x_input <= -0.7f) && prev == "Up") {
                 cycle += 1;
-                prev = "Right";
-            } else if (y_input <= -0.7f && prev == "Right")
-            {
+                prev = "Horiz";
+            } else if (y_input <= -0.7f && prev == "Horiz") {
                 cycle += 1;
                 prev = "Down";
-            } else if (x_input <= -0.7f && prev == "Down")
-            {
+            } else if ((x_input >= 0.7f || x_input <= -0.7f) && prev == "Down") {
                 cycle += 1;
-                prev = "Left";
+                prev = "Horiz";
             }
         }
     }
