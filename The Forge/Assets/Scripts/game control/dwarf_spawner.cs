@@ -55,6 +55,11 @@ public class dwarf_spawner : MonoBehaviour {
 		new_dwarf.team = team;
 		new_dwarf.transform.position = position;
 		dwarves[index] = new_dwarf;
+
+		// Entrance lines
+		if (SceneManager.GetActiveScene().buildIndex == game_controller.mm_scene) {
+			sound_manager.play_from_set(sound_manager.instance.entrance_lines, index + team * 4, 0, false);
+		}
 	}
 	
 	// Delete a particular dwarf
@@ -64,7 +69,7 @@ public class dwarf_spawner : MonoBehaviour {
 			Debug.LogError("Tried to delete a non-existent dwarf at index: " + index);
 			return;
 		}
-		// TODO - make sure this doesn't bug anything out? The forge?
+
 		if (dwarf.current_station != null) {
 			dwarf.current_station.abort_items_swap();
 		}

@@ -18,6 +18,7 @@ public class sound_manager : MonoBehaviour {
 	public AudioSource punch;
 	public AudioSource oven_ding;
 	public AudioSource forge_eject;
+	public AudioSource scroll_unfurling;
 
 	// Loops
 	public AudioSource furnace_loop;
@@ -29,6 +30,13 @@ public class sound_manager : MonoBehaviour {
 	// Sfx-sets
 	public List<AudioSource> footsteps;
 
+	// Voicelines
+	public AudioSource pre_battle_line;
+	public AudioSource bow_line;
+	public AudioSource hammer_line;
+	public AudioSource shield_line;
+	public AudioSource sword_line;
+	public List<AudioSource> entrance_lines;
 
 
 	// Static instance setup
@@ -52,13 +60,20 @@ public class sound_manager : MonoBehaviour {
 		update_loop(ticking_loop, false);
 		update_loop(whetstone_loop, false);
 		update_loop(crafting_table_loop, false);
+		StopAllCoroutines();
 
 		if (newScene.buildIndex == game_controller.mm_scene) {
-			Royal_Entrance.Play();
+			//Royal_Entrance.Play();
+			play_one_shot(thunderclap);
+			StartCoroutine(start_track_delayed(Royal_Entrance, thunderclap.clip.length - 0.7f));
 			Powerhouse.Stop();
 		} else if (newScene.buildIndex > game_controller.mm_scene) {
 			Royal_Entrance.Stop();
-			Powerhouse.Play();
+			//Powerhouse.Play();
+			if (newScene.buildIndex == game_controller.gameplay_scene) {
+				play_one_shot(pre_battle_line);
+				StartCoroutine(start_track_delayed(Powerhouse, pre_battle_line.clip.length / pre_battle_line.pitch - 0.3f));
+			}
 		}
 	}
 
@@ -80,6 +95,12 @@ public class sound_manager : MonoBehaviour {
 		if (rand <= p) {
 			play_one_shot(AS, pitch_variation);
 		}
+	}
+
+	// Play an audiosource from the start
+	public static void play_source(AudioSource AS) {
+		AS.Stop();
+		AS.Play();
 	}
 
 
@@ -110,12 +131,32 @@ public class sound_manager : MonoBehaviour {
 
 	// ===== SFX-SETS =====
 
-	public static void play_from_set(List<AudioSource> ass, int index, float pitch_variation = 0f) {
-		play_one_shot(ass[index], pitch_variation);
+	public static void play_from_set(List<AudioSource> ass, int index, float pitch_variation = 0f, bool one_shot = true) {
+		if (one_shot) {
+			play_one_shot(ass[index], pitch_variation);
+		} else {
+			play_source(ass[index]);
+			if (ass == instance.entrance_lines) {
+				int opposite_index = index >= 4 ? index - 4 : index + 4;
+				ass[opposite_index].Stop();
+			}
+		}
 	}
 
 	public static void play_random_from_set(List<AudioSource> ass, float pitch_variation = 0f) {
 		int index = Random.Range(0, ass.Count);
 		play_one_shot(ass[index], pitch_variation);
+	}
+
+
+	// ===== DELAYED COROUTINES =====
+	public IEnumerator play_one_shot_delayed(AudioSource AS, float delay) {
+		yield return new WaitForSeconds(delay);
+		play_one_shot(AS);
+	}
+
+	public IEnumerator start_track_delayed(AudioSource AS, float delay) {
+		yield return new WaitForSeconds(delay);
+		AS.Play();
 	}
 }
