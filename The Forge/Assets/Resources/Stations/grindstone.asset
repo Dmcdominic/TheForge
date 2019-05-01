@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 2bb6345d465fecd4ab915fad9ca1be11, type: 3}
   highlight: {fileID: 21300000, guid: 27bf98734b324e9439f561deb8645549, type: 3}
-  highlight_col: {r: 1, g: 0.5137255, b: 0.32941177, a: 1}
+  highlight_col: {r: 0.45098042, g: 0.45098042, b: 0.45098042, a: 1}
   crate: 0
