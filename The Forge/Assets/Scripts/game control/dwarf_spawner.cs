@@ -22,10 +22,14 @@ public class dwarf_spawner : MonoBehaviour {
 			full_init();
 		} else {
 			// Check if we're loading directly into a gameplay scene in the editor
-			if (dwarf_teams == null) {
+			bool direct_gameplay = (dwarf_teams == null);
+			if (direct_gameplay) {
 				dwarf_teams = new int[4] { 0, 1, 0, 1 };
 			}
 			spawn_dwarves();
+			if (direct_gameplay) {
+				game_controller.instance.start_game();
+			}
 		}
 	}
 

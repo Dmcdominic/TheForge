@@ -60,7 +60,7 @@ public class game_controller : MonoBehaviour {
 	}
 
 	// Start a game
-	private void start_game() {
+	public void start_game() {
 		// Some initial setup
 		bool team_0 = false;
 		bool team_1 = false;
