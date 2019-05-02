@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class game_controller : MonoBehaviour {
 
@@ -16,6 +17,22 @@ public class game_controller : MonoBehaviour {
 	public static float game_timer;
 	public static bool game_playing;
 	public static bool pre_game;
+
+    // Public text mesh pros (end screen)
+    public TextMeshPro eitri_score;
+    public TextMeshPro brokkr_score;
+    public TextMeshPro eitri_winner;
+    public TextMeshPro brokkr_winner;
+    public TextMeshPro draw;
+
+    // Public GameObject sprites for players (end screen)
+    public GameObject Eitri1;
+    public GameObject Eitri2;
+    public GameObject Brokkr1;
+    public GameObject Brokkr2;
+
+    private bool EitriHere = false;
+    private bool BrokkrHere = false;
 
 	// Static settings
 	public static readonly float total_game_time = 240f;
@@ -73,6 +90,9 @@ public class game_controller : MonoBehaviour {
 		}
 		teams = (team_0 && team_1);
 		the_team = team_0 ? 0 : 1;
+        brokkr_winner.SetText("");
+        eitri_winner.SetText("");
+        draw.SetText("");
 
 		// TODO - read high score from disk
 
@@ -96,7 +116,10 @@ public class game_controller : MonoBehaviour {
 		abort_all_stations();
 		game_playing = false;
 		movement.all_players_frozen = true;
-		temp_endgame_screen.SetActive(true);
+        temp_endgame_screen.SetActive(true);
+        eitri_score.SetText(team_scores[1].ToString());
+        brokkr_score.SetText(team_scores[0].ToString());
+        declare_winner();
 		// TODO - end game screen here
 	}
 
@@ -120,8 +143,31 @@ public class game_controller : MonoBehaviour {
 		team_scores[Player.team] += incr;
 	}
 
-	// Abort ALL stations currently being used
-	private void abort_all_stations() {
+    // Compare teams' scores and declare winner
+    private void declare_winner() {
+        if (team_scores[0] > team_scores[1]) {
+            brokkr_winner.SetText("Winner!");
+        } else if (team_scores[0] < team_scores[1]) {
+            eitri_winner.SetText("Winner!");
+        } else {
+            draw.SetText("Tie!");
+        }
+    }
+
+    // Set the player models (end screen)
+    private void set_player_models()
+    {
+        for (int i = 0; i <= dwarf_spawner.dwarves.Length; i++)
+        {
+            if (dwarf_spawner.dwarves[i].team == 0 && BrokkrHere == false)
+            {
+                int index = dwarf_spawner.dwarves[i].get_anim_palette_index();
+            }
+        }
+    }
+
+    // Abort ALL stations currently being used
+    private void abort_all_stations() {
 		foreach (player dwarf in dwarf_spawner.dwarves) {
 			if (dwarf.current_station != null) {
 				dwarf.current_station.abort_items_swap();

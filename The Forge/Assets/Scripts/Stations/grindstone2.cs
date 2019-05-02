@@ -49,9 +49,11 @@ public class grindstone2 : MonoStation
                 if (prev == null) {
                     cycle += 1;
                     prev = "Up";
+                    print("Start grindstone");
                 } else if (cycle == 4 && prev == "Horiz") {
                     count += 1;
-                    if (count >= current_counts_required) {
+                    if (count >= counts_required) {
+                        print("Completed");
                         complete_items_swap();
                         cycle = 0;
                         count = 0;
@@ -63,6 +65,7 @@ public class grindstone2 : MonoStation
                     else {
                         cycle = 1;
                         prev = "Up";
+                        print("Cycle");
                     }
                 }
             } else if ((x_input >= 0.7f || x_input <= -0.7f) && prev == "Up") {
