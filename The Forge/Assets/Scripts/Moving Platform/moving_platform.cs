@@ -18,15 +18,18 @@ public class moving_platform : MonoBehaviour {
 
 	// Component references
 	private Rigidbody2D rb;
+	private crafting_table attached_crafting_Table;
 
 
 	// Init
 	private void Awake() {
 		rb = GetComponent<Rigidbody2D>();
+		attached_crafting_Table = GetComponentInChildren<crafting_table>();
 	}
 
 	// Update is called once per frame
 	void Update() {
+
 		int try_move_left = 0;
 		int try_move_right = 0;
 
@@ -38,6 +41,13 @@ public class moving_platform : MonoBehaviour {
 			if (input.p[p.index].platform_right) {
 				try_move_right++;
 			}
+		}
+		
+		if (movement.all_players_frozen || attached_table_occupied()) {
+			rb.velocity = new Vector2(0, 0);
+			left_indicator.SetActive(false);
+			right_indicator.SetActive(false);
+			return;
 		}
 
 		int right_sum = try_move_right - try_move_left;
@@ -59,6 +69,11 @@ public class moving_platform : MonoBehaviour {
 		right_indicator.SetActive(players_touching.Count > 0 && !touching_right_edge);
 	}
 
+
+	// Returns true iff there's a crafting table attached to the moving platform, and it is currently occupied
+	private bool attached_table_occupied() {
+		return attached_crafting_Table != null && attached_crafting_Table.occupied();
+	}
 
 	// Keeps track of which players are touching the platform
 	private void OnCollisionEnter2D(Collision2D collision) {
