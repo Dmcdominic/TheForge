@@ -1003,7 +1003,7 @@ MonoBehaviour:
   bar_location: {fileID: 4021627977273460680}
   is_playing: 0
   player_num: 0
-  total_num: 30
+  total_num: 25
   miss_num: 15
   boost_size: 5
 --- !u!61 &8646229949231678389
@@ -1019,7 +1019,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0.0010359883}
+  m_Offset: {x: 0, y: 0.062280953}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1030,7 +1030,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.997928}
+  m_Size: {x: 1, y: 0.7998103}
   m_EdgeRadius: 0
 --- !u!50 &8646229949231678388
 Rigidbody2D:
@@ -1203,6 +1203,7 @@ MonoBehaviour:
   icon_pressed: {fileID: 1705116552869671473}
   bar_location: {fileID: 4021627977273460680}
   bar_sprites: {fileID: 11400000, guid: 2f5eba4397d08405bb3a270ddb9364e4, type: 2}
+  indicator_speed: 5
   finished: 0
 --- !u!1001 &8646229948821434372
 PrefabInstance:
@@ -1211,6 +1212,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8646229949231678391}
     m_Modifications:
+    - target: {fileID: 5722966153295963035, guid: 152f931c88b8f34419ff211b282d73e9,
+        type: 3}
+      propertyPath: m_Name
+      value: Interact Indicator
+      objectReference: {fileID: 0}
     - target: {fileID: 5722966153295963034, guid: 152f931c88b8f34419ff211b282d73e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1265,11 +1271,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5722966153295963035, guid: 152f931c88b8f34419ff211b282d73e9,
-        type: 3}
-      propertyPath: m_Name
-      value: Interact Indicator
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152f931c88b8f34419ff211b282d73e9, type: 3}

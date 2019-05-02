@@ -26,6 +26,7 @@ public class crafting_table : MonoStation
         // todo - play minigame?
         player_num = Player.index;
         is_playing = true;
+        sound_manager.update_loop(sound_manager.instance.crafting_table_loop, true);
     }
 
     private void Start()
@@ -77,6 +78,7 @@ public class crafting_table : MonoStation
         indic.transform.position = indicator_reset.transform.position;
         is_playing = false;
         is_finished = false;
+        sound_manager.update_loop(sound_manager.instance.crafting_table_loop, false);
     }
 
     // Reset the minigame when you want to abort_items_swap

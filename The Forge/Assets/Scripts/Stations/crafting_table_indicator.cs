@@ -17,6 +17,8 @@ public class crafting_table_indicator : MonoBehaviour
     public SpriteRenderer bar_location;
     public spritesheet bar_sprites;
     private static readonly int progress_num = 10;
+    public int indicator_speed;
+    private int speed_factor;
 
     private int total_num;
     private int boost_size;
@@ -35,15 +37,14 @@ public class crafting_table_indicator : MonoBehaviour
 	// Component references
 	private crafting_table crafting_Table;
 
-
     public bool finished = false;
 
     private void Start()
     {
         direction = 1;
         counter = 0;
+        speed_factor = 4;
 		crafting_Table = GameObject.Find("crafting_table").GetComponent<crafting_table>();
-
 		total_num = crafting_Table.total_num;
         miss_num = crafting_Table.miss_num;
         boost_size = crafting_Table.boost_size;
@@ -56,11 +57,10 @@ public class crafting_table_indicator : MonoBehaviour
     {
         // Your stuff here
         finished = false;
-        indic.transform.position += Vector3.right * direction * Time.deltaTime;
+        indic.transform.position += Vector3.right * direction * Time.deltaTime * (indicator_speed/speed_factor);
 
         is_playing = GameObject.Find("crafting_table").GetComponent<crafting_table>().is_playing;
 		int player_num = crafting_Table.player_num;
-
 
 		if (in_center && input.p[player_num].hand_tool && is_playing)
         {
@@ -70,7 +70,7 @@ public class crafting_table_indicator : MonoBehaviour
                 been_hit = true;
             }
         }
-        if (is_playing && (counter > total_num || miss_counter > miss_num))
+        if (is_playing && (counter >= total_num || miss_counter > miss_num))
         {
 
             counter = 0;
@@ -87,9 +87,7 @@ public class crafting_table_indicator : MonoBehaviour
                 if (counter < 0)
                     counter = 0;
             }
-
         }
-
         if (!is_playing)
         {
             counter = 0;
@@ -115,13 +113,11 @@ public class crafting_table_indicator : MonoBehaviour
             icon_normal.enabled = true;
             icon_pressed.enabled = false;
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         in_center = false;
-
         if (((collision.name == "edge_right") || (collision.name == "edge_left")) && is_playing)
         {
             direction = -direction;
@@ -131,7 +127,5 @@ public class crafting_table_indicator : MonoBehaviour
         {
             in_center = true;
         }
-
-
     }
 }
