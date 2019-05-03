@@ -7121,6 +7121,31 @@ PrefabInstance:
       propertyPath: temp_endgame_screen
       value: 
       objectReference: {fileID: 516591919}
+    - target: {fileID: 2794656528472374214, guid: ce9cc13ded35f0741a8b6786acc62f82,
+        type: 3}
+      propertyPath: eitri_score
+      value: 
+      objectReference: {fileID: 216256626}
+    - target: {fileID: 2794656528472374214, guid: ce9cc13ded35f0741a8b6786acc62f82,
+        type: 3}
+      propertyPath: brokkr_score
+      value: 
+      objectReference: {fileID: 1179145878}
+    - target: {fileID: 2794656528472374214, guid: ce9cc13ded35f0741a8b6786acc62f82,
+        type: 3}
+      propertyPath: eitri_winner
+      value: 
+      objectReference: {fileID: 552428257}
+    - target: {fileID: 2794656528472374214, guid: ce9cc13ded35f0741a8b6786acc62f82,
+        type: 3}
+      propertyPath: brokkr_winner
+      value: 
+      objectReference: {fileID: 1357542401}
+    - target: {fileID: 2794656528472374214, guid: ce9cc13ded35f0741a8b6786acc62f82,
+        type: 3}
+      propertyPath: draw
+      value: 
+      objectReference: {fileID: 1225263911}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce9cc13ded35f0741a8b6786acc62f82, type: 3}
 --- !u!1001 &3050651019747727075
