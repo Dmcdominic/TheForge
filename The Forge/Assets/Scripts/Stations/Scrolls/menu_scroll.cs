@@ -22,9 +22,19 @@ public class menu_scroll : MonoInteractable {
 
 	// Static vars
 	public static bool play_button_placed;
+	private static readonly string[] credits = new string[] {
+		"Credits",
+		"Avery \nZou",
+		"Charles \nNilson",
+		"Trento \nVon \nLindenberg",
+		"Austin \nGarcia",
+		"Ilana \nFranklin",
+		"Dominic \nCalkosz"
+	};
 
 	// Private vars
 	private bool quit_button_really;
+	private int credits_index;
 
 	// Component references
 	private scroll_visuals visuals;
@@ -77,7 +87,8 @@ public class menu_scroll : MonoInteractable {
 				}
 				break;
 			case menu_options.Credits:
-				// Todo - display credits
+				credits_index = (credits_index + 1) % credits.Length;
+				menu_TMP.text = credits[credits_index];
 				break;
 			case menu_options.Quit:
 				if (quit_button_really) {

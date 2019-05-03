@@ -58,6 +58,7 @@ public class sound_manager : MonoBehaviour {
 	private void OnSceneSwitch(Scene oldScene, Scene newScene) {
 		update_loop(furnace_loop, false);
 		update_loop(ticking_loop, false);
+		update_loop(sizzling_loop, false);
 		update_loop(whetstone_loop, false);
 		update_loop(crafting_table_loop, false);
 		StopAllCoroutines();

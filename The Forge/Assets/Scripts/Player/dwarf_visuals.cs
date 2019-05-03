@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class dwarf_visuals : MonoBehaviour {
 
+	// Public fields
+	public SpriteRenderer bow_sr;
+
 	// Static settings
 	public static float flash_time = 0.2f;
 	public static float min_alpha = 0.2f;
@@ -34,5 +37,7 @@ public class dwarf_visuals : MonoBehaviour {
 			color_util.set_alpha(sr, 1f);
 			flash_timer = 0;
 		}
+
+		bow_sr.enabled = Konami.bow_on;
 	}
 }

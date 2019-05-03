@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54802447768e61a4aa184aa8c2b9eab1, type: 3}
-  m_Name: progressbar_temp_ss
+  m_Name: progressbar_ss
   m_EditorClassIdentifier: 
   sprites:
   - {fileID: 21300000, guid: 4f241bce6e9c343a49feb7dcbeeb940f, type: 3}
