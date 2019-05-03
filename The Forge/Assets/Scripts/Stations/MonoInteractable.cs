@@ -35,7 +35,7 @@ public abstract class MonoInteractable : MonoBehaviour {
 		bool someone_can_interact = false;
 		item craftable = null;
 		foreach (player p in players_touching) {
-			bool p_can_interact = can_interact(p);
+			bool p_can_interact = can_interact(p) && !movement.all_players_frozen;
 			someone_can_interact = someone_can_interact || p_can_interact;
 			item new_craftable = get_craftable_item(p);
 			craftable = new_craftable != null ? new_craftable : craftable;

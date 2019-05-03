@@ -13,6 +13,9 @@ public class grindstone2 : MonoStation
 
     private int player_num;
 
+	// Component references
+	private Animator animator;
+
 	// Static settings
 	private static readonly int counts_required = 3;
 	private static readonly int quickcraft_counts_required = 1;
@@ -28,6 +31,7 @@ public class grindstone2 : MonoStation
 
     private void Start()
     {
+		animator = GetComponentInChildren<Animator>();
         count = 0;
         cycle = 0;
         prev = null;
@@ -81,6 +85,8 @@ public class grindstone2 : MonoStation
                 prev = "Horiz";
             }
         }
+
+		animator.SetBool("spinning", is_playing);
     }
 
 	public override void abort_items_swap() {

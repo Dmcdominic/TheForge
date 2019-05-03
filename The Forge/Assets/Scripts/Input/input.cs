@@ -55,6 +55,9 @@ public static class input {
 		public bool interact {
 			get { return XCI.GetButtonDown(XboxButton.Y, controller) || Input.GetKeyDown(interact_key); }
 		}
+		public bool exit_interaction {
+			get { return XCI.GetButtonDown(XboxButton.Y, controller) || XCI.GetButtonDown(XboxButton.B, controller) || Input.GetKeyDown(interact_key); }
+		}
 
 		public bool hand_tool {
 			get { return XCI.GetButtonDown(XboxButton.A, controller) || Input.GetKeyDown(hand_tool_key); }
@@ -125,6 +128,14 @@ public static class input {
 			get {
 				return XCI.GetAxis(XboxAxis.RightStickY, controller);
 			}
+		}
+
+		// Konami controls
+		public bool a {
+			get { return XCI.GetButtonDown(XboxButton.A, controller); }
+		}
+		public bool b {
+			get { return XCI.GetButtonDown(XboxButton.B, controller); }
 		}
 	}
 }

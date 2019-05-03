@@ -36,7 +36,12 @@ public class sound_manager : MonoBehaviour {
 	public AudioSource hammer_line;
 	public AudioSource shield_line;
 	public AudioSource sword_line;
+	public AudioSource axe_line;
 	public List<AudioSource> entrance_lines;
+
+
+	// Private vars
+	private bool was_just_paused = false;
 
 
 	// Static instance setup
@@ -58,12 +63,14 @@ public class sound_manager : MonoBehaviour {
 	private void OnSceneSwitch(Scene oldScene, Scene newScene) {
 		update_loop(furnace_loop, false);
 		update_loop(ticking_loop, false);
+		update_loop(sizzling_loop, false);
 		update_loop(whetstone_loop, false);
 		update_loop(crafting_table_loop, false);
 		StopAllCoroutines();
 
 		if (newScene.buildIndex == game_controller.mm_scene) {
 			//Royal_Entrance.Play();
+			pre_battle_line.Stop();
 			play_one_shot(thunderclap);
 			StartCoroutine(start_track_delayed(Royal_Entrance, thunderclap.clip.length - 0.7f));
 			Powerhouse.Stop();
@@ -74,6 +81,26 @@ public class sound_manager : MonoBehaviour {
 				play_one_shot(pre_battle_line);
 				StartCoroutine(start_track_delayed(Powerhouse, pre_battle_line.clip.length / pre_battle_line.pitch - 0.3f));
 			}
+		}
+
+		was_just_paused = false;
+	}
+
+	// If the game is paused, pause the audioClips too.
+	// Otherwise, resume them.
+	private void Update() {
+		if (!was_just_paused && pausemenu.isPaused) {
+			was_just_paused = true;
+			foreach (AudioSource AS in entrance_lines) {
+				AS.Pause();
+			}
+			pre_battle_line.Pause();
+		} else if (was_just_paused && !pausemenu.isPaused) {
+			was_just_paused = false;
+			foreach (AudioSource AS in entrance_lines) {
+				AS.UnPause();
+			}
+			pre_battle_line.UnPause();
 		}
 	}
 

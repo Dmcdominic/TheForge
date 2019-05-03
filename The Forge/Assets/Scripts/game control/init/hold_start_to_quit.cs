@@ -24,6 +24,7 @@ public class hold_start_to_quit : MonoBehaviour {
 				if (escape_timer[i] >= escape_time) {
 					if (SceneManager.GetActiveScene().buildIndex >= 2) {
 						SceneManager.LoadScene(1);
+						escape_timer[i] = 0f;
 					} else {
 						quit_util.quit_game();
 					}

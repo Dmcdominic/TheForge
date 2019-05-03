@@ -20,6 +20,7 @@ public class escape_to_quit : MonoBehaviour {
 			if (escape_timer >= escape_time) {
 				if (SceneManager.GetActiveScene().buildIndex >= 2) {
 					SceneManager.LoadScene(1);
+					escape_timer = 0f;
 				} else {
 					quit_util.quit_game();
 				}

@@ -17,8 +17,10 @@ public class forge : MonoStation {
 	private int current_team = -1;
 	private bool finished_cooking;
 
+	// Component references
 	private TextMeshPro player_indicator;
 	private SpriteRenderer indicator_caret;
+	private Animator animator;
 
 	// Static vars
 	public static item cooking_rn;
@@ -42,6 +44,7 @@ public class forge : MonoStation {
 	private void Awake() {
 		player_indicator = completed_indicator.GetComponentInChildren<TextMeshPro>();
 		indicator_caret = completed_indicator.GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
 
 		current_owner = null;
 		current_team = -1;
@@ -84,6 +87,7 @@ public class forge : MonoStation {
 		StartCoroutine(cook());
 		total_cooking++;
 		total_cooking = total_cooking > 0 ? total_cooking : 1;
+		animator.SetBool("cooking", true);
 		sound_manager.update_loop(sound_manager.instance.furnace_loop, true);
 		sound_manager.update_loop(sound_manager.instance.ticking_loop, true);
 	}
@@ -92,6 +96,7 @@ public class forge : MonoStation {
 	private void on_done_cooking() {
 		finished_cooking = true;
 		completed_indicator.SetActive(true);
+		animator.SetBool("cooking", false);
 		player_indicator.text = teams.names[current_team];
 		player_indicator.color = teams.lighter_colors[current_team];
 		indicator_caret.color = teams.lighter_colors[current_team];
