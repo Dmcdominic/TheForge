@@ -25,15 +25,6 @@ public class game_controller : MonoBehaviour {
     public TextMeshPro brokkr_winner;
     public TextMeshPro draw;
 
-    // Public GameObject sprites for players (end screen)
-    public GameObject Eitri1;
-    public GameObject Eitri2;
-    public GameObject Brokkr1;
-    public GameObject Brokkr2;
-
-    private bool EitriHere = false;
-    private bool BrokkrHere = false;
-
 	// Static settings
 	public static readonly float total_game_time = 240f;
 	public static readonly float pre_game_time = 15f;
@@ -120,8 +111,9 @@ public class game_controller : MonoBehaviour {
         eitri_score.SetText(team_scores[1].ToString());
         brokkr_score.SetText(team_scores[0].ToString());
         declare_winner();
-		// TODO - end game screen here
-	}
+        // endscreen_sprites.set_player_models();
+        // TODO - end game screen here
+    }
 
 	// Update is called once per frame
 	void Update() {
@@ -151,18 +143,6 @@ public class game_controller : MonoBehaviour {
             eitri_winner.SetText("Winner!");
         } else {
             draw.SetText("Tie!");
-        }
-    }
-
-    // Set the player models (end screen)
-    private void set_player_models()
-    {
-        for (int i = 0; i <= dwarf_spawner.dwarves.Length; i++)
-        {
-            if (dwarf_spawner.dwarves[i].team == 0 && BrokkrHere == false)
-            {
-                int index = dwarf_spawner.dwarves[i].get_anim_palette_index();
-            }
         }
     }
 
