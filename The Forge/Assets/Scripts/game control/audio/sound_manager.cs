@@ -36,6 +36,7 @@ public class sound_manager : MonoBehaviour {
 	public AudioSource hammer_line;
 	public AudioSource shield_line;
 	public AudioSource sword_line;
+	public AudioSource axe_line;
 	public List<AudioSource> entrance_lines;
 
 
@@ -69,6 +70,7 @@ public class sound_manager : MonoBehaviour {
 
 		if (newScene.buildIndex == game_controller.mm_scene) {
 			//Royal_Entrance.Play();
+			pre_battle_line.Stop();
 			play_one_shot(thunderclap);
 			StartCoroutine(start_track_delayed(Royal_Entrance, thunderclap.clip.length - 0.7f));
 			Powerhouse.Stop();

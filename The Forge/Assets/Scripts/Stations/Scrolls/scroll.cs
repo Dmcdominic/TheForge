@@ -58,6 +58,9 @@ public class scroll : MonoInteractable {
 			case "shield":
 				sound_manager.play_source(sound_manager.instance.shield_line);
 				break;
+			case "axe":
+				sound_manager.play_source(sound_manager.instance.axe_line);
+				break;
 		}
 	}
 	// Initialize this scroll with a random order
