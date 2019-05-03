@@ -39,6 +39,10 @@ public class sound_manager : MonoBehaviour {
 	public List<AudioSource> entrance_lines;
 
 
+	// Private vars
+	private bool was_just_paused = false;
+
+
 	// Static instance setup
 	public static sound_manager instance;
 	
@@ -75,6 +79,26 @@ public class sound_manager : MonoBehaviour {
 				play_one_shot(pre_battle_line);
 				StartCoroutine(start_track_delayed(Powerhouse, pre_battle_line.clip.length / pre_battle_line.pitch - 0.3f));
 			}
+		}
+
+		was_just_paused = false;
+	}
+
+	// If the game is paused, pause the audioClips too.
+	// Otherwise, resume them.
+	private void Update() {
+		if (!was_just_paused && pausemenu.isPaused) {
+			was_just_paused = true;
+			foreach (AudioSource AS in entrance_lines) {
+				AS.Pause();
+			}
+			pre_battle_line.Pause();
+		} else if (was_just_paused && !pausemenu.isPaused) {
+			was_just_paused = false;
+			foreach (AudioSource AS in entrance_lines) {
+				AS.UnPause();
+			}
+			pre_battle_line.UnPause();
 		}
 	}
 

@@ -91,6 +91,10 @@ public class movement : MonoBehaviour {
 
 	// Called once per frame
 	void Update() {
+		if (pausemenu.isPaused) {
+			return;
+		}
+
 		if (!can_move) {
 			if (stunned) {
 				rb.velocity = new Vector2(0, rb.velocity.y) + platform_velo;
