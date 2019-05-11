@@ -1,4 +1,4 @@
-# TheForge
+# Helter Smelter
 
 ### A couch co-op/PvP game about forging weapons for the Norse gods.
 
