@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class game_controller : MonoBehaviour {
 
-	public GameObject temp_endgame_screen;
+	public temp_end_screen temp_endgame_screen;
 
 	// Static vars
-	public static bool teams = true;
+	public static bool pvp = true;
 	public static int the_team = 0;
 	public static int[] player_scores = new int[4] { 0, 0, 0, 0 };
 	public static int[] team_scores = new int[2] { 0, 0 };
@@ -71,7 +71,7 @@ public class game_controller : MonoBehaviour {
 				team_1 = team_1 || team == 1;
 			}
 		}
-		teams = (team_0 && team_1);
+		pvp = (team_0 && team_1);
 		the_team = team_0 ? 0 : 1;
 
 		// TODO - read high score from disk
@@ -96,8 +96,7 @@ public class game_controller : MonoBehaviour {
 		abort_all_stations();
 		game_playing = false;
 		movement.all_players_frozen = true;
-		temp_endgame_screen.SetActive(true);
-		// TODO - end game screen here
+		display_end_screen();
 	}
 
 	// Update is called once per frame
@@ -123,9 +122,30 @@ public class game_controller : MonoBehaviour {
 	// Abort ALL stations currently being used
 	private void abort_all_stations() {
 		foreach (player dwarf in dwarf_spawner.dwarves) {
-			if (dwarf.current_station != null) {
+			if (dwarf != null && dwarf.current_station != null) {
 				dwarf.current_station.abort_items_swap();
 			}
 		}
+	}
+
+	// Enable the endgame screen and display the victor
+	private void display_end_screen() {
+		temp_endgame_screen.gameObject.SetActive(true);
+
+		string victor_string = "";
+		if (!pvp) {
+			victor_string = "Great job! You scored: " + team_scores[the_team] + "!";
+		} else {
+			bool tie = team_scores[0] == team_scores[1];
+			if (tie) {
+				victor_string = "It's a tie! Both teams scored: " + team_scores[0];
+			} else {
+				int winning_team = team_scores[0] > team_scores[1] ? 0 : 1;
+				victor_string = "GG! " + teams.names[winning_team] + " won with a score of " + team_scores[winning_team] + "!";
+				temp_endgame_screen.victor_tmp.color = teams.colors[winning_team];
+			}
+		}
+
+		temp_endgame_screen.set_victor_text(victor_string);
 	}
 }

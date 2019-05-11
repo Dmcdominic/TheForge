@@ -20,11 +20,17 @@ public class hold_start_to_quit : MonoBehaviour {
 	void Update() {
 		for (int i=0; i < game_controller.max_dwarves; i++) {
 			if (input.p[i].start_held) {
-				escape_timer[i] += Time.deltaTime;
+				bool in_gameplay_scene = SceneManager.GetActiveScene().buildIndex >= 2;
+				if (in_gameplay_scene && !game_controller.game_playing) {
+					SceneManager.LoadScene(1);
+					reset_all();
+				}
+
+				escape_timer[i] += Time.unscaledDeltaTime;
 				if (escape_timer[i] >= escape_time) {
-					if (SceneManager.GetActiveScene().buildIndex >= 2) {
+					if (in_gameplay_scene) {
 						SceneManager.LoadScene(1);
-						escape_timer[i] = 0f;
+						reset_all();
 					} else {
 						quit_util.quit_game();
 					}
@@ -32,6 +38,12 @@ public class hold_start_to_quit : MonoBehaviour {
 			} else {
 				escape_timer[i] = 0f;
 			}
+		}
+	}
+
+	private void reset_all() {
+		for (int i = 0; i < game_controller.max_dwarves; i++) {
+			escape_timer[i] = 0;
 		}
 	}
 }

@@ -28,7 +28,7 @@ public class score_display : MonoBehaviour {
 			team_score_TMPs[t].color = teams.colors[t];
 		}
 
-		if (!game_controller.teams) {
+		if (!game_controller.pvp) {
 			team_score_TMPs[0].color = teams.colors[game_controller.the_team];
 			team_score_TMPs[1].color = Color.white;
 		}
@@ -41,7 +41,7 @@ public class score_display : MonoBehaviour {
 
 	// Update the team scores display
 	private void update_team_scores() {
-		if (game_controller.teams) {
+		if (game_controller.pvp) {
 			for (int t = 0; t < game_controller.team_scores.Length && t < team_score_TMPs.Length; t++) {
 				update_one_team_score(t, t);
 			}
@@ -77,7 +77,7 @@ public class score_display : MonoBehaviour {
 
 	// Set a team's score display directly
 	private void set_team_score_display(int team, int TMP_index) {
-		if (game_controller.teams || TMP_index == 0) {
+		if (game_controller.pvp || TMP_index == 0) {
 			team_score_TMPs[TMP_index].text = teams.names[team] + ": " + current_display_val[TMP_index].ToString();
 		} else {
 			team_score_TMPs[TMP_index].text = "High Score: A lot";
